@@ -55,5 +55,27 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="tblGalleries">
+      <EntityTypeMapping TypeName="mobileHairdresserModel.tblGallery">
+        <MappingFragment StoreEntitySet="tblGallery">
+          <ScalarProperty Name="GalleryDiscription" ColumnName="GalleryDiscription" />
+          <ScalarProperty Name="GalleryImg" ColumnName="GalleryImg" />
+          <ScalarProperty Name="GalleryName" ColumnName="GalleryName" />
+          <ScalarProperty Name="GalleryID" ColumnName="GalleryID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblPhotos">
+      <EntityTypeMapping TypeName="mobileHairdresserModel.tblPhoto">
+        <MappingFragment StoreEntitySet="tblPhotos">
+          <ScalarProperty Name="GalleryID" ColumnName="GalleryID" />
+          <ScalarProperty Name="DateStamp" ColumnName="DateStamp" />
+          <ScalarProperty Name="Url" ColumnName="Url" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="PhotoName" ColumnName="PhotoName" />
+          <ScalarProperty Name="PhotoID" ColumnName="PhotoID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

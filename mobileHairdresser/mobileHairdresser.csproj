@@ -221,6 +221,9 @@
     <Compile Include="Database\tblEmployee.cs">
       <DependentUpon>mobileHairdresser.tt</DependentUpon>
     </Compile>
+    <Compile Include="Database\tblGallery.cs">
+      <DependentUpon>mobileHairdresser.tt</DependentUpon>
+    </Compile>
     <Compile Include="Database\tblHaircut.cs">
       <DependentUpon>mobileHairdresser.tt</DependentUpon>
     </Compile>
@@ -228,6 +231,9 @@
       <DependentUpon>mobileHairdresser.tt</DependentUpon>
     </Compile>
     <Compile Include="Database\tblLogin.cs">
+      <DependentUpon>mobileHairdresser.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Database\tblPhoto.cs">
       <DependentUpon>mobileHairdresser.tt</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">

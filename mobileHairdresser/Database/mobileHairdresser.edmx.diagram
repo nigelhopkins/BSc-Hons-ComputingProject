@@ -4,14 +4,17 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="e3c5d5eb46074f20b9503affe63529e7" Name="Diagram1">
+      <Diagram DiagramId="e3c5d5eb46074f20b9503affe63529e7" Name="Diagram1" ZoomLevel="94">
         <EntityTypeShape EntityType="mobileHairdresserModel.sysdiagram" Width="1.5" PointX="5.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="mobileHairdresserModel.tblEmployee" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="mobileHairdresserModel.tblEmployee" Width="1.5" PointX="3" PointY="1.125" IsExpanded="true" />
         <EntityTypeShape EntityType="mobileHairdresserModel.tblHaircut" Width="1.5" PointX="3" PointY="5" IsExpanded="true" />
         <EntityTypeShape EntityType="mobileHairdresserModel.tblHaircutType" Width="1.5" PointX="0.75" PointY="5.375" IsExpanded="true" />
         <EntityTypeShape EntityType="mobileHairdresserModel.tblLogin" Width="1.5" PointX="0.75" PointY="1.125" IsExpanded="true" />
         <AssociationConnector Association="mobileHairdresserModel.FK_tblEmployee_tblLogin" ManuallyRouted="false" />
         <AssociationConnector Association="mobileHairdresserModel.FK_tblHaircut_tblHaircutType" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="mobileHairdresserModel.tblGallery" PointX="12.125" PointY="0.75" Width="1.5" />
+        <EntityTypeShape EntityType="mobileHairdresserModel.tblPhoto" PointX="10.125" PointY="0.75" Width="1.5" />
+        <AssociationConnector Association="mobileHairdresserModel.FK_tblPhotos_tblGallery" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

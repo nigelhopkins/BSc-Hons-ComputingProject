@@ -21,6 +21,15 @@
     <Property Name="PhoneNumber" Type="varchar" MaxLength="11" />
     <Property Name="LoginID" Type="int" />
   </EntityType>
+  <EntityType Name="tblGallery">
+    <Key>
+      <PropertyRef Name="GalleryID" />
+    </Key>
+    <Property Name="GalleryID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="GalleryName" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="GalleryImg" Type="varchar" MaxLength="250" Nullable="false" />
+    <Property Name="GalleryDiscription" Type="text" />
+  </EntityType>
   <EntityType Name="tblHaircut">
     <Key>
       <PropertyRef Name="HaircutID" />
@@ -49,6 +58,17 @@
     <Property Name="Password" Type="varchar" MaxLength="250" />
     <Property Name="IsDefault" Type="varchar" MaxLength="250" />
   </EntityType>
+  <EntityType Name="tblPhotos">
+    <Key>
+      <PropertyRef Name="PhotoID" />
+    </Key>
+    <Property Name="PhotoID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PhotoName" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Description" Type="varchar" MaxLength="250" Nullable="false" />
+    <Property Name="Url" Type="varchar" MaxLength="250" Nullable="false" />
+    <Property Name="DateStamp" Type="date" Nullable="false" />
+    <Property Name="GalleryID" Type="int" Nullable="false" />
+  </EntityType>
   <Association Name="FK_tblEmployee_tblLogin">
     <End Role="tblLogin" Type="Self.tblLogin" Multiplicity="0..1" />
     <End Role="tblEmployee" Type="Self.tblEmployee" Multiplicity="*" />
@@ -73,12 +93,26 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_tblPhotos_tblGallery">
+    <End Role="tblGallery" Type="Self.tblGallery" Multiplicity="1" />
+    <End Role="tblPhotos" Type="Self.tblPhotos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblGallery">
+        <PropertyRef Name="GalleryID" />
+      </Principal>
+      <Dependent Role="tblPhotos">
+        <PropertyRef Name="GalleryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <EntityContainer Name="mobileHairdresserModelStoreContainer">
     <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblEmployee" EntityType="Self.tblEmployee" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblGallery" EntityType="Self.tblGallery" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblHaircut" EntityType="Self.tblHaircut" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblHaircutType" EntityType="Self.tblHaircutType" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblLogin" EntityType="Self.tblLogin" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblPhotos" EntityType="Self.tblPhotos" Schema="dbo" store:Type="Tables" />
     <AssociationSet Name="FK_tblEmployee_tblLogin" Association="Self.FK_tblEmployee_tblLogin">
       <End Role="tblLogin" EntitySet="tblLogin" />
       <End Role="tblEmployee" EntitySet="tblEmployee" />
@@ -86,6 +120,10 @@
     <AssociationSet Name="FK_tblHaircut_tblHaircutType" Association="Self.FK_tblHaircut_tblHaircutType">
       <End Role="tblHaircutType" EntitySet="tblHaircutType" />
       <End Role="tblHaircut" EntitySet="tblHaircut" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblPhotos_tblGallery" Association="Self.FK_tblPhotos_tblGallery">
+      <End Role="tblGallery" EntitySet="tblGallery" />
+      <End Role="tblPhotos" EntitySet="tblPhotos" />
     </AssociationSet>
   </EntityContainer>
 </Schema>

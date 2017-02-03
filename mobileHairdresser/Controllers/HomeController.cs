@@ -3,6 +3,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using mobileHairdresser.Database;
+using System.Collections.Generic;
 
 namespace mobileHairdresser.Controllers
 {
@@ -57,7 +58,10 @@ namespace mobileHairdresser.Controllers
         {
             ViewBag.Title = "Portfolio";
 
-            return View();
+            mobileHairdresserEntities db = new mobileHairdresserEntities();
+            List<tblGallery> gallery = db.tblGalleries.ToList();
+
+            return View(gallery);
         }
         public ActionResult Contact()
         {

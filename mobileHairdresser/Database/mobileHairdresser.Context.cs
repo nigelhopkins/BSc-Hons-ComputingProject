@@ -30,5 +30,7 @@ namespace mobileHairdresser.Database
         public virtual DbSet<tblHaircut> tblHaircuts { get; set; }
         public virtual DbSet<tblHaircutType> tblHaircutTypes { get; set; }
         public virtual DbSet<tblLogin> tblLogins { get; set; }
+        public virtual DbSet<tblGallery> tblGalleries { get; set; }
+        public virtual DbSet<tblPhoto> tblPhotos { get; set; }
     }
 }

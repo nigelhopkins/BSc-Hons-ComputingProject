@@ -91,5 +91,45 @@
       <End Role="tblHaircutType" EntitySet="tblHaircutTypes" />
       <End Role="tblHaircut" EntitySet="tblHaircuts" />
     </AssociationSet>
+    <EntitySet Name="tblGalleries" EntityType="mobileHairdresserModel.tblGallery" />
+    <EntitySet Name="tblPhotos" EntityType="mobileHairdresserModel.tblPhoto" />
+    <AssociationSet Name="FK_tblPhotos_tblGallery" Association="mobileHairdresserModel.FK_tblPhotos_tblGallery">
+      <End Role="tblGallery" EntitySet="tblGalleries" />
+      <End Role="tblPhoto" EntitySet="tblPhotos" />
+    </AssociationSet>
   </EntityContainer>
+  <EntityType Name="tblGallery">
+    <Key>
+      <PropertyRef Name="GalleryID" />
+    </Key>
+    <Property Name="GalleryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="GalleryName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="tblPhotos" Relationship="mobileHairdresserModel.FK_tblPhotos_tblGallery" FromRole="tblGallery" ToRole="tblPhoto" />
+    <Property Name="GalleryImg" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="GalleryDiscription" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="tblPhoto">
+    <Key>
+      <PropertyRef Name="PhotoID" />
+    </Key>
+    <Property Name="PhotoID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PhotoName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Description" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="Url" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="DateStamp" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="GalleryID" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="tblGallery" Relationship="mobileHairdresserModel.FK_tblPhotos_tblGallery" FromRole="tblPhoto" ToRole="tblGallery" />
+  </EntityType>
+  <Association Name="FK_tblPhotos_tblGallery">
+    <End Type="mobileHairdresserModel.tblGallery" Role="tblGallery" Multiplicity="1" />
+    <End Type="mobileHairdresserModel.tblPhoto" Role="tblPhoto" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblGallery">
+        <PropertyRef Name="GalleryID" />
+      </Principal>
+      <Dependent Role="tblPhoto">
+        <PropertyRef Name="GalleryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

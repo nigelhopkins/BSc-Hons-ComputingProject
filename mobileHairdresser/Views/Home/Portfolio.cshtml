@@ -1,51 +1,33 @@
-﻿@{
+﻿@model IEnumerable<mobileHairdresser.Database.tblGallery>
+@{
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewBag.Title = "Portfolio";
-
-
-    Layout = "~/Views/Shared/_Layout.cshtml";
-
-    System.IO.DirectoryInfo dir = new System.IO.DirectoryInfo(Server.MapPath("~/Content/Images/Portfolio/"));
-    int count = dir.GetFiles().Length;
-
-    var FileName = "";
-    var imgCount = 0;
-
-    string[] images = new string[count];
-    string[] imgName = new string[count];
-
-    foreach (var img in dir.GetFiles())
-    {
-
-        images[imgCount] = @"..\Content\Images\Portfolio\" + img.Name;
-        imgName[imgCount] = img.Name;
-
-        imgCount++;
-    }
-
 }
 
 <div class="ContentContianer">
     <h1>Portfolio</h1>
     <div class="ContentWrapper">
         <div id="PortfolioContainer">
-            <div id="PortfolioInsideContainer">
-                @{
-                    for (var i = 0; i < images.Length; i++)
-                    {
-                        <div id="photoContainer">
-                            <img class="portfolioImg" alt="@imgName[i]" src="~/Content/Images/Portfolio/@imgName[i]" />
-                            @if (Request.IsAuthenticated)
-                            {
-                                <form action="/Uploader/Delete" method="post" name="deletePhoto">
-                                    <input type="text" name="photoFileName" value="@imgName[i]" />
-                                    <button type="submit" id="deleteButton"><img src="@Url.Content("~/Content/Images/SiteImgs/delete.png")" id="deleteIcon" /></button>
-                                </form>
-                            }
-                        </div>
-                    }
-                }
-            </div>
-        </div>
-    </div>
-</div>
+                <div class="container">
+                        <div class="row">
+                                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                                    @foreach (var item in Model)
+                                    {
+                                        <div class="item" onclick="location.href='@Url.Action("ViewGallery","Portfolio", new { GalleryID = item.GalleryID })'">
+                                            <div class="hoverEffect">
+                                                    <img src="~/Content/Images/Portfolio/@item.GalleryImg" />
+                                                    <div class="overlay">
+                                                        <h2>@Html.DisplayFor(modelItem => item.GalleryName)</h2>
+                                                        <p class="info">@Html.DisplayFor(modelItem => item.GalleryDiscription)</p>
+                                                    </div>
+                                            
+                                            </div>
+                                        </div>
+                                    }
+                                </div>
+                        </div>                  
+                      </div>
+                 </div>
+     </div>
+ </div>
+
