@@ -1,0 +1,50 @@
+﻿@model mobileHairdresser.Database.tblHaircut
+
+@{
+    ViewBag.Title = "AddNewHaircut";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="ContentContianer">
+    <h1>Add New Haircut</h1>
+    <div class="ContentWrapper">
+        @using (Html.BeginForm("SaveHaircuts", "Prices", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true, "", new { })
+            <ul>
+                <li>
+                    @Html.LabelFor(model => model.HaircutName, htmlAttributes: new { @class=""})
+                    @Html.EditorFor(model => model.HaircutName, new { htmlAttributes = new { @class = "" } })
+                    @Html.ValidationMessageFor(model => model.HaircutName, "", new { @class=""})
+                </li>
+                <li>
+                    @Html.LabelFor(model => model.ShortPrice, htmlAttributes: new { @class=""})
+                    @Html.EditorFor(model => model.ShortPrice, new { htmlAttributes = new {@class=""}})
+                    @Html.ValidationMessageFor(model => model.ShortPrice, "",new { @class=""})
+                </li>
+                <li>
+                    @Html.LabelFor(model => model.LongPrice, htmlAttributes: new { @class=""})
+                    @Html.EditorFor(model => model.LongPrice, new {  htmlAttributes = new {@class=""}})
+                    @Html.ValidationMessageFor(model => model.LongPrice, "",new { @class=""})
+                </li>
+                <li>
+                    @Html.LabelFor(model => model.TimeToCompletion, htmlAttributes: new { @class = "" })
+                    @Html.EditorFor(model => model.TimeToCompletion, new { htmtAttributes = new {@class=""}})
+                    @Html.ValidationMessageFor(model => model.TimeToCompletion, "",new { @class = "" })
+                </li>
+                <li>
+                    @Html.LabelFor(model => model.TypeID, htmlAttributes: new { @class="" })
+                    @Html.DropDownListFor(model => model.TypeID, ViewBag.TypeID as SelectList);
+                    @Html.ValidationMessageFor(model => model.TypeID, "", new { @class=""})
+                </li>
+                <li>
+                    <p class="formButtons">
+                        <button type="button" onclick="location.href='@Url.Action("Prices","Home")'">Cancel</button>
+                        <button type="submit">Save Changes</button>
+                    </p>
+                </li>
+            </ul>
+        }
+    </div>
+</div>

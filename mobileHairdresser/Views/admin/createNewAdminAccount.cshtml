@@ -1,0 +1,56 @@
+﻿@model mobileHairdresser.Database.tblEmployee
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="ContentContianer">
+    <h1>Create New Admin Account</h1>
+    <div class="ContentWrapper">
+     @using (Html.BeginForm())
+     {
+         @Html.AntiForgeryToken()
+     <ul>
+         <li>
+             @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+             @Html.LabelFor(model => model.FirstName, htmlAttributes: new { @class = "" })
+             @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new {  } })
+         </li>
+         <li>
+             @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
+             @Html.LabelFor(model => model.LastName, htmlAttributes: new { @class = "" })   
+             @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { } })
+         </li>
+         <li>
+             @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+             @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "" })
+             @Html.EditorFor(model => model.Email, new { htmlAttributes = new { } })
+         </li>
+         <li>
+             @Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "text-danger" })
+             @Html.LabelFor(model => model.PhoneNumber, htmlAttributes: new { @class = "" })
+             @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { } })
+         </li>
+         <li>
+             @Html.ValidationMessageFor(model => model.tblLogin.Username, "", new { @class = "text-danger" })
+             @Html.LabelFor(model => model.tblLogin.Username, htmlAttributes: new { @class = "" })
+             @Html.EditorFor(model => model.tblLogin.Username, new { htmlAttributes = new { } })
+         </li>
+         <li>
+             <p>The password must longer than 6 characters!</p>
+         </li>
+         <li>
+             @Html.ValidationMessageFor(model => model.tblLogin.Password, "", new { @class = "text-danger" })
+             @Html.LabelFor(model => model.tblLogin.Password, htmlAttributes: new { @class = "" })
+             @Html.PasswordFor(model => model.tblLogin.Password, new { htmlAttributes = new { } })
+         </li>
+         <li><p class="formButtons">
+                 <button type="button" onclick="location.href='@Url.Action("adminAccountList","admin")'">Cancel</button>
+                <button type="submit">Create Account</button>
+             </p>
+         </li>
+     </ul>
+     }
+ </div>
+</div>
+

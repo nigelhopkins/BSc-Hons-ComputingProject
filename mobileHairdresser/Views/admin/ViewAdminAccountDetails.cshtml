@@ -1,0 +1,41 @@
+﻿@model mobileHairdresser.Database.tblEmployee
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="ContentContianer">
+    <h1>Account Details</h1>
+    <div class="ContentWrapper">
+        <ul>
+            <li>
+                @Html.LabelFor(model => model.FirstName)
+                <span class="viewAccountDetails">@Html.DisplayFor(model => model.FirstName, new { disabled = "ture" })</span>
+            </li>
+            <li>
+                @Html.LabelFor(model => model.LastName)
+                <span class="viewAccountDetails">@Html.DisplayFor(model => model.LastName, new { disabled = "ture", @class = "DissabledTextBox" })</span>
+            </li>
+            <li>
+                @Html.LabelFor(model => model.Email)
+                <span class="viewAccountDetails">@Html.DisplayFor(model => model.Email, new { disabled = "ture", @class = "DissabledTextBox" })</span>
+            </li>
+            <li>
+                @Html.LabelFor(model => model.PhoneNumber)
+                <span class="viewAccountDetails">@Html.DisplayFor(model => model.PhoneNumber, new { disabled = "ture", @class = "DissabledTextBox" })</span>
+            </li>
+            <li>
+                @Html.LabelFor(model => model.tblLogin.Username)
+                <span class="viewAccountDetails">@Html.DisplayFor(model => model.tblLogin.Username, new { disabled = "ture", @class = "DissabledTextBox" })</span>
+            </li>
+            <li>
+            <li>
+                <p class="formButtons">
+                    <button type="button" onclick="location.href='@Url.Action("adminAccountList","admin")'">Cancel</button>
+                    <button type="button" onclick="location.href='@Url.Action("EditAdminAccount", "admin", new { id = Model.employeeID })'">Edit Account Details</button>
+                </p>
+            </li>
+        </ul>
+    </div>
+</div>
+

@@ -1,0 +1,50 @@
+﻿@model IEnumerable<mobileHairdresser.Database.tblEmployee>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="ContentContianer">
+    <h1>User Accounts</h1>
+    <div class="ContentWrapper">
+        <table class="AccountList">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.FirstName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.LastName)
+                </th>
+                <th></th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FirstName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.LastName)
+                    </td>
+                    <td>
+                        @Html.ActionLink("View", "ViewAdminAccountDetails", new { id = item.employeeID }) |
+                        @Html.ActionLink("Edit", "EditAdminAccount", new { id = item.employeeID }) |
+                        @if (Session["loginID"].ToString() != item.LoginID.ToString())
+                        {
+                            @Html.ActionLink("Delete", "DeleteAdminAccount", new { id = item.employeeID })
+                        }
+                        else
+                        {
+                            <span> Delete </span>
+                        }
+
+                    </td>
+                </tr>
+            }
+
+        </table>
+        <a href="@Url.Action("createNewAdminAccount","admin")"><button type="button">Add New Admin Account</button></a>
+    </div>
+</div>
+

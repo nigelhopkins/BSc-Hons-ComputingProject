@@ -1,0 +1,54 @@
+﻿@model mobileHairdresser.Database.tblHaircut
+
+@{
+    ViewBag.Title = "Prices";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+}
+
+<script>
+    $(function () {
+        $("#haircutTypeID").change(function () {
+            $("#PriceList").html("")
+            $.get("/Home/getHaircutTypeID", { TypeID: $("#haircutTypeID").val() }, function (data) {
+                $.each(data, function (index, row) {
+                    $("#PriceList").append("<tr class=''>" 
+                                           + "<td>" + row.HaircutName + "</td>"
+                                           + "<td> &nbsp; </td>"
+                                           + "<td> &pound " + row.LongPrice.toFixed(2) + "</td>"
+                                           + "<td> &pound " + row.ShortPrice.toFixed(2) + "</td>"
+                                           + "</tr>")
+                });
+            });
+        });
+    });
+</script>
+
+<div class="ContentContianer">
+    <h2>Prices</h2>
+    <div class="ContentWrapper">
+        <div id="tableList">
+            @Html.DropDownListFor(p => p.TypeID, ViewBag.HaircutTypeName as SelectList, "Select a Haircut Type", new { id = "haircutTypeID" })
+            <div class="tableListControl">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>@Html.DisplayNameFor(model => model.HaircutName)</th>
+                        <th> &nbsp;</th>
+                        <th>@Html.DisplayNameFor(model => model.LongPrice)</th>
+                        <th>@Html.DisplayNameFor(model => model.ShortPrice)</th>
+                    </tr>
+                </thead>
+                <tbody id="PriceList"></tbody>
+            </table>
+            </div>
+        </div>
+        @if (Session["user"] != null)
+        {
+            <div class="formButtons">
+                <button type="button" onclick="location.href='@Url.Action("Index","Prices")'">View Price Details</button>
+            </div>
+        }
+    </div>
+</div>

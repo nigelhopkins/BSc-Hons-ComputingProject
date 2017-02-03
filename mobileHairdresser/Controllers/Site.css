@@ -1,0 +1,461 @@
+﻿
+/*      Webpage body reset      */
+*{
+    padding:0px;
+    margin:0px;
+    font-family:Consolas;
+    font-size:100%;
+    color:#000;
+}
+
+html, body{
+    width:100%;
+    height:100%;
+    background:url(Images/SiteImgs/background.jpg) center center no-repeat;
+    background-size:cover;
+    -moz-background-size:cover;
+    -webkit-background-size:cover;
+    -o-background-size:cover;
+}
+/*      Default Hyperlink settings      */
+
+a, a:hover, a:active, a:visited{
+    color:#fff;
+    text-decoration:none;
+}
+
+/*      Default p settings              */
+
+p{
+    border:0px solid #000;
+    margin:0px;
+    padding:0px;
+}
+
+/*      Default Headings Styles          */
+h1, h2, h3{
+    font-weight:bold;
+    text-shadow: 0px 5px 15px rgba(128, 128 ,128 ,1);
+}
+
+h1{
+    font-size:300%;
+    letter-spacing:3px;
+}
+h2{
+    font-size:200%;
+    letter-spacing:2px;
+}
+h3{
+    font-size:100%;
+    letter-spacing:1px;
+}
+
+/*      Default Div Settings        */
+
+div{
+    border:0px solid #000;
+}
+
+form{
+    border:0px dashed #808080;
+    width:100%;
+    padding: 0;
+}
+input[type="text"], input[type="password"]{
+    display:block;
+    width:80%;
+    margin:15px auto;
+    line-height:50px;
+    font-size:3em;
+    padding: 0 15px;
+}
+select{
+    display:block;
+    
+    background:none;
+    height:50px;
+    width:80%;
+    margin:15px auto;
+    font-size:2.5em;
+    text-align-last:center;
+    border-radius:10px;
+    outline:none;
+}
+select:active, select:hover{
+    border:none;
+    border-radius:10px;
+    outline:none;
+    outline-color:rgba(243, 243, 243, 0.6);
+}
+
+
+textarea{
+    display:block;
+    width:80%;
+    height:20em;
+    font-size:1.25em;
+    margin:0 auto;
+    padding:15px;
+    color:#000;
+}
+button{
+    display:block;
+    width:30%;
+    line-height:50px;
+    margin:25px 10% 25px auto;
+}
+/*      Footer Settings             */
+footer{
+    position:absolute;
+    bottom:0px;
+    width:100%;
+    line-height:3.125em;
+    background:rgba(128, 128 ,128 ,8);
+    text-align:center;
+    z-index:999;
+}
+
+/*      Website Layout              */
+
+#wrapper{
+    position:absolute;
+    display:block;
+    width:100%;
+    height:100%;
+    border:0px solid #000;
+    overflow-x:hidden;
+    overflow-y:scroll;
+}
+#sidebar-wrapper{
+    position:relative;
+    display:inline-block;
+    width:30%;
+    margin-left:0;
+    border:0px solid #000;
+}
+#sidebarContent-wrapper{
+    position:relative;
+    display:block;
+    width:52%;
+    min-width:250px;
+    min-height:828px;
+    height:auto;
+    left:20%;
+    padding: 25px 0;
+    background:rgba(243, 243, 243, 0.6);
+    border:0px solid #000;
+}
+#sidebarContent-wrapper .TitlePannel {
+    border:0px solid #000;
+    text-align:center;
+}
+.sidebar-nav, .sidebar-Button, .sidebar-nav-dropdown{
+    position:relative;
+    margin:0 auto;
+    width:95%;
+    border:0px solid #000;
+    background:rgba(128, 128, 128, 0.4);
+    white-space:nowrap;
+}
+.sidebar-nav button {
+    width:100%;
+    border:0px solid #000;
+    background:none;
+    margin:0px;
+}
+
+.sidebar-Button{
+    margin:25px auto;
+    line-height:4.6875em;
+}
+.sidebar-Button button{
+    border:none;
+    width:100%;
+    color:#000;
+    background:none;
+}
+.sidebar-Button button:hover{
+    color:#fff;
+}
+
+.SocialMediaIcons {
+    position:relative;
+    text-align:center;
+    width:95%;
+    margin: 0 auto;
+    border:none;
+    background:none;
+}
+.SocialMedia{
+    text-align:center;
+    padding-top:15px;
+}
+.SocialMedia h2{
+    color:#000;
+}
+.SocialMediaIcons a span {
+    width:65px;
+    height:65px;
+    background: url(Images/SiteImgs/SocialMedia.png) no-repeat 0px 0px;
+    display:inline-block;
+    border:none;
+}
+
+.SocialMediaIcons a span.facebookIcon{
+    background-position:-20.5px -12px;
+}
+.SocialMediaIcons a span.twitterIcon{
+    background-position:-85px -12px;
+}
+.SocialMediaIcons a span.instergramIcon{
+    background-position:-150.5px -12px;
+}
+.SocialMediaIcons a span:hover{
+    background:url(Images/SiteImgs/SocialMediaHover.png);
+}
+.SocialMediaIcons a span.facebookIcon:hover {
+    background-position:-20.5px -12px;
+}
+.SocialMediaIcons a span.twitterIcon:hover {
+    background-position:-85.5px -12px;
+}
+.SocialMediaIcons a span.instergramIcon:hover{
+    background-position:-150.5px -12px;
+}
+.sidebar-nav li a{
+    color:#000;
+}
+.mobileNav{
+    display:none;
+    background:url(Images/SiteImgs/menu.png)center left no-repeat;
+    background-size:contain;
+    margin:0px;
+    -webkit-background-size:contain;
+    -moz-background-size:contain;
+    -o-background-size:contain;    
+}
+.mobileNav{
+    text-align:left !important;
+}
+.sidebar-nav li button:before, .sidebar-nav li button:after{
+    position:absolute;
+    font-size:1.75em;
+}
+.sidebar-nav li button:before{
+    content:'[';
+    left:5px;
+}
+.sidebar-nav li button:after{
+    content:']';
+    right:5px;
+}
+.sidebar-nav li{
+    width:100%;
+    margin:0px 0px;
+    padding:5px 0;
+    font-size:1.25em;
+    line-height:3.125em;
+    list-style:none;
+    text-align:center;
+}
+.sidebar-nav li:hover button{
+    color:#fff;
+}
+#pageContent-wrapper{
+    position:relative;
+    display:inline-block;
+    width:69%;
+    height:auto;
+    min-height:838px;
+    margin:0 1px;
+    vertical-align:top;
+    background:none;
+    padding:0px;
+    z-index:99;
+}
+.sidebar-adminLogin button{
+    width:100%;
+    line-height:25px;
+    background:none;
+    color:#000;
+    border:none;
+    margin:5px 0;
+}
+#PullDownMenu{
+    display:none;
+    line-height:3.125em;
+    width:100%;
+    text-align:center;
+    border:1px solid #000;
+}
+.MobilePageTitleHeader{
+    display:none;
+}
+.PageTitleHeader{
+    position:absolute;
+    bottom:15%;
+    right:15%;
+    display:block;
+    width:70%;
+    margin:0 0 0 auto;
+    border:0px solid #000;
+    z-index:1;
+}
+.PageTitleHeader h1 {
+    color:#000;
+    text-align:right;
+    padding:0px;
+    margin:0 0 0 20%;
+    font-size:4em;
+    font-weight:300;
+    letter-spacing:3px;
+}
+@media screen and (max-height: 863px)
+{
+    #ClickToCall{
+        display:none;
+    }
+    .SocialMedia h2{
+        display:none;
+    }
+}
+@media screen and (max-width: 1023px)
+{
+    .PageTitleHeader{
+        display:none;
+    }
+    .MobilePageTitleHeader{
+        margin-top:45px;
+        min-height:25%;
+        position:relative;
+        display:block;
+    }   
+    .MobilePageTitleHeader h1{
+        position:absolute;
+        bottom:0px;
+        display:block;
+        line-height:50px;
+        width:100%;
+        text-align:center;
+        white-space:normal;
+        color:#000;
+    }
+    #sidebarContent-wrapper{
+       display:none;
+       z-index:999;
+    }
+    #sidebar-wrapper{
+        position:absolute;
+        background:rgba(243,243,243,0.4);
+        display:block;
+    }
+    #sidebar-wrapper, #sidebarContent-wrapper{
+        width:100%;
+        left:0px;
+        top:0px;
+    }
+    .sidebar-nav{
+        display:inline-block;
+        width:100%;
+        margin:0px;
+        font-weight:bold;
+        border:1px solid #000;
+    }
+    .sidebar-nav li{
+        padding:0px;
+        margin:0 5px 0 0;
+    }
+    .sidebar-nav li a{
+        margin:0 50px;
+        background:none;
+        border:none;
+    }
+    .sidebar-nav li a:hover{
+        color:#000;
+    }
+    .mobileNav{
+        display:block;
+    }
+    .mobileNav a{
+       font-weight:bold;
+    }
+    #pageContent-wrapper{
+        position:absolute;
+        width:98.7%;
+        left:0;
+        margin: 0 5px;
+        min-height:68.5%;
+        padding-bottom:5%;
+        margin-bottom:10%;
+    }
+    #sidebarContent-wrapper h2, #sidebarContent-wrapper h3{
+        display:none;
+    }
+    footer{
+        line-height:normal;
+    }
+    #PullDownMenu{
+        display:block;
+    }
+    #PullDownMenu:hover > #sidebarContent-wrapper{
+        height:auto;
+    }     
+}
+@media screen and (orientation : portrait){
+    
+    @media screen and (max-width: 768px){
+         #pageContent-wrapper{
+            width:97%;
+            min-height:65.9%;
+        }
+         input[type="text"], input[type="password"]{
+             font-size:1.5em;
+         }
+         textarea{
+             font-size:1em;
+         }
+    }
+    @media screen and (max-width: 412px){
+         #pageContent-wrapper{
+            width:97.5%;
+            min-height:64.5%;
+        }
+        input[type="text"], input[type="password"]{
+             font-size:0.75em;
+         }
+        textarea{
+            font-size:0.75em;
+            height:150px;
+        }
+    }
+    @media screen and (max-width: 375px){
+         #pageContent-wrapper{
+            width:97.4%;
+            min-height:64.6%;
+        }
+    }
+    @media screen and (max-width: 360px){
+         #pageContent-wrapper{
+            width:97%;
+            min-height:64.4%;
+        }
+    }
+    @media screen and (max-width: 320px){
+         #pageContent-wrapper{
+            width:97%;
+            min-height:59.9%;
+        }
+    }
+
+}
+@media screen and (orientation : landscape) {
+    @media screen and (max-width : 1024px ) {
+         #pageContent-wrapper{
+             min-height:89%;
+         }
+         #sidebarContent-wrapper{
+             display:inline-block;
+         }
+    }
+}

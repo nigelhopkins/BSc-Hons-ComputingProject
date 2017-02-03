@@ -1,0 +1,30 @@
+﻿@model mobileHairdresser.Database.tblHaircutType
+
+@{
+    ViewBag.Title = "HaircutDeleteConfirmed";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="ContentContianer">
+    <h1>Delete Haircut Catagory</h1>
+    <div class="ContentWrapper">
+        <ul>
+            <li>
+                <div class="accessWarning">
+                    <h1>WARNING</h1>
+                    <p>The following catagory has been selected for deletion @Html.DisplayFor(model => model.TypeName)</p>
+                    <p>Please be awhere that all haircuts associated with this catagory will also be deleted!</p>
+                </div>                
+            </li>
+            <li>
+                @using (Html.BeginForm("DeleteHaircutsCatagory", "Prices", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+                    <p class="formButtons">
+                        <button type="button" onclick="location.href='@Url.Action("Index","Prices")'">Cancel</button>
+                        <button type="submit">Delete Catagory</button>
+                    </p>
+                }
+            </li>
+        </ul>
+    </div>
+</div>

@@ -1,0 +1,152 @@
+﻿/* Default Element Values*/
+
+/* Hyperlinks */
+
+a, a:hover, a:active, a:visited{
+    color:#fff;
+    text-decoration:none;
+}
+
+/* Paragraph Settings*/
+
+p{
+    border:0px solid #000;
+    margin:0px;
+    padding:0px;
+}
+
+/* Heading styles */
+
+h1, h2, h3{
+    font-weight:bold;
+    text-shadow: 0px 5px 15px rgba(128, 128 ,128 ,1);
+}
+
+h1{
+    font-size:300%;
+    letter-spacing:3px;
+}
+h2{
+    font-size:200%;
+    letter-spacing:2px;
+}
+h3{
+    font-size:100%;
+    letter-spacing:1px;
+}
+
+/* Div */
+
+div{
+    border:0px solid #000;
+}
+
+/* Forms */
+
+form{
+    border:0px dashed #808080;
+    width:100%;
+    padding: 0;
+}
+
+/* Inputs */
+
+input[type="text"], input[type="password"]{
+    display:block;
+    width:80%;
+    margin:15px auto;
+    line-height:50px;
+    font-size:3em;
+    padding: 0 15px;
+}
+intput[type="time"]
+{
+    display:block;
+    width:80%;
+    line-height:50px;
+    font-size:3em;
+}
+textarea{
+    display:block;
+    width:80%;
+    height:20em;
+    font-size:1.25em;
+    margin:0 auto;
+    padding:15px;
+    color:#000;
+}
+button{
+    display:block;
+    width:30%;
+    line-height:50px;
+    margin:25px 10% 25px auto;
+}
+
+select{
+    display:block;
+    background:none;
+    height:50px;
+    width:80%;
+    margin:15px auto;
+    font-size:2.5em;
+    text-align-last:center;
+    border-radius:10px;
+    outline:none;
+}
+select:active, select:hover{
+    border:none;
+    border-radius:10px;
+    outline:none;
+    outline-color:rgba(243, 243, 243, 0.6);
+}
+
+/* Unordered Lists */
+
+ul{
+    display:block;
+    width:80%;
+    margin:25px auto;
+}
+ul li{
+    display:block;
+    list-style:none;
+    margin:10px;
+    }
+
+@media screen and (max-width: 1023px)
+{
+    /* Unordered Lists */
+
+    ul{
+        display:block;
+        width:80%;
+        margin:25px auto;
+    }
+        ul li{
+        display:block;
+        list-style:none;
+        margin:10px;
+    }
+}
+@media screen and (orientation : portrait)
+{
+    /* Inputs */
+
+    @media screen and (max-width: 768px){
+         input[type="text"], input[type="password"]{
+             font-size:1.5em;
+         }
+         textarea{
+             font-size:1em;
+         }
+    }
+     @media screen and (max-width: 412px){
+        input[type="text"], input[type="password"]{
+             font-size:0.75em;
+         }
+        textarea{
+            font-size:0.75em;
+            height:150px;
+        }
+    }
+}

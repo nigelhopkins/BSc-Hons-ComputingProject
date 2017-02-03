@@ -1,0 +1,108 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Mobile Hairdresser : @ViewBag.Title</title>
+    <script src="~/Scripts/Site.js"></script>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/Site.css" rel="stylesheet" />
+    <link href="~/Content/Content.css" rel="stylesheet" />
+    
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <div id="wrapper">
+        <div id="sidebar-wrapper">
+            <span id="PullDownMenu">Menu</span>
+            <div id="sidebarContent-wrapper">
+                @{
+                    if (Session["user"] != null)
+                    {
+                        <div class="TitlePannel">
+                            <h2>Admin Panel</h2>
+                            <h3>Welcome @Session["user"]</h3>
+                        </div>
+                    }
+                    else
+                    {
+                        <h2> &nbsp; </h2>
+                        <h3> &nbsp; </h3>
+                    }
+                }
+                <ul class="sidebar-nav">
+                    <li class="active"><button onclick="location.href='@Url.Action("Index","Home")'">Home</button></li>
+                    <li><button onclick="location.href='@Url.Action("Prices", "Home")'">Prices</button></li>
+                    <li><button onclick="location.href='@Url.Action("Portfolio","Home")'">Portfolio</button></li>
+                    <li><button onclick="location.href='@Url.Action("Contact","Home")'">Contact</button></li>
+                </ul>
+
+                @{
+                    if (Session["user"] != null)
+                    {
+                        <div class="TitlePannel">
+                            <h3>Admin Navigation</h3>
+                        </div>
+                        <ul class="sidebar-nav">
+                            <li class="mobileNav" onclick="Nav()"><a href="#">Admin Menu</a></li>
+                            <li><a href="#">Email</a></li>
+                            <li><a href="#">Appointments</a></li>
+                            <li><a href="@Url.Action("adminAccountList","admin")">Account Settings</a></li>
+                        </ul>
+                    }
+                    else
+                    {
+                        <div class="sidebar-Button" id="ClickToCall">
+                            <button onclick="location.href='tel:0772519821'">Call: 07752198215</button>
+                        </div>
+
+                        <div class="sidebar-Button" id="Appointment">
+                            <button onclick="location.href='OnlineAppoinmentSystem.aspx'" )>Click to Make an Appointment...</button>
+                        </div>
+
+                        <div class="sidebar-Button SocialMedia">
+                            <h2>Social Media</h2>
+                            <div class="SocialMediaIcons">
+                                <a href="http://www.facebook.com"><span class="facebookIcon"></span></a>
+                                <a href="http://www.twitter.com"><span class="twitterIcon"></span></a>
+                                <a href="http://www.instergram.com"><span class="instergramIcon"></span></a>
+                            </div>
+                        </div>
+                    }
+                }
+                <div class="sidebar-adminLogin">
+                    @{
+                        if (Session["user"] != null)
+                        {
+                            <button onclick="location.href='@Url.Action("Logout", "login")'">Admin Logout</button>
+                        }
+                        else
+                        {
+                                <button id="adminLogonButton">Admin Login</button>
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="MobilePageTitleHeader">
+            <h1>Mobile Hairdresser</h1>
+        </div>
+        <div id="pageContent-wrapper">
+            <div class="container-fluid">
+                @RenderBody()
+            </div>
+        </div>
+        <div class="PageTitleHeader">
+            <h1>Mobile Hairdresser</h1>
+        </div>
+    </div>
+    <footer>
+        <p>Designed and built by Nigel Hopkins &copy; 2016</p>
+    </footer>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/jqueryval")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

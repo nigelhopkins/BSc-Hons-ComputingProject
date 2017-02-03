@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="mobileHairdresserModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="tblEmployee">
+    <Key>
+      <PropertyRef Name="employeeID" />
+    </Key>
+    <Property Name="employeeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FirstName" Type="varchar" MaxLength="250" />
+    <Property Name="LastName" Type="varchar" MaxLength="250" />
+    <Property Name="Email" Type="varchar" MaxLength="250" />
+    <Property Name="PhoneNumber" Type="varchar" MaxLength="11" />
+    <Property Name="LoginID" Type="int" />
+  </EntityType>
+  <EntityType Name="tblHaircut">
+    <Key>
+      <PropertyRef Name="HaircutID" />
+    </Key>
+    <Property Name="HaircutID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="HaircutName" Type="varchar" MaxLength="250" />
+    <Property Name="ShortPrice" Type="float" />
+    <Property Name="LongPrice" Type="float" />
+    <Property Name="TimeToCompletion" Type="time" Precision="7" />
+    <Property Name="TypeID" Type="int" />
+    <Property Name="isSelected" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tblHaircutType">
+    <Key>
+      <PropertyRef Name="TypeID" />
+    </Key>
+    <Property Name="TypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TypeName" Type="varchar" MaxLength="250" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tblLogin">
+    <Key>
+      <PropertyRef Name="loginID" />
+    </Key>
+    <Property Name="loginID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Username" Type="varchar" MaxLength="250" />
+    <Property Name="Password" Type="varchar" MaxLength="250" />
+    <Property Name="IsDefault" Type="varchar" MaxLength="250" />
+  </EntityType>
+  <Association Name="FK_tblEmployee_tblLogin">
+    <End Role="tblLogin" Type="Self.tblLogin" Multiplicity="0..1" />
+    <End Role="tblEmployee" Type="Self.tblEmployee" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblLogin">
+        <PropertyRef Name="loginID" />
+      </Principal>
+      <Dependent Role="tblEmployee">
+        <PropertyRef Name="LoginID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblHaircut_tblHaircutType">
+    <End Role="tblHaircutType" Type="Self.tblHaircutType" Multiplicity="0..1" />
+    <End Role="tblHaircut" Type="Self.tblHaircut" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblHaircutType">
+        <PropertyRef Name="TypeID" />
+      </Principal>
+      <Dependent Role="tblHaircut">
+        <PropertyRef Name="TypeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="mobileHairdresserModelStoreContainer">
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblEmployee" EntityType="Self.tblEmployee" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblHaircut" EntityType="Self.tblHaircut" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblHaircutType" EntityType="Self.tblHaircutType" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblLogin" EntityType="Self.tblLogin" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_tblEmployee_tblLogin" Association="Self.FK_tblEmployee_tblLogin">
+      <End Role="tblLogin" EntitySet="tblLogin" />
+      <End Role="tblEmployee" EntitySet="tblEmployee" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblHaircut_tblHaircutType" Association="Self.FK_tblHaircut_tblHaircutType">
+      <End Role="tblHaircutType" EntitySet="tblHaircutType" />
+      <End Role="tblHaircut" EntitySet="tblHaircut" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

@@ -1,0 +1,44 @@
+﻿@model mobileHairdresser.Database.tblLogin
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Index";
+    string systemMessage = Html.Raw(TempData["systemMessage"]).ToString();
+    string loginErrorMessage = Html.Raw(TempData["loginErrorMessage"]).ToString();
+}
+@if (systemMessage != null)
+{
+    <div id="systemMessages">
+        @using (Html.BeginForm("systemMessage", "Home", FormMethod.Post))
+        {
+            @Html.Raw(systemMessage)
+            <button type="submit">X</button>
+        }
+    </div>
+}
+@if (Session["user"] == null)   
+{
+<div id="adminLoginContainer">
+    <h1>Admin Login</h1>
+    <div class="loginForm">
+        @using (Html.BeginForm("getAuthenticated", "login", FormMethod.Post))
+        {
+            <div class="accessWarning">
+                <h1>WARNING</h1>
+                <p>Access for authorised personel only...</p>
+                <p>Any unauthroised access or attemped access will be loged and may be reported to local law enforcment agencies!</p>
+                <p style="color:red;">@loginErrorMessage</p>
+            </div>
+            
+            @Html.TextBoxFor(a => a.Username, new { @id = "username", @name = "Username", @placeholder = "Username." });
+            @Html.PasswordFor(a => a.Password, new { @id = "password", @name = "password", @placeholder = "Password." });
+            <span><input type="checkbox" name="PasswordReveal" id="PasswordReveal" name="PasswordReveal" /><label>Tick to reveal password.</label></span>
+            <p class="logonButtons"><button type="button" onclick="location.href='@Url.Action("recoverPassword","login")'">Forgotten Password</button><button type="submit">Login</button></p>
+            
+        }
+    </div>
+</div>
+}
+
+
+
+

@@ -1,0 +1,435 @@
+﻿/*   Index Page   */
+
+.ContentContianer, #adminLoginContainer{
+    background:rgba(243,243,243, 0.6);
+    padding:0px;
+    margin:0;
+    padding:25px;
+    width:100%;
+}
+.ContentWrapper, .loginForm{
+    border:1px dashed #808080;
+    max-height:700px;
+    width:100%;
+}
+
+.ContentWrapper{
+    min-height:500px;
+    overflow-y:auto;
+}
+#adminLoginContainer {
+    display:none;
+}
+#adminLoginContainer h1{
+    margin:0 0 25px 0;
+}
+#adminLoginContainer form button{
+    font-size:2.5em;
+}
+.logonButtons{
+    border:0px solid #808080;
+    width:80%;
+    margin:0 auto;
+}
+.logonButtons button{
+    display:inline-block;
+    width:auto;
+    min-width:30%;
+    line-height:50px;
+}
+.logonButtons button:last-child{
+    margin: 0 auto 0 25.2%;
+}
+.accessWarning{
+    width:80%;
+    margin:50px auto;
+    height:auto;
+    padding:25px;
+    border:1px dashed #808080;
+}
+.accessWarning h1{
+    display:block;
+    width:100%;
+    margin:0px 0;
+    color:#ff0000;
+}
+.accessWarning p{
+    font-size:1.25em;
+    margin:10px 0;
+}
+#adminLoginContainer span {
+    display:block;
+    width:80%;
+    border:0px solid #000;
+    margin: 0 auto;
+}
+#adminLoginContainer input[type="checkbox"]{
+    display:inline-block;
+    width:50px;
+    height:50px;
+    margin:0px;
+    
+}
+#adminLoginContainer span label{
+    display:inline-block;
+    line-height:50px;
+    font-size:1.5em;
+    vertical-align:top;
+    margin:0;
+    padding-left:20px;
+}
+
+/*  Price Page content Style    */
+
+#tableList{
+    display:block;
+    margin:25px auto;
+}
+#tableList{
+    width:80%;
+}
+#tableEdit{
+    display:block;
+    width:80%;
+    padding:0px;
+    margin: 50px auto;
+    min-height:400px;
+    overflow:auto;
+}
+#tableEdit table{
+    width:100%;
+}
+
+.tableListControl{
+    min-height:350px;
+    max-height:350px;
+    overflow:auto;
+    border:0px solid #000;
+}
+    #tableList hr {
+        border-style:dashed;
+    }
+#tableList table thead tr:first-child,#tableEdit table thead tr:first-child{
+    background:rgba(243,243,243, 0.6);
+    line-height:50px;
+}
+#tableList table tbody tr, #tableEdit table tbody tr{
+    line-height:25px;
+}
+#tableEdit table tbody tr{
+    border-bottom:1px dashed rgba(243,243,243, 1)
+}
+#tableEdit table tbody tr td input[type='text'], #tableEdit table tbody tr td select{
+    display:block;
+    margin:5px 0;
+    font-size:1em;
+    text-align:left;
+}
+#tableEdit table tbody tr td select{
+    width:100%;
+}
+#tableEdit table thead tr th:first-child, #tableEdit table tbody tr td:first-child{
+    padding-left:10px;
+}
+#tableEdit thead tr th:last-child, #tableEdit tbody tr td:last-child{
+    padding-right:10px;
+}
+#tableList table tr th:first-child, #tableList table tr td:first-child {
+    width:5%;
+}
+#tableList table tr th:nth-child(2), #tableList table tr td:nth-child(2) {
+    width:50%;
+}
+#tableList table tr th:nth-child(3), #tableList table tr td:nth-child(3) {
+    width:7.5%;
+    text-align:center;
+}
+#tableList table tr th:nth-child(4), #tableList table tr td:nth-child(4) {
+    width:7.5%;
+    text-align:center;
+}
+#tableList table tr td:nth-child(5) {
+    width:35%;
+}
+#tableList table tr td:nth-child(5) a {
+    text-decoration:none;
+    color:#000;
+}
+#tableList table tr td:nth-child(5) a:hover {
+    color:#fff;
+}
+#tableList table tr td label{
+    width:60%;
+    border:0px solid #000;
+    line-height:50px;
+    margin:0px;
+    padding:0px;
+}
+#tableList table tr td span{
+    border:0px solid #000;
+    position:relative;
+    right:-9.2%;
+    display:inline-block;
+    line-height:50px;
+    width:30%;
+    margin-left:0px;
+    margin-right:auto;
+    padding:0px;
+    text-align:right;
+}
+#tableList table tr td span a{
+    color:#000;
+}
+#tableEdit table tr td input[type="text"],#tableEdit table tr td select {
+   font-size:1em;
+   line-height:25px;
+   height:25px;
+   background:#fff;
+   
+}
+.changeTypeName{
+    cursor:pointer;
+}
+#PortfolioContainer {
+    width:96%;
+    max-height:90%;
+    margin:25px auto;
+}
+#PortfolioInsideContainer {
+    display:block;
+    height:400px;
+    width:95%;
+    margin:25px auto;
+    padding:5px;
+    overflow-y:auto;
+    overflow-x:hidden;
+    position:relative;
+    border:none;
+    background:none;
+}
+#photoContainer {
+    background:#fff;
+    width:22%;
+    height:auto;
+    margin:15px 10px;
+    padding:15px 0px;
+    display:inline-block;
+    position:relative;
+    vertical-align:top;
+    border:1px dotted #000;
+}
+    #photoContainer img {
+        position:relative;
+        width:auto;
+        height:auto;
+        max-height:80%;
+        max-width:90%;
+        display:block;
+        margin: 0 auto 10px auto;
+    }
+    #photoContainer form {
+        width:90%;
+        margin:0 auto;
+        padding:0px;
+        text-align:center;
+        position:absolute;
+        left:4.5%;
+        bottom:5px;
+        display:block;
+        height:30px;
+        border:1px dotted #000;
+        padding:5px 0;
+    }
+        #photoContainer form input[type="text"] {
+            position:absolute;
+            left:5px;
+            font-weight:bold;
+            font-size:0.75em;
+            height:30px;
+            width:50%;
+            padding:0;
+            margin:0;
+            border:none;
+        }
+#deleteButton {
+    max-height:30px;
+    width:20%;
+    position:absolute;
+    right:5px;
+}
+/*  Prices */
+#haircutCRUD{
+    display:block;
+    width:80%;
+    height:auto;
+    margin:50px auto;
+    padding:0;
+    border:1px dashed #000;
+    text-align:center;
+}
+
+
+/* CMS Admin */
+
+.AccountList{
+    width:80%;
+    margin:25px auto;
+    font-size:1em;
+}
+.AccountList tr th{
+    padding:0 10px;
+    font-size:1.25em;
+    line-height:50px;
+    background:rgba(243,243,243, 0.6);
+}
+.AccountList tr{
+    border-bottom:1px dashed #808080;
+}
+.AccountList tr:hover{
+    background:rgba(243,243,243, 0.4);
+}
+.AccountList tr td :hover{
+    color:#fff;
+}
+.AccountList tr td{
+    padding:0 10px;
+    line-height:50px;
+    font-size:1em;
+}
+.AccountList tr td:last-child{
+    text-align:right;
+}
+.AccountList tr a{
+    color:#000;
+}
+@media screen and (orientation : landscape) {
+
+    @media screen and (max-height: 768px) {
+        #adminLoginContainer, #adminLoginContainer form {
+            padding: 25px;
+        }
+
+        .accessWarning {
+            padding: 0px;
+        }
+
+        #adminLoginContainer button {
+            width: 100%;
+            position:relative;
+            display:block;
+            left:0px;
+        }
+        .logonButtons button:last-child{
+            margin:0px;
+        }
+
+        .ContentContianer {
+            width: 100%;
+            margin: 0;
+        }
+
+        .ContentContianer, #adminLoginContainer h1 {
+            font-size: 1.25em;
+        }
+        .ContentWrapper form input[type='text'], .ContentWrapper form textarea{
+            font-size:1.5em;
+        }
+        .accessWarning {
+            width: 100%;
+            border: none;
+            margin: 0 0 13% 0;
+        }
+
+            .accessWarning p {
+                font-size: 1em;
+                text-align: justify;
+            }
+
+                .accessWarning p:nth-child(2n+1) {
+                    display: block;
+                }
+        #tableList table{
+            font-size:0.75em;
+        }
+    }
+        @media screen and (max-height: 320px) {
+            #adminLoginContainer, #adminLoginContainer form {
+                min-height: 0px;
+                padding: 25px;
+            }
+            .ContentWrapper form input[type='text'], .ContentWrapper form textarea{
+                font-size:1em;
+            }
+        }
+
+        @media screen and (max-height: 360px) {
+            #adminLoginContainer, #adminLoginContainer form {
+                min-height: 0px;
+                padding: 25px;
+            }
+        }
+    }
+    @media screen and (orientation : portrait) {
+
+        @media screen and (max-width: 1023px) {
+
+            #adminLoginContainer, #adminLoginContainer form {
+                min-height: 200px;
+                padding: 25px;
+            }
+            .ContentContianer button, #adminLoginContainer button {
+                width: 80%;
+            }
+            #adminLoginContainer input[type="checkbox"]{
+                width:25px;
+                height:25px;   
+            }
+            
+            #adminLoginContainer span label{
+                    line-height:25px;
+                    font-size:0.65em;
+            }
+            #tableList table{
+            font-size:0.75em;
+            }
+            .accessWarning {
+                padding: 0px;
+            }
+
+            #adminLoginContainer button {
+                width: 80%;
+            }
+
+            .ContentContianer, #adminLoginContainer h1 {
+                font-size: 1em;
+            }
+            .ContentWrapper form input[type='text'], .ContentWrapper form textarea{
+                font-size:0.55em;
+            }
+            .accessWarning {
+                width: 100%;
+                border: none;
+                margin: 0px;
+            }
+
+                .accessWarning p {
+                    font-size: 1em;
+                    text-align: justify;
+                }
+                .accessWarning h1{
+                    font-size:1em;
+                }
+                    .accessWarning p:nth-child(2n+1) {
+                        display: none;
+                    }
+            /* CMS Admin */
+            .AccountList tr td{
+                font-size:0.75em;
+            }
+        }
+        @media screen and (max-width: 320px){
+            #tableList table{
+            font-size:0.65em;
+            }
+        }
+    }

@@ -1,0 +1,43 @@
+﻿@model mobileHairdresser.Database.tblEmployee
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="ContentContianer">
+    <h1>Delete Account</h1>
+    <div class="ContentWrapper">
+        <ul>
+           <li>
+               @Html.LabelFor(model => model.FirstName)
+               <span class="DeleteAccount">@Html.DisplayFor(model => model.FirstName) </span>
+            </li>
+           <li>
+                @Html.LabelFor(model => model.LastName)
+                <span class="DeleteAccount">@Html.DisplayFor(model => model.LastName) </span>
+           </li>
+           <li>
+                @Html.LabelFor(model => model.Email)
+                <span class="DeleteAccount">@Html.DisplayFor(model => model.Email) </span>
+           </li>
+           <li>
+                @Html.LabelFor(model => model.PhoneNumber)
+                <span class="DeleteAccount">@Html.DisplayFor(model => model.PhoneNumber) </span>
+           </li>
+           <li>
+                @Html.LabelFor(model => model.tblLogin.Username)
+                <span class="DeleteAccount">@Html.DisplayFor(model => model.tblLogin.Username) </span>
+           <li>
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+                    <p class="formButtons">
+                        <button type="button" onclick="location.href='@Url.Action("adminAccountList","admin")'">Cancel</button>
+                        <button type="submit">Delete Account</button>
+                    </p>
+                }
+           </li>
+        </ul>
+    </div>
+</div>
+    

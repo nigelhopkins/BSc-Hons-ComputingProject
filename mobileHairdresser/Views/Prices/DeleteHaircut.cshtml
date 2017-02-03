@@ -1,0 +1,43 @@
+﻿@model mobileHairdresser.Database.tblHaircut
+
+@{
+    ViewBag.Title = "HaircutDeleteConfirmed";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="ContentContianer">
+    <h1>Delete Haircut</h1>
+    <div class="ContentWrapper">
+        <ul>
+            <li>
+                @Html.LabelFor(model => model.HaircutName)
+                <span class="DeleteAccount">@Html.DisplayFor(model => model.HaircutName)</span>
+            </li>
+            <li>
+                @Html.LabelFor(model => model.ShortPrice)
+                <span class="DeleteAccount">@Html.DisplayFor(model => model.ShortPrice)</span>
+            </li>
+            <li>
+                @Html.LabelFor(model => model.LongPrice)
+                <span class="DeleteAccount">@Html.DisplayFor(model => model.LongPrice)</span>
+            </li>
+            <li>
+                @Html.LabelFor(model => model.TimeToCompletion)
+                <span class="DeleteAccount">@Html.DisplayFor(model => model.TimeToCompletion)</span>
+            </li>
+            <li>
+                @Html.LabelFor(model => model.TypeID)
+                <span class="DeleteAccount">@Html.DisplayFor(model => model.TypeID)</span>
+            </li>
+            <li>
+                @using (Html.BeginForm("DeleteHaircut", "Prices", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+                    <p class="formButtons">
+                        <button type="button" onclick="location.href='@Url.Action("HaircutTypeDetails","Prices", new { haircutTypeID = Model.TypeID })'">Cancel</button>
+                        <button type="submit">Delete Account</button>
+                    </p>
+                }
+            </li>
+        </ul>
+    </div>
+</div>
