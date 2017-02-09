@@ -1,0 +1,41 @@
+﻿@model mobileHairdresser.Database.tblGallery
+
+@{
+    ViewBag.Title = "EditGallery";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="ContentContianer">
+    <h1>Edit : @Html.DisplayFor(model => model.GalleryName)</h1>
+    <div class="ContentWrapper">
+        @using (Html.BeginForm("EditGallery", "Portfolio", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true, "", new { })
+            @Html.HiddenFor(model => model.GalleryID)
+            <ul>
+                <li>
+                    @Html.LabelFor(model => model.GalleryName, htmlAttributes: new { @class = "" })
+                    @Html.EditorFor(model => model.GalleryName, new { htmlAttributes = new { @class = "" } })
+                    @Html.ValidationMessageFor(model => model.GalleryName, "", new { @class = "" })
+                </li>
+                <li>
+                    @Html.LabelFor(model => model.GalleryDiscription, htmlAttributes: new { @class = "" })
+                    @Html.EditorFor(model => model.GalleryDiscription, new { htmlAttributes = new { @class = "" } })
+                    @Html.ValidationMessageFor(model => model.GalleryDiscription, "", new { @class = "" })
+                </li>
+                <li>
+                    @Html.LabelFor(model => model.GalleryImg, htmlAttributes: new { @class = "" })
+                    @Html.EditorFor(model => model.GalleryImg, new { htmlAttributes = new { @class = "" } })
+                    @Html.ValidationMessageFor(model => model.GalleryImg, "", new { @class = "" })
+                </li>
+                <li>
+                    <p class="formButtons">
+                        <button type="button" onclick="location.href='@Url.Action("Portfolio","Home", new { haircutTypeID = Model.TypeID })'">Cancel</button>
+                        <button type="submit">Save Changes</button>
+                    </p>
+                </li>
+            </ul>
+        }
+    </div>
+</div>

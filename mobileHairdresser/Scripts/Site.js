@@ -9,6 +9,35 @@
 *******************************************************************************************************
 */
 
+//Js to create an area for drag and drop upload for photo gallery
+
+function dragAndDrop ()
+{
+    Dropzone.options.dropzoneForm =
+        {
+            init: function () {
+                this.on("complete", function (data) {
+                    //var res = eval('(' + data.xhr.responseText + ')');
+                    var res = JSON.parse(data.xhr.responseText);
+                });
+            }
+        };
+}
+
+
+// creates a function for the photo gallery
+function photoGallery() {
+    $(document).ready(function () {
+        $('.thumbnail').click(function () {
+            $('.modal-body').empty();
+            var title = $(this).parent('a').attr("title");
+            $('.modal-title').html(title);
+            $($(this).parents('div').html()).appendTo('.modal-body');
+            $('#myModal').modal({ show: true });
+        });
+    });
+};
+
 // Creates a function that detects a change in the window size
 function Resize() {
     $(window).on('resize', function () {
@@ -79,6 +108,8 @@ function Display(button) {
 onload = function () {
 
     Resize();
+    photoGallery();
+    dragAndDrop();
     var PullDownMenu = document.getElementById('PullDownMenu');
     var changeTypeName = document.getElementsByClassName('changeTypeName');
     var adminLogonButton = document.getElementById('adminLogonButton');

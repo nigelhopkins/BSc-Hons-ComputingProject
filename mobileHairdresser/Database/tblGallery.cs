@@ -25,7 +25,6 @@ namespace mobileHairdresser.Database
         [Required]
         [Display(Name ="Gallery Name")]
         public string GalleryName { get; set; }
-        [Required]
         [Display(Name = "Gallery Image")]
         public string GalleryImg { get; set; }
         [Display(Name ="Gallery Discription")]

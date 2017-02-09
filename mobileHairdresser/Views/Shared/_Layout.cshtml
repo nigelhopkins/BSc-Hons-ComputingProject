@@ -5,10 +5,12 @@
     <meta name="viewport" content="width=device-width" />
     <title>Mobile Hairdresser : @ViewBag.Title</title>
     <script src="~/Scripts/Site.js"></script>
+    <script src="~/Scripts/dropzone/dropzone.min.js"></script>
+    <link href="~/Scripts/dropzone/dropzone.min.css" rel="stylesheet" />
     <link href="~/Content/bootstrap.css" rel="stylesheet" />
     <link href="~/Content/Site.css" rel="stylesheet" />
     <link href="~/Content/Content.css" rel="stylesheet" />
-    
+        
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
@@ -78,7 +80,16 @@
                         }
                         else
                         {
+                            string PageName = ViewBag.Title;
+
+                            if (PageName != "Index")
+                            {
+                                <button onclick="location.href='@Url.Action("Index", "Home")'">Admin Login</button>
+                            }
+                            else
+                            {
                                 <button id="adminLogonButton">Admin Login</button>
+                            }
                         }
                     }
                 </div>

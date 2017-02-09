@@ -2,7 +2,6 @@
 using System.Web.Mvc;
 using System.Linq;
 using mobileHairdresser.Database;
-using System.Text;
 using System.Threading.Tasks;
 using System.Data.Entity;
 using System.Net;
@@ -11,14 +10,13 @@ namespace mobileHairdresser.Controllers
 {
     public class PricesController : Controller
     {
-        public mobileHairdresserEntities priceListContext = new mobileHairdresserEntities();
+        public mobileHairdresserEntities db = new mobileHairdresserEntities();
         // GET: Prices
         public ActionResult Index()
         {
             if(Session["user"] != null)
             {
-                mobileHairdresserEntities priceListContext = new mobileHairdresserEntities();
-                List<tblHaircutType> haircutType = priceListContext.tblHaircutTypes.ToList();
+                List<tblHaircutType> haircutType = db.tblHaircutTypes.ToList();
                 ViewBag.Title = "Admin Prices";
 
                 return View(haircutType);
@@ -45,7 +43,7 @@ namespace mobileHairdresser.Controllers
         {
             if(Session["user"] != null)
             {
-                ViewBag.TypeID = new SelectList(priceListContext.tblHaircutTypes, "TypeID", "TypeName");
+                ViewBag.TypeID = new SelectList(db.tblHaircutTypes, "TypeID", "TypeName");
                 return View();  
             }
             else
@@ -61,9 +59,9 @@ namespace mobileHairdresser.Controllers
                 {
                     return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
                 }
-                tblHaircutType tblHaircutType = await priceListContext.tblHaircutTypes.FindAsync(TypeID);
+                tblHaircutType tblHaircutType = await db.tblHaircutTypes.FindAsync(TypeID);
 
-                ViewBag.TypeIDList = new SelectList(priceListContext.tblHaircutTypes, "TypeID", "TypeName");
+                ViewBag.TypeIDList = new SelectList(db.tblHaircutTypes, "TypeID", "TypeName");
 
                 if (tblHaircutType == null)
                 {
@@ -79,26 +77,24 @@ namespace mobileHairdresser.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> SaveHaircutsCatagory(int TypeID, [Bind(Include = "TypeID, TypeName")] tblHaircutType tblHaircutType)
+        public async Task<ActionResult> SaveHaircutsCatagory(int? TypeID, string TypeName, [Bind(Include = "TypeID, TypeName")] tblHaircutType tblHaircutType)
         {
             if (Session["user"] != null)
             {
                 if (ModelState.IsValid)
                 {
-                    bool data = priceListContext.tblHaircutTypes.Any(record => record.TypeID.Equals(TypeID));
+                    bool data = db.tblHaircutTypes.Any(record => record.TypeID == TypeID);
 
                     if (data)
                     {
-                        priceListContext.Entry(tblHaircutType).State = EntityState.Modified;
-                        await priceListContext.SaveChangesAsync();
-                        return RedirectToAction("HaircutTypeDetails", "Prices", new { haircutTypeID = tblHaircutType.TypeID });
+                        db.Entry(tblHaircutType).State = EntityState.Modified;
                     }
                     else
                     {
-                        priceListContext.tblHaircutTypes.Add(tblHaircutType);
-                        await priceListContext.SaveChangesAsync();
-                        return RedirectToAction("HaircutTypeDetails", "Prices", new { haircutTypeID = tblHaircutType.TypeID });
+                        db.tblHaircutTypes.Add(tblHaircutType);
                     }
+                    await db.SaveChangesAsync();
+                    return RedirectToAction("HaircutTypeDetails", "Prices", new { haircutTypeID = tblHaircutType.TypeID });
                 }
                 return View(tblHaircutType);
             }
@@ -117,7 +113,7 @@ namespace mobileHairdresser.Controllers
                 {
                     return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
                 }
-                tblHaircutType tblHaircutType = await priceListContext.tblHaircutTypes.FindAsync(id);
+                tblHaircutType tblHaircutType = await db.tblHaircutTypes.FindAsync(id);
 
                 if (tblHaircutType == null)
                 {
@@ -137,12 +133,12 @@ namespace mobileHairdresser.Controllers
             if (Session["user"] != null)
             {
 
-                priceListContext.tblHaircuts.Where(p => p.TypeID.Equals(id)).ToList()
-                .ForEach(p => priceListContext.tblHaircuts.Remove(p));
+                db.tblHaircuts.Where(p => p.TypeID.Equals(id)).ToList()
+                .ForEach(p => db.tblHaircuts.Remove(p));
                 
-                tblHaircutType tblHaircutType = await priceListContext.tblHaircutTypes.FindAsync(id);
-                priceListContext.tblHaircutTypes.Remove(tblHaircutType);
-                await priceListContext.SaveChangesAsync();
+                tblHaircutType tblHaircutType = await db.tblHaircutTypes.FindAsync(id);
+                db.tblHaircutTypes.Remove(tblHaircutType);
+                await db.SaveChangesAsync();
                 return RedirectToAction("Index", "Prices");
             }
             else
@@ -155,10 +151,10 @@ namespace mobileHairdresser.Controllers
         {
             if (Session["user"] != null)
             {
-                List<tblHaircut> haircutStyle = priceListContext.tblHaircuts.Where(hair => hair.TypeID == haircutTypeID).ToList();
+                List<tblHaircut> haircutStyle = db.tblHaircuts.Where(hair => hair.TypeID == haircutTypeID).ToList();
                 
 
-                var TypeName = (from t in priceListContext.tblHaircutTypes
+                var TypeName = (from t in db.tblHaircutTypes
                                 where t.TypeID == haircutTypeID
                                 select new { t.TypeName, t.TypeID }).FirstOrDefault();
 
@@ -178,7 +174,7 @@ namespace mobileHairdresser.Controllers
         {
             TempData["errorMessage"] = haircutID.ToString();
 
-            var TypeName = (from t in priceListContext.tblHaircutTypes
+            var TypeName = (from t in db.tblHaircutTypes
                                where t.TypeID == haircutID
                                select new { t.TypeID, t.TypeName }).FirstOrDefault();
 
@@ -195,9 +191,9 @@ namespace mobileHairdresser.Controllers
                 {
                     return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
                 }
-                tblHaircut tblHaircut = await priceListContext.tblHaircuts.FindAsync(id);
+                tblHaircut tblHaircut = await db.tblHaircuts.FindAsync(id);
 
-                ViewBag.TypeIDList = new SelectList(priceListContext.tblHaircutTypes, "TypeID" , "TypeName");
+                ViewBag.TypeIDList = new SelectList(db.tblHaircutTypes, "TypeID" , "TypeName");
 
                 if (tblHaircut == null)
                 {
@@ -218,19 +214,19 @@ namespace mobileHairdresser.Controllers
             {       
                 if (ModelState.IsValid)
                 {
-                    bool data = priceListContext.tblHaircuts.Any(record => record.HaircutID == HaircutID);
+                    bool data = db.tblHaircuts.Any(record => record.HaircutID == HaircutID);
                     
 
                     if (data)
                     {
-                        priceListContext.Entry(tblHaircut).State = EntityState.Modified;
+                        db.Entry(tblHaircut).State = EntityState.Modified;
                     }
                     else
                     {
-                        priceListContext.tblHaircuts.Add(tblHaircut);    
+                        db.tblHaircuts.Add(tblHaircut);    
                     }
 
-                    await priceListContext.SaveChangesAsync();
+                    await db.SaveChangesAsync();
                     return RedirectToAction("HaircutTypeDetails", "Prices", new { haircutTypeID = tblHaircut.TypeID });
                 }
                 return View(tblHaircut);
@@ -250,7 +246,7 @@ namespace mobileHairdresser.Controllers
                 {
                     return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
                 }
-                tblHaircut tblHaircut = await priceListContext.tblHaircuts.FindAsync(id);
+                tblHaircut tblHaircut = await db.tblHaircuts.FindAsync(id);
 
                 if (tblHaircut == null)
                 {
@@ -269,10 +265,10 @@ namespace mobileHairdresser.Controllers
         {
             if (Session["user"] != null)
             {
-                tblHaircut tblHaircut = await priceListContext.tblHaircuts.FindAsync(id);
+                tblHaircut tblHaircut = await db.tblHaircuts.FindAsync(id);
                 var typeID = tblHaircut.TypeID;
-                priceListContext.tblHaircuts.Remove(tblHaircut);
-                await priceListContext.SaveChangesAsync();
+                db.tblHaircuts.Remove(tblHaircut);
+                await db.SaveChangesAsync();
                 return RedirectToAction("HaircutTypeDetails", "Prices", new { haircutTypeID = typeID });
             }
             else
@@ -286,7 +282,7 @@ namespace mobileHairdresser.Controllers
             {
                 if(disposing)
                 {
-                    priceListContext.Dispose();
+                    db.Dispose();
                 }
                 base.Dispose(disposing);
             }

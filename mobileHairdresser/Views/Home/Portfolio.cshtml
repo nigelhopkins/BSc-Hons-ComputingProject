@@ -8,26 +8,33 @@
     <h1>Portfolio</h1>
     <div class="ContentWrapper">
         <div id="PortfolioContainer">
-                <div class="container">
+            @if (Session["user"] != null)
+            {
+                <div class="formButtons">
+                    <button class="btn btn-default" type="button" onclick="location.href='@Url.Action("CreateGallery","Portfolio")'">New Gallery</button>
+                </div>
+            }
+             <div class="container">
                         <div class="row">
-                                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
                                     @foreach (var item in Model)
                                     {
-                                        <div class="item" onclick="location.href='@Url.Action("ViewGallery","Portfolio", new { GalleryID = item.GalleryID })'">
+                                        <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                             <div class="hoverEffect">
-                                                    <img src="~/Content/Images/Portfolio/@item.GalleryImg" />
-                                                    <div class="overlay">
+                                                    <img class="img-responsive" src="~/Content/Images/Portfolio/@item.GalleryImg" alt="@Html.DisplayFor(modelItem => item.GalleryDiscription)"/>
+                                                    <div class="overlay" onclick="location.href='@Url.Action("PhotoGallery","Portfolio", new { GalleryID = item.GalleryID })'">
                                                         <h2>@Html.DisplayFor(modelItem => item.GalleryName)</h2>
                                                         <p class="info">@Html.DisplayFor(modelItem => item.GalleryDiscription)</p>
                                                     </div>
-                                            
                                             </div>
-                                        </div>
+                                            @if (Session["user"] != null)
+                                            {
+                                                <button class="btn btn-default" onclick="location.href='@Url.Action("DeleteGallery","Portfolio", new { GalleryID = item.GalleryID })'">Delete Gallery</button>
+                                            }
+                                        </div> 
                                     }
-                                </div>
-                        </div>                  
-                      </div>
-                 </div>
+                        </div> 
+            </div>
+        </div>
      </div>
  </div>
 

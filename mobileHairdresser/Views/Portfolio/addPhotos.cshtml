@@ -1,0 +1,23 @@
+﻿@model mobileHairdresser.Database.tblPhoto
+
+@{
+    ViewBag.Title = "addPhotos";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="ContentContianer">
+    <h1>Add New Photo</h1>
+    <div class="ContentWrapper">
+        <div class="jumbotron">
+            @using (Html.BeginForm("uploadPhotos", "Portfolio", FormMethod.Post, new { @class = "dropzone", @id = "dropzoneJsForm"}))
+            {
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true, "", new { })
+                @Html.HiddenFor(model => model.GalleryID)
+            }
+        </div>
+            <p class="formButtons">
+                <button type="button" onclick="location.href='@Url.Action("Portfolio","Home")'">Back</button>
+            </p>
+    </div>
+</div>
+

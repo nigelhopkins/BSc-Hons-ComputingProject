@@ -31,8 +31,8 @@
             <PropertyRef Name="GalleryID" />
           </Key>
           <Property Name="GalleryID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="GalleryName" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="GalleryImg" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="GalleryName" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="GalleryImg" Type="varchar" MaxLength="250" />
           <Property Name="GalleryDiscription" Type="text" />
         </EntityType>
         <EntityType Name="tblHaircut">
@@ -238,9 +238,9 @@
             <PropertyRef Name="GalleryID" />
           </Key>
           <Property Name="GalleryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="GalleryName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="GalleryName" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
           <NavigationProperty Name="tblPhotos" Relationship="mobileHairdresserModel.FK_tblPhotos_tblGallery" FromRole="tblGallery" ToRole="tblPhoto" />
-          <Property Name="GalleryImg" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="GalleryImg" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
           <Property Name="GalleryDiscription" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="tblPhoto">

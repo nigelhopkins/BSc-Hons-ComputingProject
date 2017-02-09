@@ -1,0 +1,97 @@
+﻿@model IEnumerable<mobileHairdresser.Database.tblPhoto>
+
+@{
+    ViewBag.Title = "PhotoGallery";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    int GalleryID = 0;
+    string GalleryName = "";
+    int count = 1;
+
+    if (ViewBag.GalleryID != null)
+    {
+        GalleryID = ViewBag.GalleryID;
+        GalleryName = ViewBag.GalleryName;
+    }
+    else
+    {
+        Response.Redirect("~/Home/Portfolio");
+    }
+    string errorMsg = Html.Raw(TempData["NoPhotosFound"]).ToString();
+}
+
+<div class="ContentContianer">
+    <h1>@GalleryName</h1>
+    @if (Session["user"] != null)
+    {
+        <a href="@Url.Action("editGalleryDetails","Portfolio", new { GalleryID = GalleryID })">Click to edit gallery Details.</a>
+    }    
+    <div class="ContentWrapper">
+        <div id="PortfolioContainer">
+            @if (Session["user"] != null)
+            {
+                <div class="container">
+                    <div class="row">
+                        Admin Pannel.
+                    </div>
+                </div>
+            }
+            <div class="container">
+                <div class="row">
+                    @if (errorMsg != null)
+                    {
+                        <p class="warning">@errorMsg</p>
+                    }
+                    else
+                    {
+                        <div class="col-sm-12 caption">
+                            <p class="caption">@ViewBag.GalleryDiscription</p>
+                        </div>
+                                    foreach (var image in Model)
+                                    {
+                            <div class="col-lg-3 col-sm-4 col-xs-6">
+                                <div class="hoverEffect">
+                                    <a title="Image @count" href="#">
+                                        <img class="img-responsive" src="~/Content/Images/Portfolio/@image.Url" alt="@Html.DisplayFor(modelItem => image.Description)">
+                                        <div class="thumbnail overlay">
+                                        </div>
+                                    </a>
+                                    @if (Session["user"] != null)
+                                    {
+                                        <button type="button" style="width:100%" onclick="location.href='@Url.Action("setGalleryPhoto","Portfolio", new { PhotoID = image.PhotoID })'">Set Gallery Photo</button>
+                                        <button type="button" style="width:100%" onclick="location.href='@Url.Action("deletePhoto","Portfolio", new { PhotoID = image.PhotoID })'">Delete Photo</button>
+                                    }
+                                </div>
+                            </div>
+                            count++;
+                        }
+                        <div tabindex="-1" class="modal fade" id="myModal" role="dialog">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button class="close pull-right" type="button" data-dismiss="modal">×</button>
+                                        <h3 class="modal-title">Heading</h3>
+                                    </div>
+                                    <div class="modal-body">
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button class="btn btn-default" data-dismiss="modal">Close</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                                </div>
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 formButtons">
+                        <button type="button" onclick="location.href='@Url.Action("Portfolio","Home")'">Back</button>
+                            @if (Session["user"] != null)
+                            {
+                                <button type="button" onclick="location.href='@Url.Action("addPhotos","Portfolio", new { GalleryID = GalleryID })'">Upload Photos</button>
+                            }                            
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

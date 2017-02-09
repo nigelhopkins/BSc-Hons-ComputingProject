@@ -1,0 +1,34 @@
+﻿@model mobileHairdresser.Database.tblGallery
+
+@{
+    ViewBag.Title = "CreateGallery";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="ContentContianer">
+    <h1>Add New Gallery</h1>
+    <div class="ContentWrapper">
+        @using (Html.BeginForm("SaveGallery", "Portfolio", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true, "", new { })
+            <ul>
+                <li>
+                    @Html.LabelFor(model => model.GalleryName, htmlAttributes: new { @class = ""})
+                    @Html.EditorFor(model => model.GalleryName, new { htmlAttributes = new { @class="" } })
+                    @Html.ValidationMessageFor(model => model.GalleryName, "", new {@class=""})
+                </li>
+                <li>
+                    @Html.LabelFor(model => model.GalleryDiscription, htmlAttributes: new { @class = "" })
+                    @Html.EditorFor(model => model.GalleryDiscription, new { htmlAttributes = new { @class = "" } })
+                    @Html.ValidationMessageFor(model => model.GalleryDiscription, "", new { @class = "" })
+                </li>
+                <li>
+                    <p class="formButtons">
+                        <button type="button" onclick="location.href='@Url.Action("Portfolio","Home")'">Cancel</button>
+                        <button type="submit">Save Changes</button>
+                    </p>
+                </li>
+            </ul>
+        }
+    </div>
+</div>

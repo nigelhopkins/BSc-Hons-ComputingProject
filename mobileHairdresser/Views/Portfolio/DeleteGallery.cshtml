@@ -1,0 +1,31 @@
+﻿@model mobileHairdresser.Database.tblGallery
+
+@{
+    ViewBag.Title = "CreateGallery";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="ContentContianer">
+    <h1>Delete @Html.DisplayFor(model => model.GalleryName) Gallery</h1>
+    <div class="ContentWrapper">
+        <ul>
+            <li>
+                <div class="accessWarning">
+                    <h1>WARNING</h1>
+                    <p>The following catagory has been selected for deletion @Html.DisplayFor(model => model.GalleryName)</p>
+                    <p>Please be awhere that all haircuts associated with this catagory will also be deleted!</p>
+                </div>
+            </li>
+            <li>
+                @using (Html.BeginForm("DeleteGallery", "Portfolio", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.HiddenFor(model => model.GalleryID)
+                    <p class="formButtons">
+                        <button type="button" onclick="location.href='@Url.Action("Portfolio","Home")'">Cancel</button>
+                        <button type="submit">Delete Gallery</button>
+                    </p>
+                }
+            </li>
+        </ul>
+    </div>
+</div>

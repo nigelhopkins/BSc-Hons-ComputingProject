@@ -199,6 +199,7 @@
     <Compile Include="Controllers\adminController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\loginController.cs" />
+    <Compile Include="Controllers\PortfolioController.cs" />
     <Compile Include="Controllers\PricesController.cs" />
     <Compile Include="Database\mobileHairdresser.Context.cs">
       <AutoGen>True</AutoGen>
@@ -247,10 +248,6 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Content.css" />
     <Content Include="Content\Site.css" />
-    <Content Include="Content\_defaults.css" />
-    <Content Include="Content\_layout.css" />
-    <Content Include="Content\_MobileNav.css" />
-    <Content Include="Content\_sidebarLayout.css" />
     <Content Include="Database\mobileHairdresser.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>mobileHairdresser.edmx</DependentUpon>
@@ -264,7 +261,6 @@
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="Controllers\Site.css" />
     <Content Include="Scripts\ai.0.22.19-build00125.js" />
     <Content Include="Scripts\ai.0.22.19-build00125.min.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -280,6 +276,14 @@
       <DependentUpon>mobileHairdresser.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\dropzone\basic.css" />
+    <Content Include="Scripts\dropzone\basic.min.css" />
+    <Content Include="Scripts\dropzone\dropzone-amd-module.js" />
+    <Content Include="Scripts\dropzone\dropzone-amd-module.min.js" />
+    <Content Include="Scripts\dropzone\dropzone.css" />
+    <Content Include="Scripts\dropzone\dropzone.js" />
+    <Content Include="Scripts\dropzone\dropzone.min.css" />
+    <Content Include="Scripts\dropzone\dropzone.min.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
@@ -324,6 +328,12 @@
     <Content Include="Views\Prices\CreateNewHaircutType.cshtml" />
     <Content Include="Views\Prices\DeleteHaircutsCatagory.cshtml" />
     <Content Include="Views\Prices\EditHaircutType.cshtml" />
+    <Content Include="Views\Portfolio\PhotoGallery.cshtml" />
+    <Content Include="Views\Portfolio\CreateGallery.cshtml" />
+    <Content Include="Views\Portfolio\DeleteGallery.cshtml" />
+    <Content Include="Views\Portfolio\EditGallery.cshtml" />
+    <Content Include="Views\Portfolio\addPhotos.cshtml" />
+    <Content Include="Views\Portfolio\editGalleryDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\Images\" />

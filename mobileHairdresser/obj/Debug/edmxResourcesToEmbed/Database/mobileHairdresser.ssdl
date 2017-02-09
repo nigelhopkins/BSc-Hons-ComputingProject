@@ -26,8 +26,8 @@
       <PropertyRef Name="GalleryID" />
     </Key>
     <Property Name="GalleryID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="GalleryName" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="GalleryImg" Type="varchar" MaxLength="250" Nullable="false" />
+    <Property Name="GalleryName" Type="varchar" MaxLength="250" Nullable="false" />
+    <Property Name="GalleryImg" Type="varchar" MaxLength="250" />
     <Property Name="GalleryDiscription" Type="text" />
   </EntityType>
   <EntityType Name="tblHaircut">
