@@ -1,17 +1,45 @@
 ﻿@{
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewBag.Title = "Contact";
+
+    var emailConfimation = TempData["EmailConfirmation"];
+    var errorMsg = TempData["error"];  
+
 }
 <div class="ContentContianer">
     <h1>Contact</h1>
     <div class="ContentWrapper">
-        <form method="post" action="">
-            <input type="text" name="custName" id="custName" placeholder="Please enter your name?" />
-            <input type="text" name="custPhoneNo" id="custPhoneNo" placeholder="Please enter your phone number?" />
-            <input type="text" name="custEmail" id="custEmail" placeholder="Please enter your email?" />
-            <textarea placeholder="Please enter your message?"></textarea>
-            <input type="hidden" name="antiBotSpam" id="antiBotSpam" value="" />
-            <button type="submit">Send</button>
-        </form>
+        @if (emailConfimation != null)
+        {
+            <div class="accessWarning">
+                <h1>Email Confirmation</h1>
+
+                <p>Hi @TempData["EmailConfirmation"], 
+                <br />Your email has been sent.
+                <br />We will be in touch very soon.
+                <br />Thank You
+                <br />Mobile Hairdresser</p>
+            </div>
+        }
+        else if (errorMsg != null)
+        {
+            <div class="accessWarning">
+                <h1>Opss. An Error has occured...</h1>
+                <p>Your email has not been sent!!</p>
+                <p>@TempData["error"]</p>
+            </div>
+        }
+        else
+        {
+            using (Html.BeginForm("sendEmail", "Home", FormMethod.Post))
+            {
+                <input type="text" name="custName" id="custName" placeholder="Please enter your name?" />
+                <input type="text" name="custPhoneNo" id="custPhoneNo" placeholder="Please enter your phone number?" />
+                <input type="text" name="custEmail" id="custEmail" placeholder="Please enter your email?" />
+                <textarea placeholder="Please enter your message?" name="emailMessage"></textarea>
+                <input type="hidden" name="antiBotSpam" id="antiBotSpam" value="" />
+                <button type="submit">Send</button>
+            }
+        }
     </div>
 </div>

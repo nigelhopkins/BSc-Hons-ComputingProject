@@ -4,6 +4,10 @@ using System.Web;
 using System.Web.Mvc;
 using mobileHairdresser.Database;
 using System.Collections.Generic;
+using System.IO;
+using System.Net.Mail;
+using System.Configuration;
+using System.Net;
 
 namespace mobileHairdresser.Controllers
 {
@@ -66,8 +70,100 @@ namespace mobileHairdresser.Controllers
         public ActionResult Contact()
         {
             ViewBag.Title = "Contact";
+            
+                return View();
+        }
+        [HttpPost]
+        public ActionResult sendEmail()
+        {
+            string body = "";
+            bool sendToCustomer = false;
+            string emailTo = "";
+            string custEmail = "";
+            string custName = "";
+            int count = 0;
+            do
+            {
+                if (sendToCustomer != true)
+                {
+                    emailTo = ConfigurationManager.AppSettings["EmailFormAddress"];
+                    custEmail = Request["custEmail"];
+                }
+                else
+                {
+                    emailTo = Request["custEmail"];
+                    custEmail = ConfigurationManager.AppSettings["EmailFormAddress"];
+                }
 
-            return View();
+                int smtpPort = Convert.ToInt32(ConfigurationManager.AppSettings["Port"]);
+                string username = ConfigurationManager.AppSettings["MailAuthUser"];
+                string password = ConfigurationManager.AppSettings["MailAuthPass"];
+                custName = Request["custName"];
+                string custPhoneNo = Request["custPhoneNo"];
+                string emailMessage = Request["emailMessage"];
+
+                try
+                {
+
+                    if (sendToCustomer != true)
+                    {
+                        using (var sr = new StreamReader(Server.MapPath("//App_Data//emailTemplates/" + "contactEmailNotification.html")))
+                        {
+                            body = sr.ReadToEnd();
+                        }
+                    }
+                    else
+                    {
+                        using (var sr = new StreamReader(Server.MapPath("//App_Data//emailTemplates/" + "customerEmailNotification.html")))
+                        {
+                            body = sr.ReadToEnd();
+                        }
+                    }
+
+                    MailMessage customerEmailMessage = new MailMessage();
+                    customerEmailMessage.To.Add(emailTo);
+                    customerEmailMessage.From = new MailAddress(emailTo, "Mobile Hairdresser");
+                    customerEmailMessage.ReplyTo = new MailAddress(custEmail);
+                    customerEmailMessage.Subject = @"You have recived a new message from : " + custName;
+                    if (sendToCustomer != true)
+                    {
+                        customerEmailMessage.Body = string.Format(body, custName, custPhoneNo, custEmail, emailMessage);
+                    }
+                    else
+                    {
+                        customerEmailMessage.Body = string.Format(body, custName, custPhoneNo, emailTo, emailMessage);
+                    }
+
+                    customerEmailMessage.IsBodyHtml = true;
+
+                    using (SmtpClient smtp = new SmtpClient())
+                    {
+                        smtp.EnableSsl = true;
+                        smtp.Host = ConfigurationManager.AppSettings["MailServer"];
+                        smtp.Port = smtpPort;
+                        smtp.UseDefaultCredentials = false;
+                        smtp.Credentials = new NetworkCredential(username, password);
+                        smtp.DeliveryMethod = SmtpDeliveryMethod.Network;
+                        smtp.SendCompleted += (s, e) => { smtp.Dispose(); };
+                        smtp.Send(customerEmailMessage);
+                    }
+
+                    sendToCustomer = true;
+                }
+                catch (Exception error)
+                {
+                    TempData["error"] = "An error has occured and your email could not be sent! : " + error;
+
+                    return RedirectToAction("Contact", "Home");
+                }
+                count++;
+            } while (count == 1);
+
+            TempData["EmailConfirmation"] = custName;
+                return RedirectToAction("Contact", "Home");
+          
+
+            return RedirectToAction("Contact", "Home");
         }
         public ActionResult cookiePolicy()
         {
