@@ -12,9 +12,8 @@ using System.Web.Mvc;
 
 namespace mobileHairdresser.Controllers
 {
-    public class PortfolioController : Controller
+    public class PortfolioController : BaseController
     {
-        public mobileHairdresserEntities db = new mobileHairdresserEntities();
         public string fileLocation = "~/Content/Images/Portfolio/";
         // GET: Portfolio
         [HttpGet]

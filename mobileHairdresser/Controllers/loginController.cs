@@ -12,9 +12,8 @@ using System.Net;
 
 namespace mobileHairdresser.Controllers
 {
-    public class loginController : Controller
+    public class loginController : BaseController
     {
-        private mobileHairdresserEntities db = new mobileHairdresserEntities();
         int LoginID;
         // GET: login
         public ActionResult createSession()

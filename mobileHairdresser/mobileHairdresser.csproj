@@ -197,6 +197,8 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\adminController.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\EmailController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\loginController.cs" />
     <Compile Include="Controllers\PortfolioController.cs" />
@@ -217,6 +219,9 @@
       <DependentUpon>mobileHairdresser.edmx</DependentUpon>
     </Compile>
     <Compile Include="Database\sysdiagram.cs">
+      <DependentUpon>mobileHairdresser.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Database\tblEmail.cs">
       <DependentUpon>mobileHairdresser.tt</DependentUpon>
     </Compile>
     <Compile Include="Database\tblEmployee.cs">
@@ -336,9 +341,13 @@
     <Content Include="Views\Portfolio\EditGallery.cshtml" />
     <Content Include="Views\Portfolio\addPhotos.cshtml" />
     <Content Include="Views\Portfolio\editGalleryDetails.cshtml" />
+    <Content Include="Views\Email\customerEmail.cshtml" />
+    <Content Include="Views\Email\ViewEmail.cshtml" />
+    <Content Include="Views\Shared\Sidebar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\Images\" />
+    <Folder Include="Views\Baase\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

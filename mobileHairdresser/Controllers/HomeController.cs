@@ -11,10 +11,9 @@ using System.Net;
 
 namespace mobileHairdresser.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
-        public mobileHairdresserEntities db = new mobileHairdresserEntities();
-
+        
         [HttpPost]
         public ActionResult systemMessage(string systemMessage)
         {
@@ -81,6 +80,9 @@ namespace mobileHairdresser.Controllers
             string emailTo = "";
             string custEmail = "";
             string custName = "";
+            string custPhoneNo = "";
+            string emailMessage = "";
+            bool emailSaved = false;
             int count = 0;
             do
             {
@@ -99,9 +101,33 @@ namespace mobileHairdresser.Controllers
                 string username = ConfigurationManager.AppSettings["MailAuthUser"];
                 string password = ConfigurationManager.AppSettings["MailAuthPass"];
                 custName = Request["custName"];
-                string custPhoneNo = Request["custPhoneNo"];
-                string emailMessage = Request["emailMessage"];
+                custPhoneNo = Request["custPhoneNo"];
+                emailMessage = Request["emailMessage"];
 
+                if(emailSaved != true)
+                {
+                    try
+                    {
+                        tblEmail newEmail = new tblEmail();
+                        newEmail.custEmail = custEmail;
+                        newEmail.CustName = custName;
+                        newEmail.custPhone = custPhoneNo;
+                        newEmail.Subject = "You have recived a new message from : " + custName;
+                        newEmail.Message = emailMessage;
+                        newEmail.Read = "false";
+                        newEmail.DateSent = DateTime.Now;
+
+                        db.tblEmails.Add(newEmail);
+                        db.SaveChanges();
+
+                        emailSaved = true;
+                    }
+                    catch (Exception error)
+                    {
+                        TempData["error"] = "Email sent but not added to database.";
+                    }
+                }
+                
                 try
                 {
 
@@ -157,7 +183,7 @@ namespace mobileHairdresser.Controllers
                     return RedirectToAction("Contact", "Home");
                 }
                 count++;
-            } while (count == 1);
+            } while (count == 1);                              
 
             TempData["EmailConfirmation"] = custName;
                 return RedirectToAction("Contact", "Home");

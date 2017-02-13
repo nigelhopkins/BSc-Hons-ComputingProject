@@ -6,10 +6,8 @@ using mobileHairdresser.Database;
 
 namespace mobileHairdresser.Controllers
 {
-    public class adminController : Controller
+    public class adminController : BaseController
     {
-        public mobileHairdresserEntities db = new mobileHairdresserEntities();
-
         // GET: admin
         public async Task<ActionResult> adminAccountList()
         {

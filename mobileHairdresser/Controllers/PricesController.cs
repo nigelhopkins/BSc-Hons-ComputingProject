@@ -8,9 +8,8 @@ using System.Net;
 
 namespace mobileHairdresser.Controllers
 {
-    public class PricesController : Controller
+    public class PricesController : BaseController
     {
-        public mobileHairdresserEntities db = new mobileHairdresserEntities();
         // GET: Prices
         public ActionResult Index()
         {

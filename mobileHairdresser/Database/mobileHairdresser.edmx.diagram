@@ -15,6 +15,7 @@
         <EntityTypeShape EntityType="mobileHairdresserModel.tblGallery" PointX="12.125" PointY="0.75" Width="1.5" />
         <EntityTypeShape EntityType="mobileHairdresserModel.tblPhoto" PointX="10.125" PointY="0.75" Width="1.5" />
         <AssociationConnector Association="mobileHairdresserModel.FK_tblPhotos_tblGallery" />
+        <EntityTypeShape EntityType="mobileHairdresserModel.tblEmail" Width="1.5" PointX="5.5" PointY="4.875" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

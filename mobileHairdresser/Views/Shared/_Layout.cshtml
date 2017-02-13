@@ -47,7 +47,7 @@
                         </div>
                         <ul class="sidebar-nav">
                             <li class="mobileNav" onclick="Nav()"><a href="#">Admin Menu</a></li>
-                            <li><a href="#">Email</a></li>
+                            <li><a href="@Url.Action("customerEmail","Email")">Email <span style="color:#ff0000;"class="@ViewBag.emailCount"></span></a></li>
                             <li><a href="#">Appointments</a></li>
                             <li><a href="@Url.Action("adminAccountList","admin")">Account Settings</a></li>
                         </ul>

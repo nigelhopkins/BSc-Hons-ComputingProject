@@ -97,6 +97,7 @@
       <End Role="tblGallery" EntitySet="tblGalleries" />
       <End Role="tblPhoto" EntitySet="tblPhotos" />
     </AssociationSet>
+    <EntitySet Name="tblEmails" EntityType="mobileHairdresserModel.tblEmail" />
   </EntityContainer>
   <EntityType Name="tblGallery">
     <Key>
@@ -132,4 +133,17 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <EntityType Name="tblEmail">
+    <Key>
+      <PropertyRef Name="EmailID" />
+    </Key>
+    <Property Name="EmailID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CustName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="custEmail" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="custPhone" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
+    <Property Name="Subject" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Message" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Read" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Name="DateSent" Type="DateTime" Nullable="false" Precision="0" />
+  </EntityType>
 </Schema>

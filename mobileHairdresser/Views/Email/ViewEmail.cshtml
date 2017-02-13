@@ -1,0 +1,29 @@
+﻿@model mobileHairdresser.Database.tblEmail
+
+@{
+    ViewBag.Title = "ViewEmail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="ContentContianer">
+    <h1>Email From : @Model.CustName</h1>
+    <div class="ContentWrapper">
+        <ul class="emailViewer">
+            <li>
+                <p><label>Customer Name :</label> @Model.CustName</p>
+                <p><label>Customer Phone Number :</label> @Model.custPhone</p>
+                <p><label>Cusotmer Email :</label> @Model.custEmail</p>
+            </li>
+            <li>
+                <p><label>Subject :</label> @Model.Subject</p>
+            </li>
+            <li>
+                <span class="container">@Model.Message</span>
+            </li>
+            <li>
+                <button type="button" onclick="location.href='@Url.Action("customerEmail","Email")'">Back</button>
+            </li>
+        </ul>
+    </div>
+</div>
+

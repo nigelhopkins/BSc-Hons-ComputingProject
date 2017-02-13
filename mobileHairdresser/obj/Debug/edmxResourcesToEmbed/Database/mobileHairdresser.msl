@@ -77,5 +77,19 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="tblEmails">
+      <EntityTypeMapping TypeName="mobileHairdresserModel.tblEmail">
+        <MappingFragment StoreEntitySet="tblEmail">
+          <ScalarProperty Name="DateSent" ColumnName="DateSent" />
+          <ScalarProperty Name="Read" ColumnName="Read" />
+          <ScalarProperty Name="Message" ColumnName="Message" />
+          <ScalarProperty Name="Subject" ColumnName="Subject" />
+          <ScalarProperty Name="custPhone" ColumnName="custPhone" />
+          <ScalarProperty Name="custEmail" ColumnName="custEmail" />
+          <ScalarProperty Name="CustName" ColumnName="CustName" />
+          <ScalarProperty Name="EmailID" ColumnName="EmailID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

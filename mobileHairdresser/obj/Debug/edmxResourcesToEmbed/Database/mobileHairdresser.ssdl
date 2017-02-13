@@ -10,6 +10,19 @@
     <Property Name="version" Type="int" />
     <Property Name="definition" Type="varbinary(max)" />
   </EntityType>
+  <EntityType Name="tblEmail">
+    <Key>
+      <PropertyRef Name="EmailID" />
+    </Key>
+    <Property Name="EmailID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CustName" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="custEmail" Type="varchar" MaxLength="250" />
+    <Property Name="custPhone" Type="varchar" MaxLength="11" />
+    <Property Name="Subject" Type="text" Nullable="false" />
+    <Property Name="Message" Type="text" Nullable="false" />
+    <Property Name="DateSent" Type="date" Nullable="false" />
+    <Property Name="Read" Type="varchar" MaxLength="5" Nullable="false" />
+  </EntityType>
   <EntityType Name="tblEmployee">
     <Key>
       <PropertyRef Name="employeeID" />
@@ -107,6 +120,7 @@
   </Association>
   <EntityContainer Name="mobileHairdresserModelStoreContainer">
     <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblEmail" EntityType="Self.tblEmail" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblEmployee" EntityType="Self.tblEmployee" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblGallery" EntityType="Self.tblGallery" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblHaircut" EntityType="Self.tblHaircut" Schema="dbo" store:Type="Tables" />
