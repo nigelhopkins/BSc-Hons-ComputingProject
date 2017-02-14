@@ -197,6 +197,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\adminController.cs" />
+    <Compile Include="Controllers\AppointmentController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\EmailController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -221,6 +222,12 @@
     <Compile Include="Database\sysdiagram.cs">
       <DependentUpon>mobileHairdresser.tt</DependentUpon>
     </Compile>
+    <Compile Include="Database\tblAppointment.cs">
+      <DependentUpon>mobileHairdresser.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Database\tblCustomerHistory.cs">
+      <DependentUpon>mobileHairdresser.tt</DependentUpon>
+    </Compile>
     <Compile Include="Database\tblEmail.cs">
       <DependentUpon>mobileHairdresser.tt</DependentUpon>
     </Compile>
@@ -240,6 +247,9 @@
       <DependentUpon>mobileHairdresser.tt</DependentUpon>
     </Compile>
     <Compile Include="Database\tblPhoto.cs">
+      <DependentUpon>mobileHairdresser.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Database\tblWorkingDay.cs">
       <DependentUpon>mobileHairdresser.tt</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
@@ -344,6 +354,7 @@
     <Content Include="Views\Email\customerEmail.cshtml" />
     <Content Include="Views\Email\ViewEmail.cshtml" />
     <Content Include="Views\Shared\Sidebar.cshtml" />
+    <Content Include="Views\Appointment\appointmentIndex.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Content\Images\" />
