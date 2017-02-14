@@ -11,12 +11,19 @@ namespace mobileHairdresser.Database
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class tblWorkingDay
     {
         public int DayID { get; set; }
+        [Required]
+        [Display(Name = "Day of The Week")]
         public string DayName { get; set; }
+        [Required]
+        [Display(Name = "Start Time")]
         public Nullable<System.TimeSpan> StartTime { get; set; }
+        [Required]
+        [Display(Name ="End Time")]
         public Nullable<System.TimeSpan> EndTime { get; set; }
         public Nullable<int> EmployeeID { get; set; }
     

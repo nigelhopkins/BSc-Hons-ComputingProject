@@ -15,6 +15,13 @@ namespace mobileHairdresser.Database
 
     public partial class tblEmployee
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public tblEmployee()
+        {
+            this.tblAppointments = new HashSet<tblAppointment>();
+            this.tblWorkingDays = new HashSet<tblWorkingDay>();
+        }
+    
         public int employeeID { get; set; }
         [Required]
         [Display(Name ="First Name")]
@@ -32,5 +39,9 @@ namespace mobileHairdresser.Database
         public Nullable<int> LoginID { get; set; }
     
         public virtual tblLogin tblLogin { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tblAppointment> tblAppointments { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tblWorkingDay> tblWorkingDays { get; set; }
     }
 }

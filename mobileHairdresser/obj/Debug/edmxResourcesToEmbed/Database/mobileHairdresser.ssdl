@@ -10,6 +10,31 @@
     <Property Name="version" Type="int" />
     <Property Name="definition" Type="varbinary(max)" />
   </EntityType>
+  <EntityType Name="tblAppointments">
+    <Key>
+      <PropertyRef Name="AppointmentID" />
+    </Key>
+    <Property Name="AppointmentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="EmployeeID" Type="int" Nullable="false" />
+    <Property Name="CustomerID" Type="int" Nullable="false" />
+    <Property Name="HaircutID" Type="int" Nullable="false" />
+    <Property Name="DateOfAppointment" Type="date" Nullable="false" />
+    <Property Name="StartTime" Type="time" Precision="7" Nullable="false" />
+    <Property Name="EndTime" Type="time" Precision="7" Nullable="false" />
+    <Property Name="IsBooked" Type="nvarchar" MaxLength="5" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tblCustomerHistory">
+    <Key>
+      <PropertyRef Name="CustomerID" />
+    </Key>
+    <Property Name="CustomerID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CustomerName" Type="varchar" MaxLength="50" />
+    <Property Name="CustomerPhoneNumber" Type="varchar" MaxLength="11" />
+    <Property Name="CustomerEmailAddress" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="CustomerHouseNumber" Type="varchar" MaxLength="50" />
+    <Property Name="CustomerPostalCode" Type="varchar" MaxLength="50" />
+    <Property Name="AppointmentID" Type="int" />
+  </EntityType>
   <EntityType Name="tblEmail">
     <Key>
       <PropertyRef Name="EmailID" />
@@ -82,6 +107,52 @@
     <Property Name="DateStamp" Type="date" Nullable="false" />
     <Property Name="GalleryID" Type="int" Nullable="false" />
   </EntityType>
+  <EntityType Name="tblWorkingDay">
+    <Key>
+      <PropertyRef Name="DayID" />
+    </Key>
+    <Property Name="DayID" Type="int" Nullable="false" />
+    <Property Name="DayName" Type="varchar" MaxLength="50" />
+    <Property Name="StartTime" Type="time" Precision="7" />
+    <Property Name="EndTime" Type="time" Precision="7" />
+    <Property Name="EmployeeID" Type="int" />
+  </EntityType>
+  <Association Name="FK_tblAppointments_tblCustomerHistory">
+    <End Role="tblCustomerHistory" Type="Self.tblCustomerHistory" Multiplicity="1" />
+    <End Role="tblAppointments" Type="Self.tblAppointments" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblCustomerHistory">
+        <PropertyRef Name="CustomerID" />
+      </Principal>
+      <Dependent Role="tblAppointments">
+        <PropertyRef Name="CustomerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblAppointments_tblEmployee">
+    <End Role="tblEmployee" Type="Self.tblEmployee" Multiplicity="1" />
+    <End Role="tblAppointments" Type="Self.tblAppointments" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblEmployee">
+        <PropertyRef Name="employeeID" />
+      </Principal>
+      <Dependent Role="tblAppointments">
+        <PropertyRef Name="EmployeeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblAppointments_tblHaircut">
+    <End Role="tblHaircut" Type="Self.tblHaircut" Multiplicity="1" />
+    <End Role="tblAppointments" Type="Self.tblAppointments" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="tblHaircut">
+        <PropertyRef Name="HaircutID" />
+      </Principal>
+      <Dependent Role="tblAppointments">
+        <PropertyRef Name="AppointmentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_tblEmployee_tblLogin">
     <End Role="tblLogin" Type="Self.tblLogin" Multiplicity="0..1" />
     <End Role="tblEmployee" Type="Self.tblEmployee" Multiplicity="*" />
@@ -118,8 +189,22 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_tblWorkingDay_tblEmployee">
+    <End Role="tblEmployee" Type="Self.tblEmployee" Multiplicity="0..1" />
+    <End Role="tblWorkingDay" Type="Self.tblWorkingDay" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblEmployee">
+        <PropertyRef Name="employeeID" />
+      </Principal>
+      <Dependent Role="tblWorkingDay">
+        <PropertyRef Name="EmployeeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <EntityContainer Name="mobileHairdresserModelStoreContainer">
     <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblAppointments" EntityType="Self.tblAppointments" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblCustomerHistory" EntityType="Self.tblCustomerHistory" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblEmail" EntityType="Self.tblEmail" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblEmployee" EntityType="Self.tblEmployee" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblGallery" EntityType="Self.tblGallery" Schema="dbo" store:Type="Tables" />
@@ -127,6 +212,19 @@
     <EntitySet Name="tblHaircutType" EntityType="Self.tblHaircutType" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblLogin" EntityType="Self.tblLogin" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblPhotos" EntityType="Self.tblPhotos" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblWorkingDay" EntityType="Self.tblWorkingDay" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_tblAppointments_tblCustomerHistory" Association="Self.FK_tblAppointments_tblCustomerHistory">
+      <End Role="tblCustomerHistory" EntitySet="tblCustomerHistory" />
+      <End Role="tblAppointments" EntitySet="tblAppointments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblAppointments_tblEmployee" Association="Self.FK_tblAppointments_tblEmployee">
+      <End Role="tblEmployee" EntitySet="tblEmployee" />
+      <End Role="tblAppointments" EntitySet="tblAppointments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblAppointments_tblHaircut" Association="Self.FK_tblAppointments_tblHaircut">
+      <End Role="tblHaircut" EntitySet="tblHaircut" />
+      <End Role="tblAppointments" EntitySet="tblAppointments" />
+    </AssociationSet>
     <AssociationSet Name="FK_tblEmployee_tblLogin" Association="Self.FK_tblEmployee_tblLogin">
       <End Role="tblLogin" EntitySet="tblLogin" />
       <End Role="tblEmployee" EntitySet="tblEmployee" />
@@ -138,6 +236,10 @@
     <AssociationSet Name="FK_tblPhotos_tblGallery" Association="Self.FK_tblPhotos_tblGallery">
       <End Role="tblGallery" EntitySet="tblGallery" />
       <End Role="tblPhotos" EntitySet="tblPhotos" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblWorkingDay_tblEmployee" Association="Self.FK_tblWorkingDay_tblEmployee">
+      <End Role="tblEmployee" EntitySet="tblEmployee" />
+      <End Role="tblWorkingDay" EntitySet="tblWorkingDay" />
     </AssociationSet>
   </EntityContainer>
 </Schema>

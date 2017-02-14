@@ -91,5 +91,43 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="tblAppointments">
+      <EntityTypeMapping TypeName="mobileHairdresserModel.tblAppointment">
+        <MappingFragment StoreEntitySet="tblAppointments">
+          <ScalarProperty Name="IsBooked" ColumnName="IsBooked" />
+          <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+          <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+          <ScalarProperty Name="DateOfAppointment" ColumnName="DateOfAppointment" />
+          <ScalarProperty Name="HaircutID" ColumnName="HaircutID" />
+          <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+          <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+          <ScalarProperty Name="AppointmentID" ColumnName="AppointmentID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblCustomerHistories">
+      <EntityTypeMapping TypeName="mobileHairdresserModel.tblCustomerHistory">
+        <MappingFragment StoreEntitySet="tblCustomerHistory">
+          <ScalarProperty Name="AppointmentID" ColumnName="AppointmentID" />
+          <ScalarProperty Name="CustomerPostalCode" ColumnName="CustomerPostalCode" />
+          <ScalarProperty Name="CustomerHouseNumber" ColumnName="CustomerHouseNumber" />
+          <ScalarProperty Name="CustomerEmailAddress" ColumnName="CustomerEmailAddress" />
+          <ScalarProperty Name="CustomerPhoneNumber" ColumnName="CustomerPhoneNumber" />
+          <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
+          <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblWorkingDays">
+      <EntityTypeMapping TypeName="mobileHairdresserModel.tblWorkingDay">
+        <MappingFragment StoreEntitySet="tblWorkingDay">
+          <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+          <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+          <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+          <ScalarProperty Name="DayName" ColumnName="DayName" />
+          <ScalarProperty Name="DayID" ColumnName="DayID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

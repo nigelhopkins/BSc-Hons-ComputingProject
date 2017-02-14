@@ -11,8 +11,7 @@ namespace mobileHairdresser.Database
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class tblCustomerHistory
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -20,21 +19,12 @@ namespace mobileHairdresser.Database
         {
             this.tblAppointments = new HashSet<tblAppointment>();
         }
+    
         public int CustomerID { get; set; }
-        [Required]
-        [Display(Name ="Name")]
         public string CustomerName { get; set; }
-        [Required]
-        [Display(Name ="Phone Number")]
         public string CustomerPhoneNumber { get; set; }
-        [Required]
-        [Display(Name ="Phone Number")]
         public string CustomerEmailAddress { get; set; }
-        [Required]
-        [Display(Name ="House Number")]
         public string CustomerHouseNumber { get; set; }
-        [Required]
-        [Display(Name ="Postal Code")]
         public string CustomerPostalCode { get; set; }
         public Nullable<int> AppointmentID { get; set; }
     

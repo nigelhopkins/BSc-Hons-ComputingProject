@@ -21,6 +21,8 @@
     <Property Name="PhoneNumber" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
     <Property Name="LoginID" Type="Int32" />
     <NavigationProperty Name="tblLogin" Relationship="Self.FK_tblEmployee_tblLogin" FromRole="tblEmployee" ToRole="tblLogin" />
+    <NavigationProperty Name="tblAppointments" Relationship="mobileHairdresserModel.FK_tblAppointments_tblEmployee" FromRole="tblEmployee" ToRole="tblAppointment" />
+    <NavigationProperty Name="tblWorkingDays" Relationship="mobileHairdresserModel.FK_tblWorkingDay_tblEmployee" FromRole="tblEmployee" ToRole="tblWorkingDay" />
   </EntityType>
   <EntityType Name="tblHaircut">
     <Key>
@@ -34,6 +36,7 @@
     <Property Name="TypeID" Type="Int32" />
     <Property Name="isSelected" Type="Boolean" Nullable="false" />
     <NavigationProperty Name="tblHaircutType" Relationship="Self.FK_tblHaircut_tblHaircutType" FromRole="tblHaircut" ToRole="tblHaircutType" />
+    <NavigationProperty Name="tblAppointment" Relationship="mobileHairdresserModel.FK_tblAppointments_tblHaircut" FromRole="tblHaircut" ToRole="tblAppointment" />
   </EntityType>
   <EntityType Name="tblHaircutType">
     <Key>
@@ -98,6 +101,25 @@
       <End Role="tblPhoto" EntitySet="tblPhotos" />
     </AssociationSet>
     <EntitySet Name="tblEmails" EntityType="mobileHairdresserModel.tblEmail" />
+    <EntitySet Name="tblAppointments" EntityType="mobileHairdresserModel.tblAppointment" />
+    <EntitySet Name="tblCustomerHistories" EntityType="mobileHairdresserModel.tblCustomerHistory" />
+    <EntitySet Name="tblWorkingDays" EntityType="mobileHairdresserModel.tblWorkingDay" />
+    <AssociationSet Name="FK_tblAppointments_tblCustomerHistory" Association="mobileHairdresserModel.FK_tblAppointments_tblCustomerHistory">
+      <End Role="tblCustomerHistory" EntitySet="tblCustomerHistories" />
+      <End Role="tblAppointment" EntitySet="tblAppointments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblAppointments_tblEmployee" Association="mobileHairdresserModel.FK_tblAppointments_tblEmployee">
+      <End Role="tblEmployee" EntitySet="tblEmployees" />
+      <End Role="tblAppointment" EntitySet="tblAppointments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblAppointments_tblHaircut" Association="mobileHairdresserModel.FK_tblAppointments_tblHaircut">
+      <End Role="tblHaircut" EntitySet="tblHaircuts" />
+      <End Role="tblAppointment" EntitySet="tblAppointments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblWorkingDay_tblEmployee" Association="mobileHairdresserModel.FK_tblWorkingDay_tblEmployee">
+      <End Role="tblEmployee" EntitySet="tblEmployees" />
+      <End Role="tblWorkingDay" EntitySet="tblWorkingDays" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="tblGallery">
     <Key>
@@ -146,4 +168,92 @@
     <Property Name="Read" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="false" />
     <Property Name="DateSent" Type="DateTime" Nullable="false" Precision="0" />
   </EntityType>
+  <EntityType Name="tblAppointment">
+    <Key>
+      <PropertyRef Name="AppointmentID" />
+    </Key>
+    <Property Name="AppointmentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="EmployeeID" Type="Int32" Nullable="false" />
+    <Property Name="CustomerID" Type="Int32" Nullable="false" />
+    <Property Name="HaircutID" Type="Int32" Nullable="false" />
+    <Property Name="DateOfAppointment" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="StartTime" Type="Time" Nullable="false" Precision="7" />
+    <Property Name="EndTime" Type="Time" Nullable="false" Precision="7" />
+    <Property Name="IsBooked" Type="String" Nullable="false" MaxLength="5" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="tblCustomerHistory" Relationship="mobileHairdresserModel.FK_tblAppointments_tblCustomerHistory" FromRole="tblAppointment" ToRole="tblCustomerHistory" />
+    <NavigationProperty Name="tblEmployee" Relationship="mobileHairdresserModel.FK_tblAppointments_tblEmployee" FromRole="tblAppointment" ToRole="tblEmployee" />
+    <NavigationProperty Name="tblHaircut" Relationship="mobileHairdresserModel.FK_tblAppointments_tblHaircut" FromRole="tblAppointment" ToRole="tblHaircut" />
+  </EntityType>
+  <EntityType Name="tblCustomerHistory">
+    <Key>
+      <PropertyRef Name="CustomerID" />
+    </Key>
+    <Property Name="CustomerID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CustomerName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="CustomerPhoneNumber" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
+    <Property Name="CustomerEmailAddress" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="CustomerHouseNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="CustomerPostalCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="AppointmentID" Type="Int32" />
+    <NavigationProperty Name="tblAppointments" Relationship="mobileHairdresserModel.FK_tblAppointments_tblCustomerHistory" FromRole="tblCustomerHistory" ToRole="tblAppointment" />
+  </EntityType>
+  <EntityType Name="tblWorkingDay">
+    <Key>
+      <PropertyRef Name="DayID" />
+    </Key>
+    <Property Name="DayID" Type="Int32" Nullable="false" />
+    <Property Name="DayName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="StartTime" Type="Time" Precision="7" />
+    <Property Name="EndTime" Type="Time" Precision="7" />
+    <Property Name="EmployeeID" Type="Int32" />
+    <NavigationProperty Name="tblEmployee" Relationship="mobileHairdresserModel.FK_tblWorkingDay_tblEmployee" FromRole="tblWorkingDay" ToRole="tblEmployee" />
+  </EntityType>
+  <Association Name="FK_tblAppointments_tblCustomerHistory">
+    <End Type="mobileHairdresserModel.tblCustomerHistory" Role="tblCustomerHistory" Multiplicity="1" />
+    <End Type="mobileHairdresserModel.tblAppointment" Role="tblAppointment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblCustomerHistory">
+        <PropertyRef Name="CustomerID" />
+      </Principal>
+      <Dependent Role="tblAppointment">
+        <PropertyRef Name="CustomerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblAppointments_tblEmployee">
+    <End Type="mobileHairdresserModel.tblEmployee" Role="tblEmployee" Multiplicity="1" />
+    <End Type="mobileHairdresserModel.tblAppointment" Role="tblAppointment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblEmployee">
+        <PropertyRef Name="employeeID" />
+      </Principal>
+      <Dependent Role="tblAppointment">
+        <PropertyRef Name="EmployeeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblAppointments_tblHaircut">
+    <End Type="mobileHairdresserModel.tblHaircut" Role="tblHaircut" Multiplicity="1" />
+    <End Type="mobileHairdresserModel.tblAppointment" Role="tblAppointment" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="tblHaircut">
+        <PropertyRef Name="HaircutID" />
+      </Principal>
+      <Dependent Role="tblAppointment">
+        <PropertyRef Name="AppointmentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblWorkingDay_tblEmployee">
+    <End Type="mobileHairdresserModel.tblEmployee" Role="tblEmployee" Multiplicity="0..1" />
+    <End Type="mobileHairdresserModel.tblWorkingDay" Role="tblWorkingDay" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblEmployee">
+        <PropertyRef Name="employeeID" />
+      </Principal>
+      <Dependent Role="tblWorkingDay">
+        <PropertyRef Name="EmployeeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

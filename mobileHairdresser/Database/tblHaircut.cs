@@ -37,5 +37,6 @@ namespace mobileHairdresser.Database
         public bool isSelected { get; set; }
     
         public virtual tblHaircutType tblHaircutType { get; set; }
+        public virtual tblAppointment tblAppointment { get; set; }
     }
 }
