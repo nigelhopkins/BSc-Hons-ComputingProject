@@ -13,11 +13,11 @@
             </p>
         </div>
         <p class="formButtons">
-            <button type="button" onclick="location.href='@Url.Action("Search","Appointments")'">Find Exisiting Appointments</button>
-            <button type="button" onclick="location.href='@Url.Action("createNewAppointment","Appointments")'">Make New Appointment</button>
+            <button type="button" onclick="location.href='@Url.Action("Search","Appointment")'">Find Exisiting Appointments</button>
+            <button type="button" onclick="location.href='@Url.Action("createNewAppointment","Appointment")'">Make New Appointment</button>
             @if (Session["user"] != null)
             {
-                <button type="button" onclick="location.href='@Url.Action("Diary","Appointments")'">View Diary</button>
+                <button type="button" onclick="location.href='@Url.Action("Diary","Appointment")'">View Diary</button>
             } 
         </p>   
     </div>

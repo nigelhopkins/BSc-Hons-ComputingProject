@@ -11,8 +11,7 @@ namespace mobileHairdresser.Database
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class tblHaircutType
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -20,9 +19,8 @@ namespace mobileHairdresser.Database
         {
             this.tblHaircuts = new HashSet<tblHaircut>();
         }
-        [Display(Name ="Type ID")]    
+    
         public int TypeID { get; set; }
-        [Display(Name = "Type Name")]
         public string TypeName { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

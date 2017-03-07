@@ -162,18 +162,18 @@ C:\Users\Nigel\Dropbox\College Work\Year 3\CORC371 Honours Project\mobileHairdre
 C:\Users\Nigel\Dropbox\College Work\Year 3\CORC371 Honours Project\mobileHairdresser 2.0\mobileHairdresser 2.0\mobileHairdresser\obj\Debug\mobileHairdresser.dll
 C:\Users\Nigel\Dropbox\College Work\Year 3\CORC371 Honours Project\mobileHairdresser 2.0\mobileHairdresser 2.0\mobileHairdresser\obj\Debug\mobileHairdresser.pdb
 C:\Users\Nigel\Dropbox\College Work\Year 3\CORC371 Honours Project\mobileHairdresser 2.0\mobileHairdresser 2.0\mobileHairdresser\obj\Debug\mobileHairdresser.csprojResolveAssemblyReference.cache
+C:\Users\Nigel\Dropbox\College Work\Year 3\CORC371 Honours Project\Final-Project\mobileHairdresser\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+C:\Users\Nigel\Dropbox\College Work\Year 3\CORC371 Honours Project\Final-Project\mobileHairdresser\bin\roslyn\Microsoft.CodeAnalysis.dll
+C:\Users\Nigel\Dropbox\College Work\Year 3\CORC371 Honours Project\Final-Project\mobileHairdresser\bin\roslyn\System.Reflection.Metadata.dll
+C:\Users\Nigel\Dropbox\College Work\Year 3\CORC371 Honours Project\Final-Project\mobileHairdresser\bin\roslyn\VBCSCompiler.exe
 C:\Users\Nigel\Dropbox\College Work\Year 3\CORC371 Honours Project\Final-Project\mobileHairdresser\bin\ApplicationInsights.config
 C:\Users\Nigel\Dropbox\College Work\Year 3\CORC371 Honours Project\Final-Project\mobileHairdresser\bin\roslyn\csc.exe
 C:\Users\Nigel\Dropbox\College Work\Year 3\CORC371 Honours Project\Final-Project\mobileHairdresser\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
-C:\Users\Nigel\Dropbox\College Work\Year 3\CORC371 Honours Project\Final-Project\mobileHairdresser\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
-C:\Users\Nigel\Dropbox\College Work\Year 3\CORC371 Honours Project\Final-Project\mobileHairdresser\bin\roslyn\Microsoft.CodeAnalysis.dll
 C:\Users\Nigel\Dropbox\College Work\Year 3\CORC371 Honours Project\Final-Project\mobileHairdresser\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
 C:\Users\Nigel\Dropbox\College Work\Year 3\CORC371 Honours Project\Final-Project\mobileHairdresser\bin\roslyn\Microsoft.CSharp.Core.targets
 C:\Users\Nigel\Dropbox\College Work\Year 3\CORC371 Honours Project\Final-Project\mobileHairdresser\bin\roslyn\Microsoft.VisualBasic.Core.targets
 C:\Users\Nigel\Dropbox\College Work\Year 3\CORC371 Honours Project\Final-Project\mobileHairdresser\bin\roslyn\System.Collections.Immutable.dll
-C:\Users\Nigel\Dropbox\College Work\Year 3\CORC371 Honours Project\Final-Project\mobileHairdresser\bin\roslyn\System.Reflection.Metadata.dll
 C:\Users\Nigel\Dropbox\College Work\Year 3\CORC371 Honours Project\Final-Project\mobileHairdresser\bin\roslyn\vbc.exe
-C:\Users\Nigel\Dropbox\College Work\Year 3\CORC371 Honours Project\Final-Project\mobileHairdresser\bin\roslyn\VBCSCompiler.exe
 C:\Users\Nigel\Dropbox\College Work\Year 3\CORC371 Honours Project\Final-Project\mobileHairdresser\bin\roslyn\VBCSCompiler.exe.config
 C:\Users\Nigel\Dropbox\College Work\Year 3\CORC371 Honours Project\Final-Project\mobileHairdresser\bin\mobileHairdresser.dll.config
 C:\Users\Nigel\Dropbox\College Work\Year 3\CORC371 Honours Project\Final-Project\mobileHairdresser\bin\mobileHairdresser.dll
@@ -243,3 +243,4 @@ C:\Users\Nigel\Dropbox\College Work\Year 3\CORC371 Honours Project\Final-Project
 C:\Users\Nigel\Dropbox\College Work\Year 3\CORC371 Honours Project\Final-Project\mobileHairdresser\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
 C:\Users\Nigel\Dropbox\College Work\Year 3\CORC371 Honours Project\Final-Project\mobileHairdresser\obj\Debug\mobileHairdresser.dll
 C:\Users\Nigel\Dropbox\College Work\Year 3\CORC371 Honours Project\Final-Project\mobileHairdresser\obj\Debug\mobileHairdresser.pdb
+C:\Users\Nigel\Dropbox\College Work\Year 3\CORC371 Honours Project\Final-Project\mobileHairdresser\obj\Debug\mobileHairdresser.csprojResolveAssemblyReference.cache

@@ -122,7 +122,7 @@ namespace mobileHairdresser.Controllers
 
                         emailSaved = true;
                     }
-                    catch (Exception error)
+                    catch (Exception)
                     {
                         TempData["error"] = "Email sent but not added to database.";
                     }
@@ -149,7 +149,7 @@ namespace mobileHairdresser.Controllers
                     MailMessage customerEmailMessage = new MailMessage();
                     customerEmailMessage.To.Add(emailTo);
                     customerEmailMessage.From = new MailAddress(emailTo, "Mobile Hairdresser");
-                    customerEmailMessage.ReplyTo = new MailAddress(custEmail);
+                    customerEmailMessage.ReplyToList.Add(new MailAddress(custEmail));
                     customerEmailMessage.Subject = @"You have recived a new message from : " + custName;
                     if (sendToCustomer != true)
                     {
@@ -187,9 +187,6 @@ namespace mobileHairdresser.Controllers
 
             TempData["EmailConfirmation"] = custName;
                 return RedirectToAction("Contact", "Home");
-          
-
-            return RedirectToAction("Contact", "Home");
         }
         public ActionResult cookiePolicy()
         {

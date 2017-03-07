@@ -40,7 +40,6 @@ namespace mobileHairdresser.Controllers
 
             string username = loginDetails.Username.ToLower();
             string password = loginDetails.Password;
-            string loginErrorMessage = "";
             bool verifyHash = false;
             string uname = "";
             string pword = "";
@@ -109,7 +108,7 @@ namespace mobileHairdresser.Controllers
                     }
                 }
             }
-            catch (Exception loginError)
+            catch (Exception)
             {
                     TempData["systemMessage"] = "<p>Unable to login at this time please try again later.</p>";
             }

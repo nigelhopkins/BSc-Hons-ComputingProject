@@ -1,0 +1,46 @@
+﻿    @model mobileHairdresser.Database.tblAppointment
+@{
+    ViewBag.Title = "createNewAppointment";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    DateTime dt = DateTime.Now;
+    if(Model != null)
+    {
+        dt = (System.DateTime)Model.DateOfAppointment;
+    }
+}
+
+<div class="ContentContianer">
+    <h1>Create New Appointment</h1>
+    <div class="ContentWrapper">
+        @using (Html.BeginForm("", "", FormMethod.Post, new { @id = "msform" }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary()
+
+            <!-- Form Progress Bar -->
+            <ul id="progressbar">
+                <li class="active">Appointment Details</li>
+                <li>Appointment Details</li>
+            </ul>  
+            <!-- Fieldsets -->
+            <fieldset>
+                <h2 class="fs-title">Appointment Details</h2>
+                <h3 class="fs-subtitle">Please give spacifics about your appointment.</h3>
+                @Html.DropDownListFor(model => model.tblHaircut.HaircutID, ViewBag.haircutList as SelectList, "--select--", new { @class = "form-control" })
+                @Html.TextBoxFor(model => model.DateOfAppointment, new { @class="date-picker", @type="date"})
+                @Html.EditorFor(model => model.StartTime,new { @class="time-picker"})
+                <button type="button" name="next" class="next action-button">Next</button>
+            </fieldset>
+            <fieldset>
+                <h2 class="fs-title">Customer Details</h2>
+                <h3 class="fs-subtitle">Please enter your details.</h3>
+
+                <button type="button" name="previous" class="previous action-button">Previous</button>
+                <button type="submit" name="submit" class="submit action-button">Book</button>
+            </fieldset>
+        }
+    </div>
+</div>
+
+

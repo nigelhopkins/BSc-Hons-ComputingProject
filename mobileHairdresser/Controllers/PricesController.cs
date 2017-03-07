@@ -72,7 +72,6 @@ namespace mobileHairdresser.Controllers
             {
                 return RedirectToAction("Index", "Home");
             }
-            return View();
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -166,7 +165,6 @@ namespace mobileHairdresser.Controllers
             {
                 return RedirectToAction("Index", "Home");
             }
-            return View();
         }
         [HttpPost]
         public ActionResult HaircutTypeDetails(int? haircutID)

@@ -11,23 +11,14 @@ namespace mobileHairdresser.Database
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class tblPhoto
     {
         public int PhotoID { get; set; }
-        [Required]
-        [Display(Name ="Photo Name")]
         public string PhotoName { get; set; }
-        [Required]
-        [Display(Name = "Description")]
         public string Description { get; set; }
-        [Required]
-        [Display(Name = "File Location")]
         public string Url { get; set; }
         public System.DateTime DateStamp { get; set; }
-        [Required]
-        [Display(Name = "Gallery Name")]
         public int GalleryID { get; set; }
     
         public virtual tblGallery tblGallery { get; set; }

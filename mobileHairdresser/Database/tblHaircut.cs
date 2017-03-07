@@ -11,29 +11,15 @@ namespace mobileHairdresser.Database
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class tblHaircut
     {
         public int HaircutID { get; set; }
-        [Required(ErrorMessage = "A haircut name is required!")]
-        [Display(Name ="Haircut Name")]
         public string HaircutName { get; set; }
-        [Required(ErrorMessage = "Please enter the cost for short hair")]
-        [DataType(DataType.Currency)]
-        [Display(Name ="Short Price")]
         public Nullable<double> ShortPrice { get; set; }
-        [Required(ErrorMessage = "Please enter the cost for long hair")]
-        [DataType(DataType.Currency)]
-        [Display(Name = "Long Price")]
         public Nullable<double> LongPrice { get; set; }
-        [Required]
-        [DataType(DataType.Time)]
-        [Display(Name ="Duration")]
         public Nullable<System.TimeSpan> TimeToCompletion { get; set; }
-        [Required]
-        [Display(Name = "Category")]
-        public int TypeID { get; set; }
+        public Nullable<int> TypeID { get; set; }
         public bool isSelected { get; set; }
     
         public virtual tblHaircutType tblHaircutType { get; set; }

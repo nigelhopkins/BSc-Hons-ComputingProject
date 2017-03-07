@@ -39,7 +39,7 @@ namespace mobileHairdresser.Controllers
                 return View();
             }
         }
-        public async Task<ActionResult> addPhotos(int GalleryID)
+        public ActionResult addPhotos(int GalleryID)
         {
             if(Session["user"] != null)
             {
@@ -110,7 +110,7 @@ namespace mobileHairdresser.Controllers
                                 db.SaveChangesAsync();
 
                             }
-                            catch(Exception ex)
+                            catch(Exception)
                             {
                                 isAddedSucessfully = false;
                             }
@@ -131,7 +131,7 @@ namespace mobileHairdresser.Controllers
                         }
                         }
                     }
-                    catch (Exception ex)
+                    catch (Exception )
                     {
                         isSavedSuccessfully = false;
                     }
@@ -149,8 +149,6 @@ namespace mobileHairdresser.Controllers
                             Message = "Error in saving file"
                         });
                     }
-                    
-                return RedirectToAction("PhotoGallery", "Portfolio");
             }
             else
             {
@@ -191,7 +189,6 @@ namespace mobileHairdresser.Controllers
             {
                 return RedirectToAction("Portfolio", "Home");
             }
-            return View();
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -303,8 +300,6 @@ namespace mobileHairdresser.Controllers
             {
                 return RedirectToAction("Portfolio", "Home");
             }
-
-            return RedirectToAction("Portfolio", "Home");
         }
         public ActionResult deletePhoto(int PhotoID)
         {
@@ -339,8 +334,6 @@ namespace mobileHairdresser.Controllers
         {
             if (Session["user"] != null)
             {
-                string fileName = "";
-
                 List<tblPhoto> tblPhotos = db.tblPhotos.Where(gallery => gallery.GalleryID.Equals(GalleryID)).ToList();
                 foreach (var file in tblPhotos)
                 {

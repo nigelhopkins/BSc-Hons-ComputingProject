@@ -4,14 +4,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
     <title>Mobile Hairdresser : @ViewBag.Title</title>
-    <script src="~/Scripts/Site.js"></script>
-    <script src="~/Scripts/dropzone/dropzone.min.js"></script>
-    <link href="~/Scripts/dropzone/dropzone.min.css" rel="stylesheet" />
-    <link href="~/Content/bootstrap.css" rel="stylesheet" />
-    <link href="~/Content/Site.css" rel="stylesheet" />
-    <link href="~/Content/Content.css" rel="stylesheet" />
-        
-    @Scripts.Render("~/bundles/modernizr")
+    @Styles.Render("~/bundles/css")        
 </head>
 <body>
     <div id="wrapper">
@@ -110,10 +103,11 @@
     <footer>
         <p>Designed and built by Nigel Hopkins &copy; 2016</p>
     </footer>
-
     @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/modernizr")
     @Scripts.Render("~/bundles/bootstrap")
-    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/customScript")
+    @Scripts.Render("~/bundles/StyleScripts")
     @RenderSection("scripts", required: false)
 </body>
 </html>

@@ -371,6 +371,103 @@
 .emailViewer button{
     margin:25px 0 0 auto;
 }
+
+/* Appointment System */
+
+#msform{
+    width:80%;
+    margin:50px auto;
+    text-align:center;
+    position:relative;
+}
+
+#msform fieldset{
+    background:#fff;
+    border:none;
+    border-radius:3px;
+    box-shadow:0 0 15px 1px rgba(0,0,0,0.4);
+    padding:20px 30px;
+    box-sizing: border-box;
+    width:100%;
+
+    position:absolute;
+}
+#msform fieldset:not(:first-of-type)
+{
+    display:none;
+}
+#msform input{
+    line-height:35px;
+    padding:15px;
+    border:1px solid #ccc;
+    border-radius:3px;
+    margin-bottom:10px;
+    width:100%;
+    box-sizing:border-box;
+    color:#000;
+    border-radius:1px;
+    cursor: pointer;
+    padding:10px 5px;
+    margin:10px 5px;
+    font-size:13px;
+}
+#msform .action-button:hover, #msform .action-button:focus{
+    box-shadow: 0 0 0 2px white, 0 0 0 3px #27AE60;
+}
+#msform .action-button{
+    display:block;
+    position:relative;
+
+    
+}
+.fs-title{
+    font-size:2em;
+    text-transform:uppercase;
+    color:#000;
+    margin-bottom:10px;
+}
+.fs-subtitle{
+    font-weight:normal;
+    font-size:0.75em;
+    color:#000;
+    border-bottom:1px dashed #000;
+    padding-bottom:20px;
+    margin-bottom:20px;
+}
+#progressbar{
+    margin-bottom:30px;
+    overflow:hidden;
+    counter-reset:step;
+    width:100%;
+}
+#progressbar li {
+    list-style-type:none;
+    color:#000;
+    text-transform:uppercase;
+    font-size:1.75em;
+    width:31.33%;
+    float:left;   
+}
+#progressbar li:before{
+    content:counter(step);
+    counter-increment:step;
+    width:20px;
+    line-height:20px;
+    display:block;
+    font-size:10px;
+    color:#000;
+    background:white;
+    border-radius:3px;
+    margin: 0 auto 5px auto;
+}
+
+#progressbar li:first-child:after{
+    content:none;
+}
+#progressbar li.active:before, #progressbar li.active:after{
+    background:#27AE60;
+    color:#000;
+}
 /* CMS Admin */
 
 .AccountList{
