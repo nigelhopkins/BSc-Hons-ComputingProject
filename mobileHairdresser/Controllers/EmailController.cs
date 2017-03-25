@@ -24,7 +24,7 @@ namespace mobileHairdresser.Controllers
                 {
                     TempData["highlightEmail"] = "true";
                 }
-                return View(db.tblEmails);
+                return View(db.tblEmails.OrderByDescending(o=>o.EmailID));
             }
             return RedirectToAction("Index","Home");
         }

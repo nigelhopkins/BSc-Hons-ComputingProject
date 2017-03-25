@@ -1,21 +1,75 @@
-﻿/*   Index Page   */
+﻿/* 
+    CSS style for screens with widths grater than 640px and not on mobile device
+
+    This page contains all the CSS that dose not alter the main design of the page    
+*/
+
+/*   Index Page   
+     ==========
+
+     create the default style for the index page
+*/
 
 .ContentContianer, #adminLoginContainer{
-    background:rgba(243,243,243, 0.6);
-    padding:0px;
-    margin:0;
-    padding:25px;
+    display:block;
+    position:absolute;
     width:100%;
+    height:100%;
+    border:0px solid #000;
+}
+.ContentContianer{
+    background:none;
+    padding-top:200px;
+}
+.ContentContianer h1{
+    display:block;
+    width:80%;
+    margin:0px auto 25px;
+    padding:0px;
+    text-shadow:0px 0px 10px #fff;
+
 }
 .ContentWrapper, .loginForm{
-    border:1px dashed #808080;
-    max-height:700px;
-    width:100%;
+    display:block;
+    background:#fff;
+    height:75%;
+    width:80%;
+    margin:0 auto;
+    max-height:75%;
+    box-shadow: 0 0 5px 2px #000;
+    border-radius:15px;
 }
-
+.loginForm{
+    padding-top:1px;
+}
 .ContentWrapper{
     min-height:500px;
     overflow-y:auto;
+    overflow-x:hidden;
+}
+.ContentWrapper h2{
+    width:80%;
+    margin:0px auto;
+    margin-top:35px;
+}
+.ContentWrapper form input[type="text"]{
+    width:100%;
+}
+.ContentWrapper form label{
+    width:100%;
+}
+
+/*
+    CSS Style spacific to the Admin Login Pannel
+*/
+#adminLoginContainer{
+    margin-top:125px;
+}
+#adminLoginContainer input[type="text"], #adminLoginContainer input[type="password"]
+{
+    display:block;
+    line-height:50px;
+    margin:10px auto;
 }
 #adminLoginContainer {
     display:none;
@@ -24,22 +78,25 @@
     margin:0 0 25px 0;
 }
 #adminLoginContainer form button{
-    font-size:2.5em;
+    font-size:100%;
+    display:inline-block;
+    width:49%;
+}
+#adminLoginContainer form button:first-child{
+    float:left;
+}
+#adminLoginContainer form button:last-child{
+    float:right;
 }
 .logonButtons{
     border:0px solid #808080;
     width:80%;
     margin:0 auto;
 }
-.logonButtons button{
-    display:inline-block;
-    width:auto;
-    min-width:30%;
-    line-height:50px;
-}
-.logonButtons button:last-child{
-    margin: 0 auto 0 25.2%;
-}
+
+/*
+    CSS style for the login warnings also use for email error warrnings
+*/
 .accessWarning{
     width:80%;
     margin:50px auto;
@@ -78,115 +135,119 @@
     margin:0;
     padding-left:20px;
 }
+/* End of CSS style for the Index page and Login form */
+/*  CSS style for the price list tables and all the CRUD oporations for all the pages in the PricesController */
 
-/*  Price Page content Style    */
+#haircutTypeID{
+    width:100%;
+    background:none;
+    border:none;
+    text-align-last:center;
+    height:50px;
+    font-size:150%;
+}
+
+/* CSS style for the tables for the price lists and CRUD oporations */
 
 #tableList{
     display:block;
-    margin:25px auto;
+    margin:50px auto;
+    width:100%;
+    height:70%;
+    min-height:70%;
+    max-height:70%;
 }
-#tableList{
-    width:80%;
+.tableListControl{
+    display:block;
+    height:90%;
+}
+.table thead tr th:first-child{
+    width:70%;
+    text-align:left;
+}
+.table tbody tr td:not(:first-child), .table thead tr th:not(:first-child) {
+    text-align:center;
 }
 #tableEdit{
     display:block;
-    width:80%;
+    width:90%;
     padding:0px;
-    margin: 50px auto;
-    min-height:400px;
-    overflow:auto;
+    margin:50px auto;
 }
-#tableEdit table{
-    width:100%;
+#tableEdit li:first-child{
+    border-bottom:1px solid #000;
 }
-
-.tableListControl{
-    min-height:350px;
-    max-height:350px;
-    overflow:auto;
-    border:0px solid #000;
-}
-    #tableList hr {
-        border-style:dashed;
-    }
-#tableList table thead tr:first-child,#tableEdit table thead tr:first-child{
-    background:rgba(243,243,243, 0.6);
+#tableEdit li{
+    display:block;
     line-height:50px;
 }
-#tableList table tbody tr, #tableEdit table tbody tr{
-    line-height:25px;
-}
-#tableEdit table tbody tr{
-    border-bottom:1px dashed rgba(243,243,243, 1)
-}
-#tableEdit table tbody tr td input[type='text'], #tableEdit table tbody tr td select{
-    display:block;
-    margin:5px 0;
-    font-size:1em;
-    text-align:left;
-}
-#tableEdit table tbody tr td select{
+#tableEdit li h2{
     width:100%;
 }
-#tableEdit table thead tr th:first-child, #tableEdit table tbody tr td:first-child{
-    padding-left:10px;
+#tableEdit label{
+    display:inline-block;
+    width:80%;
 }
-#tableEdit thead tr th:last-child, #tableEdit tbody tr td:last-child{
-    padding-right:10px;
+#tableEdit span{
+    width:18%;
+    display:inline-block;
+    text-align:right;
 }
-#tableList table tr th:first-child, #tableList table tr td:first-child {
-    width:5%;
-}
-#tableList table tr th:nth-child(2), #tableList table tr td:nth-child(2) {
-    width:50%;
-}
-#tableList table tr th:nth-child(3), #tableList table tr td:nth-child(3) {
-    width:7.5%;
-    text-align:center;
-}
-#tableList table tr th:nth-child(4), #tableList table tr td:nth-child(4) {
-    width:7.5%;
-    text-align:center;
-}
-#tableList table tr td:nth-child(5) {
-    width:35%;
-}
-#tableList table tr td:nth-child(5) a {
-    text-decoration:none;
+#tableEdit a{
     color:#000;
 }
-#tableList table tr td:nth-child(5) a:hover {
-    color:#fff;
+.changeTypeName{
+    display:block;
+    width:100%;
+    margin:0 auto;
+    padding-bottom:0px;
 }
-#tableList table tr td label{
-    width:60%;
-    border:0px solid #000;
-    line-height:50px;
+.changeTypeName h1{
+    padding:0px;
+    margin:0px auto;
+    margin-top:50px;
+    width:90%;
+}
+.HaircutTypeEdit{
+    display:block;
+    width:80%;
+    margin:0 auto;
+    margin-bottom:25px;
+}
+#haircutCRUD{
+    display:block;
+    width:80%;
+    height:auto;
+    margin:50px auto;
+    padding:0;
+    border:1px dashed #000;
+    text-align:center;
+}
+
+/* End of CSS style for the tables with in the tables in the Prices controller */
+/* End of CSS style for all the pages in the Prices Controller */
+/* CSS style for all the pages with in the Portfolio Controller */
+.photoGalleryTitle{
+    display:block;
+    width:100%;
+    margin:0 auto;
+    margin-top:0px;
+}
+.photoGalleryTitle h2{
+    width:100%;
+}
+.photoGalleryTitle h1{
+    display:block;
+    width:100%;
     margin:0px;
     padding:0px;
 }
-#tableList table tr td span{
-    border:0px solid #000;
-    position:relative;
-    right:-9.2%;
-    display:inline-block;
-    line-height:50px;
-    width:30%;
-    margin-left:0px;
-    margin-right:auto;
-    padding:0px;
-    text-align:right;
+.photoGalleryTitleEdit{
+    display:block;
+    width:80%;
+    margin:0 auto;
 }
-#tableList table tr td span a{
-    color:#000;
-}
-#tableEdit table tr td input[type="text"],#tableEdit table tr td select {
-   font-size:1em;
-   line-height:25px;
-   height:25px;
-   background:#fff;
-   
-}
+
 .changeTypeName{
     cursor:pointer;
 }
@@ -195,6 +256,9 @@
     max-height:90%;
     margin:25px auto;
 }
+
+/* CSS Style for the hover over effects for the photo gallery pages */
+
 .hoverEffect{
     display:block;
     position:relative;
@@ -211,7 +275,7 @@
 .hoverEffect .overlay{
     width:auto;
     min-width:100%;
-    height:250px;
+    height:100%;
     position:absolute;
     overflow:hidden;
     display:block;
@@ -245,7 +309,10 @@
     text-align:center;
     position:relative;
     font-size:100%;
+    margin-top:25px;
+    bottom:0px;
     padding:10px;
+    width:100%;
     background:rgba(0,0,0,0.5);
     -webkit-transform: translateY(190px);
     -ms-transform:translateY(190px);
@@ -292,50 +359,94 @@
 .hoverEffect p.info:hover {
   box-shadow: 0 0 5px #fff;
 }
+/* End of CSS style for the hover effect of the images with in the photo gallery*/
+/* End of css style for all the pages in the Portfolio Controller */
+/* CSS Style for the email contact form in the home controller and also for all the pages
+    with in the Email controller
+*/
 
-/* Start for zoom effect for photo gallery */
-
-.modal-dialog {
-    width:600px;
-    z-index:10;
+#emailForm input[type="text"]
+{
+    display:block;
+    margin:10px auto;
+    line-height:35px;
+    width:80%;
 }
-.modal-backdrop{
-    z-index:9;
+#emailForm input[type="text"]:first-child{
+    margin-top:30px; 
 }
-.close{
-    margin-right:0px;
-    width:20px;
+#emailForm textarea{
+    display:block;
+    height:325px;
+    resize:none;
+    overflow:auto;
 }
-.btn.btn-default{
-    margin:0px;
-    line-height:50px;
-    width:100%; 
+.messageDisplay{
+    display:block;
+    width:100%;
+    border:1px solid #000;
+    height:250px;
+    max-height:250px;
+    overflow-y:auto;
+    padding:15px;
 }
-.thumbnail {
-    margin:0 auto;
-    max-height:500px;
-    width:auto;
-}
-
-/*  Prices */
-#haircutCRUD{
+#emailForm span{
     display:block;
     width:80%;
-    height:auto;
-    margin:50px auto;
-    padding:0;
-    border:1px dashed #000;
-    text-align:center;
+    margin:0 auto;
 }
-
-/* Email */
-
 .tableHeadding
 {
     font-weight:bold;
     background:rgba(0,0,0,0.5);
     font-size:2.0em;
 }
+.emailtable{
+    display:block;
+    width:80%;
+    margin:0px;
+    padding:0px;
+    margin:50px auto;
+}
+.emailtable li{
+    display:block;
+    line-height:35px;
+}
+.emailtable li ul{
+    display:block;
+    width:100%;
+    height:450px;
+    max-height:450px;
+    padding:0px;
+    margin:0px;
+}
+.emailtable li ul li{
+    border-bottom:1px dashed #808080;
+}
+.emailHeadding h2{
+    display:inline-block;
+    margin:0px;
+    padding:0px;
+    font-size:120%;
+}
+.emailHeadding{
+    display:block;
+    height:25px;
+    width:100%;
+    padding-bottom:35px;
+    margin-bottom:15px;
+    border-bottom:1px solid #000;
+    font-size:150%;
+    background:rgba(0,0,0,0.2);
+}
+.subject{
+    display:inline-block;
+    width:100%;
+    font-size:68%;
+    padding-right:10px;
+    text-align:justify;
+}
+
 .isUnread {
     font-weight: bold;
     background: rgba(255,255,255,0.5);
@@ -371,104 +482,210 @@
 .emailViewer button{
     margin:25px 0 0 auto;
 }
-
-/* Appointment System */
-
-#msform{
-    width:80%;
-    margin:50px auto;
-    text-align:center;
-    position:relative;
-}
-
-#msform fieldset{
-    background:#fff;
-    border:none;
-    border-radius:3px;
-    box-shadow:0 0 15px 1px rgba(0,0,0,0.4);
-    padding:20px 30px;
-    box-sizing: border-box;
-    width:100%;
-
-    position:absolute;
-}
-#msform fieldset:not(:first-of-type)
-{
-    display:none;
-}
-#msform input{
-    line-height:35px;
-    padding:15px;
-    border:1px solid #ccc;
-    border-radius:3px;
-    margin-bottom:10px;
-    width:100%;
-    box-sizing:border-box;
-    color:#000;
-    border-radius:1px;
-    cursor: pointer;
-    padding:10px 5px;
-    margin:10px 5px;
-    font-size:13px;
-}
-#msform .action-button:hover, #msform .action-button:focus{
-    box-shadow: 0 0 0 2px white, 0 0 0 3px #27AE60;
-}
-#msform .action-button{
+/* End of the CSS style for the Email contact form in the home controller and all the pages within the Email controller */
+/* CSS style for the all the pages with in the Appointment Controller */
+.appointmentButtons{
     display:block;
-    position:relative;
+    width:80%;
+    margin:0 auto;
+    padding:0px;
+    text-align:center;
+}
+.appointmentButtons button{
+    display:inline-block;
+    margin:0px;
+    padding:0px;
+}
+.appointmentButtons button:first-child{
+    float:left;
+}
+.appointmentButtons button:last-child{
+    float:right;
+}
+.appointmentButtons button::after{
+    clear:both;
+}
+.appointment fieldset {
+    display:block;
+    background: white;
+    border: 0 none;
+    border-radius: 3px;
+    padding: 20px 30px;
+    box-sizing: border-box;
+    width: 100%;
+    overflow-x:hidden;
+    height:405px;
+    max-height:405px;
+    /*stacking fieldsets above each other*/
+    position: relative;
+}
+.appointment fieldset:not(:first-of-type) {
+    display: none;
+}
 
-    
-}
-.fs-title{
-    font-size:2em;
-    text-transform:uppercase;
-    color:#000;
-    margin-bottom:10px;
-}
-.fs-subtitle{
-    font-weight:normal;
-    font-size:0.75em;
-    color:#000;
-    border-bottom:1px dashed #000;
-    padding-bottom:20px;
-    margin-bottom:20px;
-}
-#progressbar{
-    margin-bottom:30px;
-    overflow:hidden;
-    counter-reset:step;
+.appointment {
+    display:block;
     width:100%;
+    margin:0px auto;
+    padding:0px;
+    text-align:left;
+}
+.appointment input, .appointment select{
+    width:100%;
+    margin:5px 0;
+    font-size:1.25em;
+    height:35px;  
+    border:1px solid #808080;
+    border-radius:3px;  
+}
+.appointment p{
+    text-align:left;
+    width:100%;
+    padding:15px 0;
+}
+.appointment h1{
+    text-align:center;
+    margin:0px;
+    padding:0px;
+    width:100%;
+}
+.input-group{
+    width:100%;
+    margin:0px;
+    padding:0px;
+}
+.appointment input[type="text"]
+{
+    width:100%;
+    margin:0;
+    border-radius:3px;
+    border:1px solid #808080;
+}
+.customer input[type="text"],.customer input[type="tel"], .customer input[type="email"]{
+    display:block;
+    width:100%;
+    margin: 5px 0;
+    padding-left:15px;
+}
+.appointment button{
+    display:inline-block;
+    margin:0px;
+    position:relative;
+}
+.appointment button:last-child{
+    float:right;
+}
+.appointment button:last-child:after{
+    clear:both;
+}
+
+/*CSS style for the progress bar on the createAppointment page with in the appointment controller */
+#progressbar {
+	margin-bottom: 30px;
+	overflow: hidden;
+    width:100%;
+	/*CSS counters to number the steps*/
+	counter-reset: step;
 }
 #progressbar li {
-    list-style-type:none;
+	list-style-type: none;
+	color: white;
+	text-transform: uppercase;
+	font-size: 1em;
+	width: 33.33%;
+    text-align:center;
     color:#000;
-    text-transform:uppercase;
-    font-size:1.75em;
-    width:31.33%;
-    float:left;   
+	float: left;
+	position: relative;
 }
-#progressbar li:before{
-    content:counter(step);
-    counter-increment:step;
-    width:20px;
-    line-height:20px;
-    display:block;
-    font-size:10px;
-    color:#000;
-    background:white;
-    border-radius:3px;
-    margin: 0 auto 5px auto;
+#progressbar li:before {
+	content: counter(step);
+	counter-increment: step;
+	width: 50px;
+	line-height: 50px;
+	display: block;
+	font-size: 1.25em;
+	color: #333;
+	background: white;
+	border-radius: 3px;
+	margin: 0 auto 5px auto;
 }
+/*progressbar connectors*/
+#progressbar li:after {
+	content: '';
+	width: 100%;
+	height: 2px;
+	background: white;
+	position: absolute;
+	left: -50%;
+	top: 24px;
+	z-index: -1; /*put it behind the numbers*/
+}
+#progressbar li:first-child:after {
+	/*connector not needed before the first step*/
+	content: none; 
+}
+/*marking active/completed steps green*/
+/*The number of the step and the connector before it = green*/
+#progressbar li.active:before,  #progressbar li.active:after{
+	background: #27AE60;
+	color: white;
+}
+/* End of CSS style for the progress bar with in the createNewAppointment page with in the appointments controller */
 
-#progressbar li:first-child:after{
-    content:none;
+.master{
+    background:#fff;
+    border:1px dashed #000;
+    margin:25px auto;
+    padding:50px;
+    width:90%;
+    height:auto;
+    font-size:100%;
 }
-#progressbar li.active:before, #progressbar li.active:after{
-    background:#27AE60;
+.master a{
     color:#000;
 }
-/* CMS Admin */
+.master h1, .master h3{
+    font-size:1em;
+}    
+.master li{
+    list-style:none;
+    line-height:25px;
+}
+.master li ul{
+    display:block;
+    margin:25px;
+    margin-left:auto;
+    margin-right:0;
+    width:90%;
+    border:1px solid #000;
+}
+.master li p{
+    display:inline-block;
+    width:auto;
+    text-align:left;
+    margin:0;
+    vertical-align:top;
+    padding:0px;
+    font-size:100%;
+}
+.master li span a{
+    padding :0px;
+    margin :0px;
+    text-align:left;
+}
+.master li label{
+    display:inline-block;
+    width:200px;
+    text-align:left;
+    font-weight:bold;
+    vertical-align:top;
+    padding:5px;
+    margin:0px;
+}
+/* End of CSS style for all the pages with in the Appointment Controller */
+
+/* CSS Style for all the pages for the Admin controller  */
 
 .AccountList{
     width:80%;
@@ -501,134 +718,339 @@
 .AccountList tr a{
     color:#000;
 }
-@media screen and (orientation : landscape) {
+/* End of CSS style for all the pages with in the Admin controller */
+/* CSS Style when the screens max width is less then 800px */
+@media screen and  (max-height: 800px){
+    #sidebar-wrapper{
+        overflow-y:auto;
+    }
+    .sidebar-adminLogin{
+        margin:0 auto;
+    }
+    .sidebar-adminLogin  button{
+        position:relative;
+        margin:0 auto;
+        padding:0px;
+        left:0px;
+    }
+}/* End of CSS style when then screens max width is less than 800px */
+ /* CSS Style when the screens max width is less then 1240px */
+@media screen and (max-width: 1240px){
+    #tableEdit li label{
+        width:60%;
+    }
+    #tableEdit li span{
+        width:38.7%;
+    }
+}/* End of CSS style when the screens max width is less than 1240px */
+ /* CSS Style when the screens max width is less then 1219px */
+@media screen and (max-width: 1219px){
+    #tableEdit li label{
+        width:50%;
+        font-size:80%;
+    }
+    #tableEdit li span{
+        width:48.6%;
+        font-size:80%;
+    }
+}/* End of CSS Style when the screens max width is less then 1219px */
+ /* CSS Style when the screens max width is less then 1135px */
+@media screen and (max-width: 1135px){
+    #tableEdit li label, #tableList li label{
+        width:40%;
+    }
+    #tableEdit li span{
+        width:57.9%;
+    }
+}/*End CSS Style when the screens max width is less then 1135px */
+/* CSS Style when the screens max width is less then 1023px */
+@media screen and (max-width: 1023px) {
+    .ContentContianer{
+        padding-top:2%;
+    }
+    .ContentWrapper{
+        min-height:70%;
+    }
+    .PageTitleHeader h1{
+        display:none;
+    }
+    #adminLoginContainer{
+        padding:0px;
+        margin:0px;
+        height:90%;
+    }
+    .loginForm{
+        font-size:80%;
+    }
+    .logonButtons{
+        display:block;
+        margin:0 auto;
+    }
+    .logonButtons button{
+        display:inline-block;
+        width:49%;
+        padding:0px;
+        margin:0px;
+        font-size:100% !important;
+    }
+    .logonButtons button:first-child{
+        float:left;
+    }
+    .logonButtons button:last-child{
+        float:right;
+        margin:0px;
+    }
+    .loginButtons button:after{
+        clear:both;
+    }
+     #progressbar li{
+        width:30%;
+    }
+}
+/* End of CSS style for screens with widths grater than 640px and not on mobile device */
+/* CSS Style for screen with a width of 640px or mobile device in landscape orientation */
+@media only screen 
+    and (max-width: 640px)
+    and (orientation: landscape)
+{
+    .sidebar-adminLogin  button{
+        margin-top:20px;
+    }
+    #wrapper
+    {
+        overflow-y:auto;
+    }
+    .ContentWrapper{
+        width:100%;
+        border-radius:0px;
+        border:none;
+        padding:25px 0;
+        margin:0 -1px;
+        height:auto;
+        min-height:629px;
+        overflow:visible;
+    }
+    footer p{
+        padding:0px;
+    }
+} /*End of CSS style for screen with width of 640px or mobile device in landscape orientation */
+/*  CSS style for screen in with a width of 414px or mobile device in portriate orientation */
+@media only screen 
+    and (max-width: 414px)
+    and (orientation: portrait){
 
-    @media screen and (max-height: 768px) {
-        #adminLoginContainer, #adminLoginContainer form {
-            padding: 25px;
-        }
+    /* CSS style for the system message pop up */
 
-        .accessWarning {
-            padding: 0px;
-        }
+    #systemMessages{
+        width:100%;
+    }
+    #systemMessages h1{
+        font-size:140%;
+    }
+    #systemMessages button[type="submit"]{
+        width:10%;
+    }
+    #adminLoginContainer{
+        margin:0px;
+        width:100%;
+    }
 
-        #adminLoginContainer button {
-            width: 100%;
-            position:relative;
+    /* CSS for default containers for the content of the website */
+    .ContentWrapper, .loginForm{
+        position:relative;
+        margin-left:-1px;
+        width:100%;
+        border:none;
+        border-radius:0px;
+        overflow-y:visible;
+        
+    }
+    .ContentWrapper h2{
+        text-align:center;
+    }
+    .ContentWrapper ul li label{
+        width:100%;
+    }
+    .ContentWrapper ul li span{
+        width:100%;
+    }
+    .ContentContianer{
+        height:93.2%;
+    }
+    .ContentContianer form button{
+        margin:25px 0;
+        width:100%;
+    }
+    .ContentContianer h1{
+        font-size:140%;
+        width:100%;
+        margin:0px;
+        text-align:center;
+    }
+    #emailForm textarea{
+        height:7em;
+        font-size:80%;
+    }
+    input[type="text"]
+    {
+        font-size:80%;
+    }
+    .loginForm{
+        padding-top:15px;
+        font-size:100%;
+        height:69%;
+        overflow:hidden;
+        overflow-y:auto;
+    }
+    #adminLoginContainer h1{
+        margin:0 auto;
+        text-align:center;
+    }
+    #adminLoginContainer p, .accessWarning{
+        margin:25px auto;
+        text-align:justify;
+    }
+    #adminLoginContainer p:last-child, .accessWarning p:last-child{
+        margin:0 auto;
+    }
+    #adminLoginContainer span label{
+        font-size:100%;
+    }
+    .appointmentButtons button{
+        width:100%;
+        margin:10px auto;
+    }
+    .appointmentButtons button:first-child{
+        margin-top:0px;
+    }
+    #adminLoginContainer form button{
             display:block;
-            left:0px;
-        }
-        .logonButtons button:last-child{
-            margin:0px;
-        }
-
-        .ContentContianer {
-            width: 100%;
-            margin: 0;
-        }
-
-        .ContentContianer, #adminLoginContainer h1 {
-            font-size: 1.25em;
-        }
-        .ContentWrapper form input[type='text'], .ContentWrapper form textarea{
-            font-size:1.5em;
-        }
-        .accessWarning {
-            width: 100%;
-            border: none;
-            margin: 0 0 13% 0;
-        }
-
-            .accessWarning p {
-                font-size: 1em;
-                text-align: justify;
-            }
-
-                .accessWarning p:nth-child(2n+1) {
-                    display: block;
-                }
-        #tableList table{
-            font-size:0.75em;
-        }
+            padding:0px;
+            margin:10px 0px;
+            width:100%;
+            font-size:100%;
     }
-        @media screen and (max-height: 320px) {
-            #adminLoginContainer, #adminLoginContainer form {
-                min-height: 0px;
-                padding: 25px;
-            }
-            .ContentWrapper form input[type='text'], .ContentWrapper form textarea{
-                font-size:1em;
-            }
-        }
-
-        @media screen and (max-height: 360px) {
-            #adminLoginContainer, #adminLoginContainer form {
-                min-height: 0px;
-                padding: 25px;
-            }
-        }
+    #haircutTypeID{
+        font-size:100%;
     }
-    @media screen and (orientation : portrait) {
-
-        @media screen and (max-width: 1023px) {
-
-            #adminLoginContainer, #adminLoginContainer form {
-                min-height: 200px;
-                padding: 25px;
-            }
-            .ContentContianer button, #adminLoginContainer button {
-                width: 80%;
-            }
-            #adminLoginContainer input[type="checkbox"]{
-                width:25px;
-                height:25px;   
-            }
-            
-            #adminLoginContainer span label{
-                    line-height:25px;
-                    font-size:0.65em;
-            }
-            #tableList table{
-            font-size:0.75em;
-            }
-            .accessWarning {
-                padding: 0px;
-            }
-
-            #adminLoginContainer button {
-                width: 80%;
-            }
-
-            .ContentContianer, #adminLoginContainer h1 {
-                font-size: 1em;
-            }
-            .ContentWrapper form input[type='text'], .ContentWrapper form textarea{
-                font-size:0.55em;
-            }
-            .accessWarning {
-                width: 100%;
-                border: none;
-                margin: 0px;
-            }
-
-                .accessWarning p {
-                    font-size: 1em;
-                    text-align: justify;
-                }
-                .accessWarning h1{
-                    font-size:1em;
-                }
-                    .accessWarning p:nth-child(2n+1) {
-                        display: none;
-                    }
-            /* CMS Admin */
-            .AccountList tr td{
-                font-size:0.75em;
-            }
-        }
-        @media screen and (max-width: 320px){
-            #tableList table{
-            font-size:0.65em;
-            }
-        }
+    .table{
+        font-size:100%;
     }
+    .photoGalleryTitle{
+        padding:0px;
+        margin:0px;
+        width:100%;
+        text-align:center;
+    }
+    .photoGalleryTitle h2{
+        padding:0px;
+        margin:0px;
+    }
+    .formButtons button{
+        display:block;
+        margin: 10px auto;
+        width:100%;
+    }
+    .appointment{
+        width:85%;
+        margin: 0px auto;
+        padding:0px;
+    }
+    .appointment fieldset{
+        box-shadow:unset;
+        margin:0px;
+        padding:0px;
+        height:auto;
+    }
+    .appointment fieldset button{
+        width:100%;
+        margin:10px auto;
+        padding:0px;
+    }
+    .appointment input, .appointment select{
+        font-size:80%;
+    }
+    #tableEdit{
+        width:90%;
+        margin:0 auto;
+    }
+    #tableEdit li:first-child{
+        border-top:none;
+    }
+    #tableEdit label{
+        width:100%;
+        font-size:80%;
+    }
+    #tableEdit span{
+        width:100%;
+        font-size:80%;
+        text-align:justify;
+    }
+    #tableEdit span a:first-child{
+        float:left;
+    }
+    #tableEdit span a{
+        float:right;
+    }
+    #tableEdit span a:after{
+        clear:both;
+    }
+    #tableEdit li:not(:first-child){
+        border-bottom:1px dashed #000;
+        background:rgba(255,255,255, 0.6);
+    }
+    #tableEdit li h2{
+        width:100%;
+        font-size:190%;
+        text-align:center;
+    }
+    .HaircutTypeEdit{
+        width:100%;
+        text-align:justify;
+    }
+    .EditHaircuts, .AddHaircuts, .AddAccount, .EditAccount{
+        display:block;
+    }
+    /* CSS style for the inputs used for CRUD oporations in the Accounts and Haircut */
+    .EditHaircuts input[type="text"], .EditHaircuts select, .AddHaircuts input[type="text"], .AddHaircuts select
+    , .AddAccount input[type="text"], .EditAccount input[type="text"], .AddAccount input[type="email"], .AddAccount input[type="tel"], .EditAccount input[type="tel"],
+    .EditAccount input[type="email"], .EditAccount input[type="email"], .AddAccount input[type="password"], EditAccount input[type="password"] {
+        width:100%;
+        margin:10px auto;
+        font-size:100%;
+        padding-left:20px;
+    }
+    .AccountList tr th{
+        font-size:100%;
+    }
+    .AccountList tr td{
+        font-size:90%;
+        padding:0px;
+        margin:0px;
+        vertical-align:top;
+    }
+    .AccountList tr a{
+        display:block;
+        text-align:center;
+    }
+    .adminButton{
+        width:80%;
+        margin:10px auto;
+    }
+    .emailtable li:first-child{
+        display:none;
+    }
+    .emailtable li span{
+        width:100% !important;
+    }
+    .emailtable li span:nth-child(2){
+        display:none;
+    }
+    .emailtable li ul li span:first-child{
+        display:none;
+    }
+    .emailHeadding span h2{
+        font-size:80%;
+        
+    }
+} /* End of CSS style for screen in with a width of 414px or mobile device in portriate orientation */

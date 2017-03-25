@@ -3,44 +3,138 @@
     ViewBag.Title = "createNewAppointment";
     Layout = "~/Views/Shared/_Layout.cshtml";
 
-    DateTime dt = DateTime.Now;
-    if(Model != null)
-    {
-        dt = (System.DateTime)Model.DateOfAppointment;
-    }
+    <script src="~/Scripts/jquery-1.12.4.min.js"></script>
 }
+<script>
+        $(document).ready(function () {
+            $("#appointmentDate").datepicker({
+                dateFormat: 'DD dd MM',
+                endDate: ' ',
+                minDate: '0',
+                maxDate: '6w',
+                beforeShowDay: $.datepicker.noWeekends,
+                defaultDate: new Date(+1),
+                autoclose: false,
+                todayHighlight: true,
+                onSelect: function (data) {
+                    var getYear = new Date();
+                    var shortDate = new Date(Date.parse(data + getYear.getFullYear()));
+                    var formatDate = $.datepicker.formatDate('dd-mm-yy', shortDate);
+                    $("#appointmentList").empty();
 
+                    $.getJSON("@Url.Action("getTimeSlots","Appointment")", { appointmentDate: formatDate }, function (data) {
+                        $("#appointmentList").addList(data);
+                        $('#appointmentList').show();
+                      
+                    });
+                    if (data != null) {
+                        $.fn.addList = function (data) {
+                            return this.each(function () {
+                                var list = this;
+                                var option = new Option("--- Avalible Appointment Times ---");
+                                list.add(option);
+                                $.each(data, function (index, itemData) {
+                                    option = new Option(itemData.Text, itemData.Value);
+                                    list.add(option);
+                                });
+                            });
+                        };
+                    }
+                }
+            });
+            $('#appointmentList').change(function () {
+                var timeID = $('#appointmentList').val();
+                $('#appointmentTime').val(timeID);
+            });
+            $('#appointmentList').ready(function () {
+                var getValue = $('#appointmentList').val();
+                if(getValue == null)
+                {
+                    $('#appointmentList').hide();
+                }               
+            })
+    })
+</script>
 <div class="ContentContianer">
-    <h1>Create New Appointment</h1>
     <div class="ContentWrapper">
-        @using (Html.BeginForm("", "", FormMethod.Post, new { @id = "msform" }))
+        @using (Html.BeginForm("bookAppointment", "Appointment", FormMethod.Post, new { @class="appointment" }))
         {
             @Html.AntiForgeryToken()
             @Html.ValidationSummary()
-
-            <!-- Form Progress Bar -->
+            
             <ul id="progressbar">
-                <li class="active">Appointment Details</li>
+                <li class="active">Haircut Details</li>
                 <li>Appointment Details</li>
-            </ul>  
-            <!-- Fieldsets -->
+                <li>Customer Details</li>
+            </ul>
             <fieldset>
-                <h2 class="fs-title">Appointment Details</h2>
-                <h3 class="fs-subtitle">Please give spacifics about your appointment.</h3>
-                @Html.DropDownListFor(model => model.tblHaircut.HaircutID, ViewBag.haircutList as SelectList, "--select--", new { @class = "form-control" })
-                @Html.TextBoxFor(model => model.DateOfAppointment, new { @class="date-picker", @type="date"})
-                @Html.EditorFor(model => model.StartTime,new { @class="time-picker"})
+                <h1 class="fs-title">Haircut Detials</h1>
+                <h2 class="fs-subtitle"></h2>
+                @Html.DropDownListFor(model => model.employeeID, ViewBag.employeeName as SelectList, "-- Please Select Stylist --", new { @class = "" })
+                @Html.DropDownListFor(model => model.haircutID, ViewBag.haircutList as SelectList, "-- Please Haircut --", new { @class = "" })
                 <button type="button" name="next" class="next action-button">Next</button>
             </fieldset>
             <fieldset>
-                <h2 class="fs-title">Customer Details</h2>
-                <h3 class="fs-subtitle">Please enter your details.</h3>
-
+                <h1 class="fs-title">Appointment Detials</h1>
+                <h2 class="fs-subtitle"></h2>
+                <div class="input-group ui-datepicker appointmentDatepicker" data-provide="datepicker">
+                    @Html.TextBox("appointmentDate", null, new { @class = "datepicker", @placeholder = "Please Select Appointment Date." })
+                    <div class="input-group-addon">
+                        <span class="glyphicon glyphicon-calendar"></span>
+                    </div>
+                </div>
+                <select id="appointmentList" onchange=""></select>  
+                @Html.HiddenFor(model => model.timeSlotID, new { @id= "appointmentTime" })
                 <button type="button" name="previous" class="previous action-button">Previous</button>
-                <button type="submit" name="submit" class="submit action-button">Book</button>
+                <button type="button" name="next" class="next action-button">Next</button>
+            </fieldset>
+            <fieldset class="customer">
+                <h1 class="fs-title">Customer Detials</h1>
+                <h2 class="fs-subtitle"></h2>
+                @Html.EditorFor(model => model.tblClient.clientName, new { htmlAttributes = new { @class = "", @placeholder = "Enter your name" } })
+                @Html.EditorFor(model => model.tblClient.clientMobile, new { htmlAttributes = new { @class = "", @placeholder = "Enter your phone number" } })
+                @Html.EditorFor(model => model.tblClient.clientEmail, new { htmlAttributes = new { @class = "", @placeholder = "Enter your email address" } })
+                @Html.EditorFor(model => model.tblClient.clientHouseNumber, new { htmlAttributes = new { @class = "", @placeholder = "Enter your house number", @type="text"}})
+                @Html.EditorFor(model => model.tblClient.clientPostalCode, new { htmlAttributes = new { @class = "", @placeholder = "Enter your Post Code" } })
+                <button type="button" name="previous" class="previous action-button">Previous</button>
+                <button type="submit" class="" name="submit">Book Appointment</button>
             </fieldset>
         }
     </div>
 </div>
+<script>
+    var placeSearch, autocomplete;
+    var componentForm = {
+        street_number: 'short_name',
+        route: 'long_name',
+        locality: 'long_name',
+        administrative_area_level_1: 'short_name',
+        country: 'long_name',
+        postal_code: 'shot_name'
+    };
 
+    function initAutocomplete() {
+        autocomplete = new google.maps.places.Autocomplete(
+            (document.getElementById('tblClient_clientPostalCode')),
+            { types: ['geocode'] });
+    }
+
+    function geolocate() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function (position) {
+                var geolocation = {
+                    lat: position.coords.latitude,
+                    lng: position.coords.longitude
+                };
+                var circle = new google.maps.Circle({
+                    center: geolocation,
+                    radius: position.coords.accuracy
+                });
+                autocomplete.setBounds(circle.getBounds());
+            });
+        }
+    }
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDRPtxEx7Ybsfldb_f58c82C-JYXPn_xXE&libraries=places&callback=initAutocomplete"
+        async defer></script>
 

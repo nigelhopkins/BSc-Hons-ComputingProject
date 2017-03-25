@@ -11,27 +11,27 @@ namespace mobileHairdresser.Database
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class tblEmployee
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public tblEmployee()
-        {
-            this.tblAppointments = new HashSet<tblAppointment>();
-            this.tblWorkingDays = new HashSet<tblWorkingDay>();
-        }
-    
         public int employeeID { get; set; }
+        [Required]
+        [Display(Name ="First Name")]
         public string FirstName { get; set; }
+        [Required]
+        [Display(Name ="Last Name")]
         public string LastName { get; set; }
+        [Required]
+        [Display(Name ="Email Address")]
+        [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
+        [Required]
+        [Display(Name ="Phone Number")]
+        [DataType(DataType.PhoneNumber)]
         public string PhoneNumber { get; set; }
         public Nullable<int> LoginID { get; set; }
     
         public virtual tblLogin tblLogin { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tblAppointment> tblAppointments { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tblWorkingDay> tblWorkingDays { get; set; }
     }
 }

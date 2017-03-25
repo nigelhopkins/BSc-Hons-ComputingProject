@@ -10,16 +10,65 @@
     <Property Name="version" Type="int" />
     <Property Name="definition" Type="varbinary(max)" />
   </EntityType>
+  <EntityType Name="tblAppointment">
+    <Key>
+      <PropertyRef Name="appointmentID" />
+    </Key>
+    <Property Name="appointmentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="dateCreated" Type="datetime" Nullable="false" />
+    <Property Name="employeeID" Type="int" Nullable="false" />
+    <Property Name="clientID" Type="int" Nullable="false" />
+    <Property Name="haircutID" Type="int" Nullable="false" />
+    <Property Name="timeSlotID" Type="int" Nullable="false" />
+    <Property Name="expectedEndTime" Type="datetime" Nullable="false" />
+    <Property Name="expectedPrice" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+    <Property Name="appointmentCancled" Type="varchar" MaxLength="3" Nullable="false" />
+    <Property Name="cancledReason" Type="text" />
+  </EntityType>
+  <EntityType Name="tblClient">
+    <Key>
+      <PropertyRef Name="clientID" />
+    </Key>
+    <Property Name="clientID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="clientName" Type="varchar" MaxLength="250" Nullable="false" />
+    <Property Name="clientMobile" Type="varchar" MaxLength="250" Nullable="false" />
+    <Property Name="clientEmail" Type="varchar" MaxLength="250" Nullable="false" />
+    <Property Name="clientHouseNumber" Type="int" />
+    <Property Name="clientHouseName" Type="varchar" MaxLength="250" />
+    <Property Name="clientPostalCode" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="tblEmail">
+    <Key>
+      <PropertyRef Name="EmailID" />
+    </Key>
+    <Property Name="EmailID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CustName" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="custEmail" Type="varchar" MaxLength="250" />
+    <Property Name="custPhone" Type="varchar" MaxLength="11" />
+    <Property Name="Subject" Type="text" Nullable="false" />
+    <Property Name="Message" Type="text" Nullable="false" />
+    <Property Name="DateSent" Type="date" Nullable="false" />
+    <Property Name="Read" Type="varchar" MaxLength="5" Nullable="false" />
+  </EntityType>
   <EntityType Name="tblEmployee">
     <Key>
       <PropertyRef Name="employeeID" />
     </Key>
-    <Property Name="employeeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="employeeID" Type="int" Nullable="false" />
     <Property Name="FirstName" Type="varchar" MaxLength="250" />
     <Property Name="LastName" Type="varchar" MaxLength="250" />
     <Property Name="Email" Type="varchar" MaxLength="250" />
     <Property Name="PhoneNumber" Type="varchar" MaxLength="11" />
     <Property Name="LoginID" Type="int" />
+  </EntityType>
+  <EntityType Name="tblGallery">
+    <Key>
+      <PropertyRef Name="GalleryID" />
+    </Key>
+    <Property Name="GalleryID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="GalleryName" Type="varchar" MaxLength="250" Nullable="false" />
+    <Property Name="GalleryImg" Type="varchar" MaxLength="250" />
+    <Property Name="GalleryDiscription" Type="text" />
   </EntityType>
   <EntityType Name="tblHaircut">
     <Key>
@@ -27,8 +76,8 @@
     </Key>
     <Property Name="HaircutID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="HaircutName" Type="varchar" MaxLength="250" />
-    <Property Name="ShortPrice" Type="float" />
-    <Property Name="LongPrice" Type="float" />
+    <Property Name="ShortPrice" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="LongPrice" Type="decimal" Precision="10" Scale="2" />
     <Property Name="TimeToCompletion" Type="time" Precision="7" />
     <Property Name="TypeID" Type="int" />
     <Property Name="isSelected" Type="bit" Nullable="false" />
@@ -49,6 +98,79 @@
     <Property Name="Password" Type="varchar" MaxLength="250" />
     <Property Name="IsDefault" Type="varchar" MaxLength="250" />
   </EntityType>
+  <EntityType Name="tblPhotos">
+    <Key>
+      <PropertyRef Name="PhotoID" />
+    </Key>
+    <Property Name="PhotoID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PhotoName" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Description" Type="varchar" MaxLength="250" Nullable="false" />
+    <Property Name="Url" Type="varchar" MaxLength="250" Nullable="false" />
+    <Property Name="DateStamp" Type="date" Nullable="false" />
+    <Property Name="GalleryID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tblSchedule">
+    <Key>
+      <PropertyRef Name="scheduleID" />
+    </Key>
+    <Property Name="scheduleID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="timeSlot" Type="time" Precision="7" />
+  </EntityType>
+  <EntityType Name="tblTimeSlot">
+    <Key>
+      <PropertyRef Name="timeSlotID" />
+    </Key>
+    <Property Name="timeSlotID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="timeSlot" Type="time" Precision="7" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_tblAppointment_tblClient">
+    <End Role="tblClient" Type="Self.tblClient" Multiplicity="1" />
+    <End Role="tblAppointment" Type="Self.tblAppointment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblClient">
+        <PropertyRef Name="clientID" />
+      </Principal>
+      <Dependent Role="tblAppointment">
+        <PropertyRef Name="clientID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblAppointment_tblEmployee">
+    <End Role="tblEmployee" Type="Self.tblEmployee" Multiplicity="1" />
+    <End Role="tblAppointment" Type="Self.tblAppointment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblEmployee">
+        <PropertyRef Name="employeeID" />
+      </Principal>
+      <Dependent Role="tblAppointment">
+        <PropertyRef Name="employeeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblAppointment_tblHaircut">
+    <End Role="tblHaircut" Type="Self.tblHaircut" Multiplicity="1" />
+    <End Role="tblAppointment" Type="Self.tblAppointment" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="tblHaircut">
+        <PropertyRef Name="HaircutID" />
+      </Principal>
+      <Dependent Role="tblAppointment">
+        <PropertyRef Name="appointmentID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblAppointment_tblTimeSlot">
+    <End Role="tblTimeSlot" Type="Self.tblTimeSlot" Multiplicity="1" />
+    <End Role="tblAppointment" Type="Self.tblAppointment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblTimeSlot">
+        <PropertyRef Name="timeSlotID" />
+      </Principal>
+      <Dependent Role="tblAppointment">
+        <PropertyRef Name="timeSlotID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_tblEmployee_tblLogin">
     <End Role="tblLogin" Type="Self.tblLogin" Multiplicity="0..1" />
     <End Role="tblEmployee" Type="Self.tblEmployee" Multiplicity="*" />
@@ -73,12 +195,47 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_tblPhotos_tblGallery">
+    <End Role="tblGallery" Type="Self.tblGallery" Multiplicity="1" />
+    <End Role="tblPhotos" Type="Self.tblPhotos" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblGallery">
+        <PropertyRef Name="GalleryID" />
+      </Principal>
+      <Dependent Role="tblPhotos">
+        <PropertyRef Name="GalleryID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <EntityContainer Name="mobileHairdresserModelStoreContainer">
     <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblAppointment" EntityType="Self.tblAppointment" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblClient" EntityType="Self.tblClient" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblEmail" EntityType="Self.tblEmail" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblEmployee" EntityType="Self.tblEmployee" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblGallery" EntityType="Self.tblGallery" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblHaircut" EntityType="Self.tblHaircut" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblHaircutType" EntityType="Self.tblHaircutType" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblLogin" EntityType="Self.tblLogin" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblPhotos" EntityType="Self.tblPhotos" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblSchedule" EntityType="Self.tblSchedule" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblTimeSlot" EntityType="Self.tblTimeSlot" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_tblAppointment_tblClient" Association="Self.FK_tblAppointment_tblClient">
+      <End Role="tblClient" EntitySet="tblClient" />
+      <End Role="tblAppointment" EntitySet="tblAppointment" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblAppointment_tblEmployee" Association="Self.FK_tblAppointment_tblEmployee">
+      <End Role="tblEmployee" EntitySet="tblEmployee" />
+      <End Role="tblAppointment" EntitySet="tblAppointment" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblAppointment_tblHaircut" Association="Self.FK_tblAppointment_tblHaircut">
+      <End Role="tblHaircut" EntitySet="tblHaircut" />
+      <End Role="tblAppointment" EntitySet="tblAppointment" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblAppointment_tblTimeSlot" Association="Self.FK_tblAppointment_tblTimeSlot">
+      <End Role="tblTimeSlot" EntitySet="tblTimeSlot" />
+      <End Role="tblAppointment" EntitySet="tblAppointment" />
+    </AssociationSet>
     <AssociationSet Name="FK_tblEmployee_tblLogin" Association="Self.FK_tblEmployee_tblLogin">
       <End Role="tblLogin" EntitySet="tblLogin" />
       <End Role="tblEmployee" EntitySet="tblEmployee" />
@@ -86,6 +243,10 @@
     <AssociationSet Name="FK_tblHaircut_tblHaircutType" Association="Self.FK_tblHaircut_tblHaircutType">
       <End Role="tblHaircutType" EntitySet="tblHaircutType" />
       <End Role="tblHaircut" EntitySet="tblHaircut" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblPhotos_tblGallery" Association="Self.FK_tblPhotos_tblGallery">
+      <End Role="tblGallery" EntitySet="tblGallery" />
+      <End Role="tblPhotos" EntitySet="tblPhotos" />
     </AssociationSet>
   </EntityContainer>
 </Schema>

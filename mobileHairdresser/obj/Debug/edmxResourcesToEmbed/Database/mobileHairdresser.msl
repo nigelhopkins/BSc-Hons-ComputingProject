@@ -12,6 +12,47 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="tblAppointments">
+      <EntityTypeMapping TypeName="mobileHairdresserModel.tblAppointment">
+        <MappingFragment StoreEntitySet="tblAppointment">
+          <ScalarProperty Name="appointmentID" ColumnName="appointmentID" />
+          <ScalarProperty Name="appointmentDate" ColumnName="appointmentDate" />
+          <ScalarProperty Name="employeeID" ColumnName="employeeID" />
+          <ScalarProperty Name="clientID" ColumnName="clientID" />
+          <ScalarProperty Name="haircutID" ColumnName="haircutID" />
+          <ScalarProperty Name="timeSlotID" ColumnName="timeSlotID" />
+          <ScalarProperty Name="appointmentCancled" ColumnName="appointmentCancled" />
+          <ScalarProperty Name="cancledReason" ColumnName="cancledReason" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblClients">
+      <EntityTypeMapping TypeName="mobileHairdresserModel.tblClient">
+        <MappingFragment StoreEntitySet="tblClient">
+          <ScalarProperty Name="clientID" ColumnName="clientID" />
+          <ScalarProperty Name="clientName" ColumnName="clientName" />
+          <ScalarProperty Name="clientMobile" ColumnName="clientMobile" />
+          <ScalarProperty Name="clientEmail" ColumnName="clientEmail" />
+          <ScalarProperty Name="clientHouseNumber" ColumnName="clientHouseNumber" />
+          <ScalarProperty Name="clientHouseName" ColumnName="clientHouseName" />
+          <ScalarProperty Name="clientPostalCode" ColumnName="clientPostalCode" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblEmails">
+      <EntityTypeMapping TypeName="mobileHairdresserModel.tblEmail">
+        <MappingFragment StoreEntitySet="tblEmail">
+          <ScalarProperty Name="EmailID" ColumnName="EmailID" />
+          <ScalarProperty Name="CustName" ColumnName="CustName" />
+          <ScalarProperty Name="custEmail" ColumnName="custEmail" />
+          <ScalarProperty Name="custPhone" ColumnName="custPhone" />
+          <ScalarProperty Name="Subject" ColumnName="Subject" />
+          <ScalarProperty Name="Message" ColumnName="Message" />
+          <ScalarProperty Name="DateSent" ColumnName="DateSent" />
+          <ScalarProperty Name="Read" ColumnName="Read" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="tblEmployees">
       <EntityTypeMapping TypeName="mobileHairdresserModel.tblEmployee">
         <MappingFragment StoreEntitySet="tblEmployee">
@@ -24,6 +65,16 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="tblGalleries">
+      <EntityTypeMapping TypeName="mobileHairdresserModel.tblGallery">
+        <MappingFragment StoreEntitySet="tblGallery">
+          <ScalarProperty Name="GalleryID" ColumnName="GalleryID" />
+          <ScalarProperty Name="GalleryName" ColumnName="GalleryName" />
+          <ScalarProperty Name="GalleryImg" ColumnName="GalleryImg" />
+          <ScalarProperty Name="GalleryDiscription" ColumnName="GalleryDiscription" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="tblHaircuts">
       <EntityTypeMapping TypeName="mobileHairdresserModel.tblHaircut">
         <MappingFragment StoreEntitySet="tblHaircut">
@@ -31,7 +82,6 @@
           <ScalarProperty Name="HaircutName" ColumnName="HaircutName" />
           <ScalarProperty Name="ShortPrice" ColumnName="ShortPrice" />
           <ScalarProperty Name="LongPrice" ColumnName="LongPrice" />
-          <ScalarProperty Name="TimeToCompletion" ColumnName="TimeToCompletion" />
           <ScalarProperty Name="TypeID" ColumnName="TypeID" />
           <ScalarProperty Name="isSelected" ColumnName="isSelected" />
         </MappingFragment>
@@ -55,77 +105,31 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="tblGalleries">
-      <EntityTypeMapping TypeName="mobileHairdresserModel.tblGallery">
-        <MappingFragment StoreEntitySet="tblGallery">
-          <ScalarProperty Name="GalleryDiscription" ColumnName="GalleryDiscription" />
-          <ScalarProperty Name="GalleryImg" ColumnName="GalleryImg" />
-          <ScalarProperty Name="GalleryName" ColumnName="GalleryName" />
-          <ScalarProperty Name="GalleryID" ColumnName="GalleryID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="tblPhotos">
       <EntityTypeMapping TypeName="mobileHairdresserModel.tblPhoto">
         <MappingFragment StoreEntitySet="tblPhotos">
-          <ScalarProperty Name="GalleryID" ColumnName="GalleryID" />
-          <ScalarProperty Name="DateStamp" ColumnName="DateStamp" />
-          <ScalarProperty Name="Url" ColumnName="Url" />
-          <ScalarProperty Name="Description" ColumnName="Description" />
-          <ScalarProperty Name="PhotoName" ColumnName="PhotoName" />
           <ScalarProperty Name="PhotoID" ColumnName="PhotoID" />
+          <ScalarProperty Name="PhotoName" ColumnName="PhotoName" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Url" ColumnName="Url" />
+          <ScalarProperty Name="DateStamp" ColumnName="DateStamp" />
+          <ScalarProperty Name="GalleryID" ColumnName="GalleryID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="tblEmails">
-      <EntityTypeMapping TypeName="mobileHairdresserModel.tblEmail">
-        <MappingFragment StoreEntitySet="tblEmail">
-          <ScalarProperty Name="DateSent" ColumnName="DateSent" />
-          <ScalarProperty Name="Read" ColumnName="Read" />
-          <ScalarProperty Name="Message" ColumnName="Message" />
-          <ScalarProperty Name="Subject" ColumnName="Subject" />
-          <ScalarProperty Name="custPhone" ColumnName="custPhone" />
-          <ScalarProperty Name="custEmail" ColumnName="custEmail" />
-          <ScalarProperty Name="CustName" ColumnName="CustName" />
-          <ScalarProperty Name="EmailID" ColumnName="EmailID" />
+    <EntitySetMapping Name="tblSchedules">
+      <EntityTypeMapping TypeName="mobileHairdresserModel.tblSchedule">
+        <MappingFragment StoreEntitySet="tblSchedule">
+          <ScalarProperty Name="scheduleID" ColumnName="scheduleID" />
+          <ScalarProperty Name="timeSlot" ColumnName="timeSlot" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="tblAppointments">
-      <EntityTypeMapping TypeName="mobileHairdresserModel.tblAppointment">
-        <MappingFragment StoreEntitySet="tblAppointments">
-          <ScalarProperty Name="IsBooked" ColumnName="IsBooked" />
-          <ScalarProperty Name="EndTime" ColumnName="EndTime" />
-          <ScalarProperty Name="StartTime" ColumnName="StartTime" />
-          <ScalarProperty Name="DateOfAppointment" ColumnName="DateOfAppointment" />
-          <ScalarProperty Name="HaircutID" ColumnName="HaircutID" />
-          <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
-          <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
-          <ScalarProperty Name="AppointmentID" ColumnName="AppointmentID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="tblCustomerHistories">
-      <EntityTypeMapping TypeName="mobileHairdresserModel.tblCustomerHistory">
-        <MappingFragment StoreEntitySet="tblCustomerHistory">
-          <ScalarProperty Name="AppointmentID" ColumnName="AppointmentID" />
-          <ScalarProperty Name="CustomerPostalCode" ColumnName="CustomerPostalCode" />
-          <ScalarProperty Name="CustomerHouseNumber" ColumnName="CustomerHouseNumber" />
-          <ScalarProperty Name="CustomerEmailAddress" ColumnName="CustomerEmailAddress" />
-          <ScalarProperty Name="CustomerPhoneNumber" ColumnName="CustomerPhoneNumber" />
-          <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
-          <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="tblWorkingDays">
-      <EntityTypeMapping TypeName="mobileHairdresserModel.tblWorkingDay">
-        <MappingFragment StoreEntitySet="tblWorkingDay">
-          <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
-          <ScalarProperty Name="EndTime" ColumnName="EndTime" />
-          <ScalarProperty Name="StartTime" ColumnName="StartTime" />
-          <ScalarProperty Name="DayName" ColumnName="DayName" />
-          <ScalarProperty Name="DayID" ColumnName="DayID" />
+    <EntitySetMapping Name="tblTimeSlots">
+      <EntityTypeMapping TypeName="mobileHairdresserModel.tblTimeSlot">
+        <MappingFragment StoreEntitySet="tblTimeSlot">
+          <ScalarProperty Name="timeSlotID" ColumnName="timeSlotID" />
+          <ScalarProperty Name="timeSlot" ColumnName="timeSlot" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

@@ -5,21 +5,20 @@
 }
 
 <div class="ContentContianer">
-    <h1>Appointment System</h1>
     <div class="ContentWrapper">
         <div class="accessWarning">
             <p>
                 If You are intrested in booking an appointment or ammending an existing appoinement please select from the options below. 
             </p>
         </div>
-        <p class="formButtons">
-            <button type="button" onclick="location.href='@Url.Action("Search","Appointment")'">Find Exisiting Appointments</button>
-            <button type="button" onclick="location.href='@Url.Action("createNewAppointment","Appointment")'">Make New Appointment</button>
-            @if (Session["user"] != null)
-            {
-                <button type="button" onclick="location.href='@Url.Action("Diary","Appointment")'">View Diary</button>
-            } 
-        </p>   
+        <div class="appointmentButtons">
+                <button type="button" onclick="location.href='@Url.Action("Search","Appointment")'">Find Exisiting Appointments</button>
+                <button type="button" onclick="location.href='@Url.Action("createNewAppointment","Appointment")'">Make New Appointment</button>
+                @if (Session["user"] != null)
+                {
+                    <button type="button" onclick="location.href='@Url.Action("Diary","Appointment")'">View Diary</button>
+                } 
+        </div>
     </div>
 </div>
 

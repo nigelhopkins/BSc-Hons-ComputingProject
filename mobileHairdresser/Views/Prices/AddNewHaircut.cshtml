@@ -6,37 +6,30 @@
 }
 
 <div class="ContentContianer">
-    <h1>Add New Haircut</h1>
     <div class="ContentWrapper">
+        <h2>Add New Haircut</h2>
         @using (Html.BeginForm("SaveHaircuts", "Prices", FormMethod.Post))
         {
             @Html.AntiForgeryToken()
-            @Html.ValidationSummary(true, "", new { })
-            <ul>
+            <ul class="AddHaircuts">
+                <li>
+                    @Html.ValidationSummary()
+                </li>
                 <li>
                     @Html.LabelFor(model => model.HaircutName, htmlAttributes: new { @class=""})
-                    @Html.EditorFor(model => model.HaircutName, new { htmlAttributes = new { @class = "" } })
-                    @Html.ValidationMessageFor(model => model.HaircutName, "", new { @class=""})
+                    @Html.EditorFor(model => model.HaircutName, new { htmlAttributes = new { @class = "form-control" } })
                 </li>
                 <li>
                     @Html.LabelFor(model => model.ShortPrice, htmlAttributes: new { @class=""})
-                    @Html.EditorFor(model => model.ShortPrice, new { htmlAttributes = new {@class=""}})
-                    @Html.ValidationMessageFor(model => model.ShortPrice, "",new { @class=""})
+                    @Html.EditorFor(model => model.ShortPrice, new { htmlAttributes = new {@class="form-control"}})
                 </li>
                 <li>
                     @Html.LabelFor(model => model.LongPrice, htmlAttributes: new { @class=""})
-                    @Html.EditorFor(model => model.LongPrice, new {  htmlAttributes = new {@class=""}})
-                    @Html.ValidationMessageFor(model => model.LongPrice, "",new { @class=""})
-                </li>
-                <li>
-                    @Html.LabelFor(model => model.TimeToCompletion, htmlAttributes: new { @class = "" })
-                    @Html.EditorFor(model => model.TimeToCompletion, new { htmtAttributes = new {@class=""}})
-                    @Html.ValidationMessageFor(model => model.TimeToCompletion, "",new { @class = "" })
+                    @Html.EditorFor(model => model.LongPrice, new {  htmlAttributes = new {@class="form-control"}})
                 </li>
                 <li>
                     @Html.LabelFor(model => model.TypeID, htmlAttributes: new { @class="" })
-                    @Html.DropDownListFor(model => model.TypeID, ViewBag.TypeID as SelectList);
-                    @Html.ValidationMessageFor(model => model.TypeID, "", new { @class=""})
+                    @Html.DropDownListFor(model => model.TypeID, ViewBag.TypeID as SelectList , new { })
                 </li>
                 <li>
                     <p class="formButtons">

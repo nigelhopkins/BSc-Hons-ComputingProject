@@ -5,8 +5,8 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <div class="ContentContianer">
-    <h1>Delete Haircut</h1>
     <div class="ContentWrapper">
+        <h2>Delete Haircut</h2>
         <ul>
             <li>
                 @Html.LabelFor(model => model.HaircutName)
@@ -21,12 +21,8 @@
                 <span class="DeleteAccount">@Html.DisplayFor(model => model.LongPrice)</span>
             </li>
             <li>
-                @Html.LabelFor(model => model.TimeToCompletion)
-                <span class="DeleteAccount">@Html.DisplayFor(model => model.TimeToCompletion)</span>
-            </li>
-            <li>
                 @Html.LabelFor(model => model.TypeID)
-                <span class="DeleteAccount">@Html.DisplayFor(model => model.TypeID)</span>
+                <span class="DeleteAccount">@Html.DisplayFor(model => model.tblHaircutType.TypeName)</span>
             </li>
             <li>
                 @using (Html.BeginForm("DeleteHaircut", "Prices", FormMethod.Post))

@@ -5,7 +5,6 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <div class="ContentContianer">
-    <h1>User Accounts</h1>
     <div class="ContentWrapper">
         <table class="AccountList">
             <tr>
@@ -28,8 +27,8 @@
                         @Html.DisplayFor(modelItem => item.LastName)
                     </td>
                     <td>
-                        @Html.ActionLink("View", "ViewAdminAccountDetails", new { id = item.employeeID }) |
-                        @Html.ActionLink("Edit", "EditAdminAccount", new { id = item.employeeID }) |
+                        @Html.ActionLink("View", "ViewAdminAccountDetails", new { id = item.employeeID })
+                        @Html.ActionLink("Edit", "EditAdminAccount", new { id = item.employeeID })
                         @if (Session["loginID"].ToString() != item.LoginID.ToString())
                         {
                             @Html.ActionLink("Delete", "DeleteAdminAccount", new { id = item.employeeID })
@@ -44,7 +43,7 @@
             }
 
         </table>
-        <a href="@Url.Action("createNewAdminAccount","admin")"><button type="button">Add New Admin Account</button></a>
+        <button type="button" onclick="location.href='@Url.Action("createNewAdminAccount","admin")'" class="adminButton">Add New Admin Account</button>
     </div>
 </div>
 

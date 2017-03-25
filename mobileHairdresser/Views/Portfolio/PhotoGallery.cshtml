@@ -20,12 +20,7 @@
     string errorMsg = Html.Raw(TempData["NoPhotosFound"]).ToString();
 }
 
-<div class="ContentContianer">
-    <h1>@GalleryName</h1>
-    @if (Session["user"] != null)
-    {
-        <a href="@Url.Action("editGalleryDetails","Portfolio", new { GalleryID = GalleryID })">Click to edit gallery Details.</a>
-    }    
+<div class="ContentContianer">    
     <div class="ContentWrapper">
         <div id="PortfolioContainer">
             @if (Session["user"] != null)
@@ -45,17 +40,20 @@
                     else
                     {
                         <div class="col-sm-12 caption">
-                            <p class="caption">@ViewBag.GalleryDiscription</p>
+                            <span class="photoGalleryTitle"><h2>@GalleryName</h2>
+                                @if (Session["user"] != null)
+                                {
+                                    <span class="photoGalleryTitleEdit"><a href="@Url.Action("editGalleryDetails","Portfolio", new { GalleryID = GalleryID })">Click to edit gallery Details.</a></span>
+                                }
+                            </span>
                         </div>
                                     foreach (var image in Model)
                                     {
-                            <div class="col-lg-3 col-sm-4 col-xs-6">
+                            <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
                                 <div class="hoverEffect">
-                                    <a title="Image @count" href="#">
                                         <img class="img-responsive" src="~/Content/Images/Portfolio/@image.Url" alt="@Html.DisplayFor(modelItem => image.Description)">
-                                        <div class="thumbnail overlay">
+                                        <div class="thumbnail overlay" style="cursor:default">
                                         </div>
-                                    </a>
                                     @if (Session["user"] != null)
                                     {
                                         <button type="button" style="width:100%" onclick="location.href='@Url.Action("setGalleryPhoto","Portfolio", new { PhotoID = image.PhotoID })'">Set Gallery Photo</button>

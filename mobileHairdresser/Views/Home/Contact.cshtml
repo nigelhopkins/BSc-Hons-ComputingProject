@@ -7,7 +7,6 @@
 
 }
 <div class="ContentContianer">
-    <h1>Contact</h1>
     <div class="ContentWrapper">
         @if (emailConfimation != null)
         {
@@ -31,14 +30,14 @@
         }
         else
         {
-            using (Html.BeginForm("sendEmail", "Home", FormMethod.Post))
+            using (Html.BeginForm("sendEmail", "Home", FormMethod.Post, new { @id="emailForm" }))
             {
                 <input type="text" name="custName" id="custName" placeholder="Please enter your name?" />
                 <input type="text" name="custPhoneNo" id="custPhoneNo" placeholder="Please enter your phone number?" />
                 <input type="text" name="custEmail" id="custEmail" placeholder="Please enter your email?" />
                 <textarea placeholder="Please enter your message?" name="emailMessage"></textarea>
                 <input type="hidden" name="antiBotSpam" id="antiBotSpam" value="" />
-                <button type="submit">Send</button>
+                <span><button type="submit">Send</button></span>
             }
         }
     </div>

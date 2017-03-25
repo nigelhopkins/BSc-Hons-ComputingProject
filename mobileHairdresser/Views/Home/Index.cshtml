@@ -18,7 +18,6 @@
 @if (Session["user"] == null)   
 {
 <div id="adminLoginContainer">
-    <h1>Admin Login</h1>
     <div class="loginForm">
         @using (Html.BeginForm("getAuthenticated", "login", FormMethod.Post))
         {

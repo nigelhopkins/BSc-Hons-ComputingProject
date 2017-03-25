@@ -11,20 +11,22 @@ namespace mobileHairdresser.Database
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class tblAppointment
     {
-        public int AppointmentID { get; set; }
-        public int EmployeeID { get; set; }
-        public int CustomerID { get; set; }
-        public int HaircutID { get; set; }
-        public System.DateTime DateOfAppointment { get; set; }
-        public System.TimeSpan StartTime { get; set; }
-        public System.TimeSpan EndTime { get; set; }
-        public string IsBooked { get; set; }
+        public int appointmentID { get; set; }
+        [Required]
+        [Display(Name ="Appointment Date")]
+        [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd}")]
+        public DateTime appointmentDate { get; set; }
+        public int employeeID { get; set; }
+        public int clientID { get; set; }
+        public int haircutID { get; set; }
+        public int timeSlotID { get; set; }
+        public string appointmentCancled { get; set; }
+        public string cancledReason { get; set; }
     
-        public virtual tblCustomerHistory tblCustomerHistory { get; set; }
-        public virtual tblEmployee tblEmployee { get; set; }
-        public virtual tblHaircut tblHaircut { get; set; }
+        public virtual tblClient tblClient { get; set; }
     }
 }

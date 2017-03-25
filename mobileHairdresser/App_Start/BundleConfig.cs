@@ -34,6 +34,7 @@ namespace mobileHairdresser
 
             //Groups all css pages 
             bundles.Add(new StyleBundle("~/bundles/css").Include(
+                      "~/Content/themes/base/jquery-ui.css",
                       "~/Content/bootstrap.css",
                       "~/Content/site.css",
                       "~/Content/Content.css",

@@ -7,22 +7,19 @@
     @Styles.Render("~/bundles/css")        
 </head>
 <body>
-    <div id="wrapper">
+    <div id="wrapper" class="container-fluid col-lg-12">
         <div id="sidebar-wrapper">
             <span id="PullDownMenu">Menu</span>
             <div id="sidebarContent-wrapper">
+                <div class="PageTitleHeader">
+                    <h1>Mobile Hairdresser</h1>
+                </div>
                 @{
                     if (Session["user"] != null)
                     {
                         <div class="TitlePannel">
-                            <h2>Admin Panel</h2>
                             <h3>Welcome @Session["user"]</h3>
                         </div>
-                    }
-                    else
-                    {
-                        <h2> &nbsp; </h2>
-                        <h3> &nbsp; </h3>
                     }
                 }
                 <ul class="sidebar-nav">
@@ -39,7 +36,6 @@
                             <h3>Admin Navigation</h3>
                         </div>
                         <ul class="sidebar-nav">
-                            <li class="mobileNav" onclick="Nav()"><a href="#">Admin Menu</a></li>
                             <li><a href="@Url.Action("customerEmail","Email")">Email <span style="color:#ff0000;"class="@ViewBag.emailCount"></span></a></li>
                             <li><a href="@Url.Action("appointmentIndex", "Appointment")">Appointments</a></li>
                             <li><a href="@Url.Action("adminAccountList","admin")">Account Settings</a></li>
@@ -56,7 +52,6 @@
                         </div>
 
                         <div class="sidebar-Button SocialMedia">
-                            <h2>Social Media</h2>
                             <div class="SocialMediaIcons">
                                 <a href="http://www.facebook.com"><span class="facebookIcon"></span></a>
                                 <a href="http://www.twitter.com"><span class="twitterIcon"></span></a>
@@ -88,16 +83,13 @@
                 </div>
             </div>
         </div>
-        <div class="MobilePageTitleHeader">
-            <h1>Mobile Hairdresser</h1>
-        </div>
         <div id="pageContent-wrapper">
+            <div class="MobilePageTitleHeader">
+                <h1>Mobile Hairdresser</h1>
+            </div>
             <div class="container-fluid">
                 @RenderBody()
             </div>
-        </div>
-        <div class="PageTitleHeader">
-            <h1>Mobile Hairdresser</h1>
         </div>
     </div>
     <footer>

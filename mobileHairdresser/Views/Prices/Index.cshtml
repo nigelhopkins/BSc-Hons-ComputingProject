@@ -9,36 +9,27 @@
 @if (Session["user"] != null)
 {
     <div class="ContentContianer">
-        <h1>Haircut Type Menu</h1>
         <div class="ContentWrapper">
-            <div id="tableList">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>
-                                @Html.DisplayNameFor(model => model.TypeName)
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
+                <ul id="tableEdit">
+                    <li>
+                        <h2>@Html.DisplayNameFor(model => model.TypeName)</h2>
+                    </li>
                         @foreach (tblHaircutType haircutType in @Model)
                         {
-                            <tr>
-                                <td>
-                                    <label>@Html.DisplayFor(model => haircutType.TypeName)</label>
-                                    <span>@Html.ActionLink("Details", "HaircutTypeDetails", new {  haircutTypeID = haircutType.TypeID } , null)
-                                    @Html.ActionLink("Delete", "DeleteHaircutsCatagory", new { id = haircutType.TypeID } , null)</span>
-                                </td>
-                            </tr>
+                            <li>
+                                <label>@Html.DisplayFor(model => haircutType.TypeName)</label>
+                                <span>@Html.ActionLink("Details", "HaircutTypeDetails", new {  haircutTypeID = haircutType.TypeID } , null)
+                                @Html.ActionLink("Delete", "DeleteHaircutsCatagory", new { id = haircutType.TypeID } , null)</span>
+                            </li>
                         }
-                    </tbody>
-                </table>
-                <div class="formButtons">
-                    <button type="button" onclick="location.href='@Url.Action("CreateNewHaircutType","Prices")'">Create New</button>
-                    <button type="button" onclick="location.href='@Url.Action("Prices","Home")'">Back To Prices</button>
-                </div>
-                </div>
-            </div>
+                    <li>
+                        <div class="formButtons">
+                        <button type="button" onclick="location.href='@Url.Action("CreateNewHaircutType","Prices")'">Create New</button>
+                        <button type="button" onclick="location.href='@Url.Action("Prices","Home")'">Back To Prices</button>
+                        </div>
+                    </li>
+                </ul>
+        </div>
     </div>
 }
 else

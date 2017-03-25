@@ -26,15 +26,16 @@ namespace mobileHairdresser.Database
         }
     
         public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
+        public virtual DbSet<tblAppointment> tblAppointments { get; set; }
+        public virtual DbSet<tblClient> tblClients { get; set; }
+        public virtual DbSet<tblEmail> tblEmails { get; set; }
         public virtual DbSet<tblEmployee> tblEmployees { get; set; }
+        public virtual DbSet<tblGallery> tblGalleries { get; set; }
         public virtual DbSet<tblHaircut> tblHaircuts { get; set; }
         public virtual DbSet<tblHaircutType> tblHaircutTypes { get; set; }
         public virtual DbSet<tblLogin> tblLogins { get; set; }
-        public virtual DbSet<tblGallery> tblGalleries { get; set; }
         public virtual DbSet<tblPhoto> tblPhotos { get; set; }
-        public virtual DbSet<tblEmail> tblEmails { get; set; }
-        public virtual DbSet<tblAppointment> tblAppointments { get; set; }
-        public virtual DbSet<tblCustomerHistory> tblCustomerHistories { get; set; }
-        public virtual DbSet<tblWorkingDay> tblWorkingDays { get; set; }
+        public virtual DbSet<tblSchedule> tblSchedules { get; set; }
+        public virtual DbSet<tblTimeSlot> tblTimeSlots { get; set; }
     }
 }

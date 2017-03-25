@@ -22,33 +22,28 @@
 @if (Session["user"] != null)
 {
     <div class="ContentContianer">
-        <h1><span class="changeTypeName">@PriceTypeName</span></h1>
-        <span>@Html.ActionLink("Click catagory name to change","EditHaircutType", new { TypeID = ViewBag.PriceTypeID })</span>
         <div class="ContentWrapper">
             <p style="color:red;">@errorMsg</p>
             <div id="tableList">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>@Html.DisplayNameFor(x => x.HaircutName)</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach (var item in Model)
-                            {
-                                <tr>
-                                    <td>
-                                        <label>@Html.DisplayFor(modelItem => item.HaircutName)</label>
-                                        <span>@Html.ActionLink("Edit", "EditHaircuts", new { id = item.HaircutID })
-                                        @Html.ActionLink("Delete", "DeleteHaircut", new { id = item.HaircutID }) </span></td>
-                                </tr>
-                            }
-                        </tbody>
-                    </table>
-                    <div class="formButtons">
-                        <button type="button" onclick="location.href='@Url.Action("AddNewHaircut","Prices")'">Add New Haircut</button>
-                        <button type="button" onclick="location.href='@Url.Action("Index","Prices")'">Back</button>
-                    </div>
+                <span class="changeTypeName"><h1>@PriceTypeName</h1></span>
+                <span class="HaircutTypeEdit">@Html.ActionLink("Click here to change catagory name", "EditHaircutType", new { TypeID = ViewBag.PriceTypeID })</span>
+                    <ul id="tableEdit">
+                        <li><h2>@Html.DisplayNameFor(x => x.HaircutName)</h2></li>
+                        @foreach (var item in Model)
+                        {
+                            <li>
+                                <label>@Html.DisplayFor(modelItem => item.HaircutName)</label>
+                                <span>@Html.ActionLink("Edit", "EditHaircuts", new { id = item.HaircutID })
+                                @Html.ActionLink("Delete", "DeleteHaircut", new { id = item.HaircutID }) </span>
+                            </li>   
+                        }
+                        <li>
+                            <div class="formButtons">
+                                <button type="button" onclick="location.href='@Url.Action("AddNewHaircut","Prices")'">Add New Haircut</button>
+                                <button type="button" onclick="location.href='@Url.Action("Index","Prices")'">Back</button>
+                            </div>
+                        </li>
+                    </ul>
             </div>
             
             </div>

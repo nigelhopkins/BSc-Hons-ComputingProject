@@ -17,8 +17,8 @@
             <li>
                 <p><label>Subject :</label> @Model.Subject</p>
             </li>
-            <li>
-                <span class="container">@Model.Message</span>
+            <li class="messageDisplay">
+                @Model.Message
             </li>
             <li>
                 <button type="button" onclick="location.href='@Url.Action("customerEmail","Email")'">Back</button>

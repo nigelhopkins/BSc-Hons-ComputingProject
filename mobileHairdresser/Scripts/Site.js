@@ -9,11 +9,6 @@
 *******************************************************************************************************
 */
 
-function DatePicker() {
-    var $j = jQuery.noConflict();
-    $j(".date-picker").datepicker();
-}
-
 //Js to create an area for drag and drop upload for photo gallery
 
 function dragAndDrop ()
@@ -28,21 +23,41 @@ function dragAndDrop ()
             }
         };
 }
+function MultiStepForm() {
 
+//jQuery time
+var current_fs, next_fs, previous_fs; //fieldsets
 
-    // creates a function for the photo gallery
-    function photoGallery() {
-        $(document).ready(function () {
-            $('.thumbnail').click(function () {
-                $('.modal-body').empty();
-                var title = $(this).parent('a').attr("title");
-                $('.modal-title').html(title);
-                $($(this).parents('div').html()).appendTo('.modal-body');
-                $('#myModal').modal({ show: true });
-            });
-        });
-    };
+$(".next").click(function(){
+	
+	current_fs = $(this).parent();
+	next_fs = $(this).parent().next();
+	
+	//activate next step on progressbar using the index of next_fs
+	$("#progressbar li").eq($("fieldset").index(next_fs)).addClass("active");
+	
+	//show the next fieldset
+	next_fs.show();
+	current_fs.hide();
+});
 
+$(".previous").click(function(){	
+	current_fs = $(this).parent();
+	previous_fs = $(this).parent().prev();
+	
+	//de-activate current step on progressbar
+	$("#progressbar li").eq($("fieldset").index(current_fs)).removeClass("active");
+	
+	//show the previous fieldset
+	previous_fs.show();
+	current_fs.hide();
+});
+
+$(".submit").click(function(){
+	return false;
+})
+
+}
     // Creates a function that detects a change in the window size
     function Resize() {
         $(window).on('resize', function () {
@@ -113,9 +128,8 @@ function dragAndDrop ()
     onload = function () {
 
         Resize();
-        photoGallery();
         dragAndDrop();
-        DatePicker();
+        MultiStepForm();
         var PullDownMenu = document.getElementById('PullDownMenu');
         var changeTypeName = document.getElementsByClassName('changeTypeName');
         var adminLogonButton = document.getElementById('adminLogonButton');
@@ -123,7 +137,7 @@ function dragAndDrop ()
         var checkAll = document.getElementById('checkAll');
         var selectAll = document.getElementsByClassName('isSelected');
         var btnSubmit = document.getElementById('btnSubmit');
-
+        
         if (checkAll) {
             checkAll.addEventListener("change", function (e) {
                 for (var i = 0; i < selectAll.length; i++) {

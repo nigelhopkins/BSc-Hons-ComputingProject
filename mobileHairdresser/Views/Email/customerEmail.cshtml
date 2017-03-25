@@ -7,45 +7,36 @@
     string unreadEmail = "";
 }
 <div class="ContentContianer">
-    <h1>Customer Emails</h1>
     <div class="ContentWrapper">
-        <table class="table">
-            <tr class="tableHeadding">
-                <th>
-                    @Html.DisplayNameFor(model => model.CustName)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.DateSent)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Subject)
-                </th>
-            </tr>
+        <h2>Customer Emails</h2>
+        <ul class="emailtable">
+            <li class="emailHeadding">
+                <span class="subject">
+                    <h2>You have @Model.Count() emails and @Model.Where(unread => unread.Read == "false").Count() unread</h2>
+                </span>
+            </li>
+            <li>
+                <ul>
+                    @foreach (var item in Model)
+                        {
+                            if (item.Read == "false")
+                            {
+                                unreadEmail = "isUnread";
+                            }
+                            else
+                            {
+                                unreadEmail = "";
+                            }
+                            <li class="@unreadEmail emailSelection" onclick="location.href='@Url.Action("ViewEmail", "Email", new { EmailID = item.EmailID })'">
+                                <span class="subject">
+                                    @Html.LabelFor(modelItem => item.DateSent): @Html.DisplayFor(modelItem => item.DateSent) <br />
+                                    @Html.DisplayFor(modelItem => item.Subject)
+                                </span>
 
-            @foreach (var item in Model)
-            {
-                if (item.Read == "false")
-                {
-                    unreadEmail = "isUnread";
-                }
-                else
-                {
-                    unreadEmail = "";
-                }
-                <tr class="@unreadEmail emailSelection" onclick="location.href='@Url.Action("ViewEmail", "Email", new { EmailID = item.EmailID })'">
-                    <td>
-                        @Html.DisplayFor(modelItem => item.CustName)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.DateSent)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Subject)
-                    </td>
-                    
-                </tr>
-            }
-
-        </table>
+                            </li>
+                         }
+                 </ul>
+             </li>
+        </ul>
     </div>
 </div>

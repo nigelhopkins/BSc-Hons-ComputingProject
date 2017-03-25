@@ -1,0 +1,55 @@
+﻿*{
+    padding:0px;
+    margin:0px;
+    font-family:Consolas;
+    font-size:100%;
+    color:#000;
+}
+
+/* Body layout */
+
+html, body{
+    width:100%;
+    height:100%;
+}
+.master{
+    display:block;
+    background:#fff;
+    border:1px dashed #000;
+    margin:0 auto;
+    padding:50px;
+    width:80%;
+    height:100%;
+    min-height:100%;
+}
+    
+.master li{
+    list-style:none;
+    line-height:25px;
+}
+.master li ul{
+    margin:25px 0;
+    border:1px solid #000;
+}
+.master li p{
+    display:inline-block;
+    width:auto;
+    text-align:left;
+    margin:0;
+    vertical-align:top;
+    padding:0px;
+}
+.master li span a{
+    padding :0px;
+    margin :0px;
+    text-align:left;
+}
+.master li label{
+    display:inline-block;
+    width:200px;
+    text-align:left;
+    font-weight:bold;
+    vertical-align:top;
+    padding:5px;
+    margin:0px;
+}

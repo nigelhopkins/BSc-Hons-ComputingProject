@@ -11,12 +11,13 @@
         @using (Html.BeginForm("SaveHaircutsCatagory", "Prices", FormMethod.Post))
         {
             @Html.AntiForgeryToken()
-            @Html.ValidationSummary(true, "", new { })
             <ul>
+                <li>
+                    @Html.ValidationSummary()
+                </li>
                 <li>
                     @Html.LabelFor(model => model.TypeName, htmlAttributes: new { @class = "" })
                     @Html.EditorFor(model => model.TypeName, new { htmlAttributes = new { @class = "" } })
-                    @Html.ValidationMessageFor(model => model.TypeName, "", new { @class = "" })
                 </li>
                 <li>
                     <p class="formButtons">

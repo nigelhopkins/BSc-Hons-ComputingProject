@@ -5,34 +5,32 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <div class="ContentContianer">
-    <h1>Edit Account</h1>
     <div class="ContentWrapper">
+        <h2>Edit Account</h2>
         @using (Html.BeginForm())
         {
             @Html.AntiForgeryToken()
-            @Html.ValidationSummary(true, "", new { })
             @Html.HiddenFor(model => model.employeeID)
 
-            <ul>
+            <ul class="EditAccount">
+                <li>
+                    @Html.ValidationSummary()
+                </li>
                 <li>
                         @Html.LabelFor(model => model.FirstName, htmlAttributes: new { @class = "" })
                         @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "" } })
-                        @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "" })
                 </li>
                 <li>
                         @Html.LabelFor(model => model.LastName, htmlAttributes: new { @class = "" })
                         @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "" } })
-                        @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "" })
                 </li>
                 <li>
                         @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "" })
                         @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "" } })
-                        @Html.ValidationMessageFor(model => model.Email, "", new { @class = "" })
                 </li>
                 <li>
                         @Html.LabelFor(model => model.PhoneNumber, htmlAttributes: new { @class = "" })
                         @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "" } })
-                        @Html.ValidationMessageFor(model => model.PhoneNumber, "", new { @class = "" })
                 </li>
                 <li>
                         @Html.HiddenFor(model => model.LoginID, new { htmlAttributes = new { @class = "" } })

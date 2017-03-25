@@ -11,7 +11,8 @@ namespace mobileHairdresser.Database
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class tblGallery
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -21,8 +22,12 @@ namespace mobileHairdresser.Database
         }
     
         public int GalleryID { get; set; }
+        [Required]
+        [Display(Name ="Gallery Name")]
         public string GalleryName { get; set; }
+        [Display(Name ="Gallery Img")]
         public string GalleryImg { get; set; }
+        [Display(Name ="Gallery Discription")]
         public string GalleryDiscription { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

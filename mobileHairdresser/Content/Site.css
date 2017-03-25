@@ -1,6 +1,8 @@
-﻿/* Site Layout */
+﻿/* 
+    The CSS style with in this page builds the main frame work for the website
+*/
 
-/*      Webpage body reset      */
+/*      Webpage body reset     */
 *{
     padding:0px;
     margin:0px;
@@ -21,66 +23,100 @@ html, body{
     -o-background-size:cover;
 }
 
+/* CSS style for the placeholder values in the website */
+::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+    color:    #000;
+}
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+   color:    #000;
+   opacity:  1;
+}
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+   color:    #000;
+   opacity:  1;
+}
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+   color:    #000;
+}
+/* End of CSS style for the placeholder values used in the website*/
 
-/* Main Page Wrapper */
+/* Main Page Wrapper : The section of the 
+   page the contains all sections of the website */
 
 #wrapper{
     position:absolute;
     display:block;
     width:100%;
-    height:100%;
+    height:95%;
+    padding:0px;
     border:0px solid #000;
-    overflow-x:hidden;
-    overflow-y:scroll;
+    overflow:hidden;
 }
 
-/*   Sidebar Wrapper */
+/* CSS style for the sidebar navigation bar
+   when display on a computer with a screen greater than 1023px
+*/
 
 #sidebar-wrapper{
     position:absolute;
     display:inline-block;
     width:30%;
+    height:100%;
     margin-left:0;
     border:0px solid #000;
-    overflow-y:hidden;
+    overflow:hidden;
+    z-index:999;
 }
-/* Main body Content Wrapper*/
+/* CSS Style for the main body of the web page 
+   This is on the right hand side of the site and 
+   displays all the content for the website
+*/
 #pageContent-wrapper{
     position:absolute;
     left:30%;
     display:inline-block;
     width:69%;
-    height:auto;
-    min-height:838px;
+    height:100%;
     margin:0 1px;
     vertical-align:top;
     background:none;
     padding:0px;
-    z-index:99;
     border:0px solid #000;
 }
+/*
+    This provides a wrapper for all the content with in the sidebar
+    on the left hand side of the screen.
+*/
 #sidebarContent-wrapper{
     position:relative;
     display:block;
     width:52%;
     min-width:250px;
-    min-height:828px;
+    min-height:100%;
     height:auto;
     left:20%;
     padding: 25px 0;
-    background:rgba(243, 243, 243, 0.6);
+    background:none;
     border:0px solid #000;
 }
-/* Footer */
+/* CSS style for the default values for the footer of the website */
 
 footer{
     position:absolute;
     bottom:0px;
     width:100%;
-    line-height:3.125em;
+    height:5%;
     background:rgba(128, 128 ,128 ,8);
     text-align:center;
     z-index:999;
+    box-shadow:0 0 5px 2px #fff;
+    border-top:1px solid #000;
+   
+}
+footer p {
+    display:block;
+    height:100%;
+    padding:12px;
 }
 
 /* Default Element Values */
@@ -88,7 +124,7 @@ footer{
 /* Hyperlinks */
 
 a, a:hover, a:active, a:visited{
-    color:#fff;
+    color:#000;
     text-decoration:none;
 }
 
@@ -105,6 +141,9 @@ p{
 h1, h2, h3{
     font-weight:bold;
     text-shadow: 0px 5px 15px rgba(128, 128 ,128 ,1);
+    font-family:Consolas;
+    font-weight:300;
+    text-shadow: 0 0px 10px #fff;
 }
 
 h1{
@@ -139,9 +178,7 @@ form{
 input[type="text"], input[type="password"]{
     display:block;
     width:80%;
-    margin:15px auto;
-    line-height:50px;
-    font-size:3em;
+    margin-bottom:15px;
     padding: 0 15px;
 }
 textarea{
@@ -153,27 +190,24 @@ textarea{
     padding:15px;
     color:#000;
 }
+/* Buttons */
 button{
     display:block;
     width:30%;
     line-height:50px;
     margin:25px 10% 25px auto;
+    font-size:80%;
 }
-
+/* Drop Down Menus */
 select{
     display:block;
-    background:none;
-    height:50px;
-    width:80%;
-    margin:15px auto;
-    font-size:2.5em;
-    text-align-last:center;
-    border-radius:10px;
-    outline:none;
+    width: 100%;
+    height:37px;
+    padding:5px;
+    border:1px solid #000;
+    border-radius:0px;
 }
 select:active, select:hover{
-    border:none;
-    border-radius:10px;
     outline:none;
     outline-color:rgba(243, 243, 243, 0.6);
 }
@@ -202,7 +236,7 @@ ul li p {
 }
 ul li label{
     display:inline-block;
-    width:10%;
+    width:100%;
     border:0px solid #000;
     padding:0px;
     margin:0px;
@@ -210,37 +244,19 @@ ul li label{
 }
 ul li input[type="text"], ul li input[type="password"], ul li input[type="time"],ul li input[type="email"],ul li input[type="tel"]
 {
-    display:inline-block;
-    width:89.1%;
-    padding:0px;
-    margin:0px;
+    display:block;
+    width:100%;
+    line-height:35px;
+    border:1px solid #000;
+    border-radius:0px;
 }
 
 ul li input[type="time"], ul li input[type="email"],ul li input[type="tel"]
 {
      font-size:2.5em;
 }
-ul li select{
-    display:inline-block;
-    background:#fff;
-    width:89.1%;
-    border-radius:0px;
-    padding:0px;
-    margin:0px;
-    text-align-last:left;
-}
 
-.validationMessage{
-    display:block;
-    font-size:1em;
-    line-height:50px;
-    font-size:2.5em;
-    text-align:center;
-    border:0px solid #000;
-    width:100%;
-}
-
-/* Sidebar Layout */
+/* CSS style for the content of the sidebar navigation */
 
 #sidebarContent-wrapper .TitlePannel{
     display:block;
@@ -249,11 +265,19 @@ ul li select{
 }
 .sidebar-nav, .sidebar-Button, .sidebar-nav-dropdown{
     position:relative;
-    margin:0 auto;
+    margin:10% auto;    
     width:95%;
     border:0px solid #000;
-    background:rgba(128, 128, 128, 0.4);
+    background:rgba(128, 128, 128, 0.9);
     white-space:nowrap;
+    box-shadow:0 0 5px 2px #fff;
+    border-radius:15px;
+}
+.TitlePannel h3{
+    margin:5%;
+    color:#fff;
+    text-shadow:0 0 5px #000;
+    font-weight:bold;
 }
 .sidebar-nav button {
     width:100%;
@@ -301,24 +325,26 @@ ul li select{
 }
 
 .sidebar-adminLogin button{
-    width:100%;
+    display:block;
+    width:95%;
     line-height:25px;
-    background:none;
+    background:rgba(128, 128 ,128 ,8);
     color:#000;
     border:none;
-    margin:5px 0;
+    position:absolute;
+    bottom:0px;
+    left:10px;
+    border-radius:15px;
+    box-shadow: 0 0 5px 2px #fff;
 }
 
-/* Mobile Nav */
+/* CSS stlye for the sidebar when displayed on a mobile device */
 
 .mobileNav{
     display:none;
-    background:url(Images/SiteImgs/menu.png)center left no-repeat;
     background-size:contain;
     margin:0px;
-    -webkit-background-size:contain;
-    -moz-background-size:contain;
-    -o-background-size:contain;    
+    text-align:center;  
 }
 .mobileNav{
     text-align:left !important;
@@ -331,182 +357,12 @@ ul li select{
     text-align:center;
     border:1px solid #000;
 }
-
-@media screen and (max-width: 1023px)
-{
-
-    /* Sidebar Layout */
-
-    #sidebarContent-wrapper{
-       display:none;
-       z-index:999;
-    }
-    #sidebar-wrapper, #sidebarContent-wrapper{
-        width:100%;
-        left:0px;
-        top:0px;
-    }
-    #sidebarContent-wrapper h2, #sidebarContent-wrapper h3{
-        display:none;
-    }
-    .sidebar-nav{
-        display:inline-block;
-        width:100%;
-        margin:0px;
-        font-weight:bold;
-        border:1px solid #000;
-    }
-    .sidebar-nav li{
-        padding:0px;
-        margin:0 5px 0 0;
-    }
-    .sidebar-nav li a{
-        margin:0 50px;
-        background:none;
-        border:none;
-    }
-    .sidebar-nav li a:hover{
-        color:#000;
-    }
-
-    #sidebar-wrapper{
-        position:absolute;
-        background:rgba(243,243,243,0.4);
-        display:block;
-    }
-
-    /* Mobile Nav */
-
-    .PageTitleHeader{
-        display:none;
-    }
-    .MobilePageTitleHeader{
-        margin-top:45px;
-        min-height:25%;
-        position:relative;
-        display:block;
-    }   
-    .MobilePageTitleHeader h1{
-        position:absolute;
-        bottom:0px;
-        display:block;
-        line-height:50px;
-        width:100%;
-        text-align:center;
-        white-space:normal;
-        color:#000;
-    }
-    .mobileNav{
-        display:block;
-    }
-    .mobileNav a{
-       font-weight:bold;
-    }
-        #PullDownMenu{
-        display:block;
-    }
-    #PullDownMenu:hover > #sidebarContent-wrapper{
-        height:auto;
-    }
-
-    #pageContent-wrapper{
-        position:absolute;
-        width:98.7%;
-        left:0;
-        top:10%;
-        margin: 0 5px;
-        min-height:68.5%;
-        padding-bottom:5%;
-        margin-bottom:10%;
-    }
-    footer{
-        line-height:normal;
-    }
-
-        /* Unordered Lists */
-
-    ul{
-        display:block;
-        width:80%;
-        margin:25px auto;
-    }
-        ul li{
-        display:block;
-        list-style:none;
-        margin:10px;
-    }
-}
-@media screen and (orientation : portrait)
-{
-    @media screen and (max-width: 768px){
-        #pageContent-wrapper {
-            width: 97.5%;
-            min-height: 64.5%;
-        }
-
-            /* Inputs */
-
-         input[type="text"], input[type="password"]{
-             font-size:1.5em;
-         }
-         textarea{
-             font-size:1em;
-         }
-    }
-    @media screen and (max-width: 412px){
-        input[type="text"], input[type="password"]{
-             font-size:0.75em;
-         }
-        textarea{
-            font-size:0.75em;
-            height:150px;
-        }
-    }
-    @media screen and (max-width: 375px){
-         #pageContent-wrapper{
-            width:97.4%;
-            min-height:64.6%;
-        }
-    }
-    @media screen and (max-width: 360px){
-         #pageContent-wrapper{
-            width:97%;
-            min-height:64.4%;
-        }
-    }
-    @media screen and (max-width: 320px){
-         #pageContent-wrapper{
-            width:97%;
-            min-height:59.9%;
-        }
-    }
-}
-@media screen and (orientation : landscape)
-{
-       @media screen and (max-width : 1023px ) {
-         #pageContent-wrapper{
-             min-height:89%;
-         }
-         #sidebarContent-wrapper{
-             display:inline-block;
-         }
-    }
-}
-
-.SocialMediaIcons {
-    position:relative;
-    text-align:center;
-    width:95%;
-    margin: 0 auto;
-    border:none;
-    background:none;
-}
 .SocialMedia{
     text-align:center;
-    padding-top:15px;
 }
-.SocialMedia h2{
-    color:#000;
+.socialMediaIcons a{
+    display:block;
+    width:65px;
 }
 .SocialMediaIcons a span {
     width:65px;
@@ -515,7 +371,9 @@ ul li select{
     display:inline-block;
     border:none;
 }
-
+.sidebar-Button{
+    line-height:normal;
+}
 .SocialMediaIcons a span.facebookIcon{
     background-position:-20.5px -12px;
 }
@@ -543,28 +401,39 @@ ul li select{
 
 .MobilePageTitleHeader{
     display:none;
+
+}
+.MobilePageTitleHeader h1{
+    color:#fff;
+    text-shadow:0 0 5px #000;
 }
 .PageTitleHeader{
-    position:absolute;
-    bottom:15%;
-    right:15%;
     display:block;
-    width:70%;
-    margin:0 0 0 auto;
+    width:100%;
+    margin:0 auto;
+    padding:0px;
     border:0px solid #000;
     z-index:1;
 }
 .PageTitleHeader h1 {
-    color:#000;
-    text-align:right;
+    color:#fff;
+    text-shadow:0 0 5px #000;
+    text-align:center;
     padding:0px;
-    margin:0 0 0 20%;
-    font-size:4em;
+    margin:0 auto;
+    line-height:165%;
+    font-size:250%;
     font-weight:300;
     letter-spacing:3px;
+    z-index:-1;
 }
 
-/*      System Messages     */
+/*      
+        CSS style for the following;
+            -   System Messages 
+            -   Error Message popups 
+            -   Cookie Popup
+*/
 #popupWindow
 {
     display:none;
@@ -593,7 +462,7 @@ ul li select{
     top:40%;
     width:100%;
     background:rgba(243, 243, 243, 0.6);
-    border:1px dashed #000;
+    border:1px dashed   #000;
     text-align:center;
     padding:25px;
 }
@@ -630,7 +499,7 @@ ul li select{
     margin: 25px auto;
     width:100%;
     border:0px;
-    text-align:center;
+    text-align:right;
 }
 .formButtons a {
     display:inline-block;
@@ -651,43 +520,103 @@ ul li select{
     margin:10px 0;
     border:none;
 }
-@media screen and (max-height: 863px)
-{
-    #ClickToCall{
-        display:none;
-    }
-    .SocialMedia h2{
-        display:none;
-    }
-}
-@media screen and (max-width: 1023px)
-{
-
-    ul li p {
+/* CSS Style when the screens max width is less then 1023px */
+@media screen and (max-width: 1023px){
+    #sidebar-wrapper{
         width:100%;
-        text-align:center;
-        font-size:1em;
-        font-weight:bold;
+        height:auto;
+        overflow-y:auto;
     }
-    ul li label{
-        display:inline-block;
-        width:28.9%;
-        font-size:0.75em;
+    #PullDownMenu{
+        display:block;
+        z-index:99;
         line-height:50px;
-        border:0px solid #000;
-        padding:0px;
-        margin:0px;
-        vertical-align:top;
+        background:#fff;
     }
-    ul li input[type="text"], ul li input[type="password"]
-    {
-        display:inline-block;
-        width:69.1%;
+    #sidebarContent-wrapper{
+        display:none;
         padding:0px;
-        margin:0px;
-    }
-    .formButtons button{
         width:100%;
-        margin:5px 0;
+        margin:0 auto;
+        padding:5%;
+        left:0px;
+        top:0px;
+        background:rgba(0,0,0,0.8);
     }
-}
+    .sidebar-nav{
+        margin:50px auto 0;
+    }
+    .sidebar-adminLogin{
+        display:block;
+        height:50px;
+        width:95%;
+        margin:0 auto;
+    }
+    .sidebar-adminLogin button{
+        display:block;
+        position:relative;
+        left:0px;
+        bottom:0px;
+        width:100%;
+        line-height:50px;
+        margin-top:30px;
+    }
+    #pageContent-wrapper
+    {
+        width:100%;
+        height:94%;
+        left:0px;
+        top:6%;
+    }
+    .ContentContianer{
+        top:150px;
+    }
+    .MobilePageTitleHeader{
+        display:block; 
+        width:100%;
+        margin-top:5%; 
+    }
+    .MobilePageTitleHeader h1{
+        display:block;
+        width:100%;
+        margin:0px;
+        line-height:170px;
+        text-align:center;
+    }
+    button{
+        width:49%;
+    }
+}/* End of CSS Style when the screens max width is less then 1023px */
+ /* CSS Style when the screens max width is less then 414px */
+@media screen and (max-width: 414px ){
+    .MobilePageTitleHeader h1{
+        font-size:180%;
+        line-height:140px;
+    }
+    .sidebar-nav{
+        margin:0 auto;
+    }
+    .sidebar-nav li{
+        padding:0px;
+        line-height:35px;
+    }
+    .sidebar-nav li a{
+        font-size:80%;
+    }
+    .sidebar-adminLogin{
+        height:40px;
+    }
+    .sidebar-adminLogin button{
+        line-height:40px;
+    }
+    button{
+        margin:0 auto;
+        line-height:40px;
+    }
+    footer p{
+        display:block;
+        line-height:30px;
+        padding:0px;
+        font-size:90%;  
+    }
+}/*End of CSS Style when the screens max width is less then 1135px */

@@ -5,22 +5,22 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <div class="ContentContianer">
-    <h1>Add New Gallery</h1>
     <div class="ContentWrapper">
+        <h2>Add New Gallery</h2>
         @using (Html.BeginForm("SaveGallery", "Portfolio", FormMethod.Post))
         {
             @Html.AntiForgeryToken()
-            @Html.ValidationSummary(true, "", new { })
             <ul>
+                <li>
+                    @Html.ValidationSummary()
+                </li>
                 <li>
                     @Html.LabelFor(model => model.GalleryName, htmlAttributes: new { @class = ""})
                     @Html.EditorFor(model => model.GalleryName, new { htmlAttributes = new { @class="" } })
-                    @Html.ValidationMessageFor(model => model.GalleryName, "", new {@class=""})
                 </li>
                 <li>
                     @Html.LabelFor(model => model.GalleryDiscription, htmlAttributes: new { @class = "" })
                     @Html.EditorFor(model => model.GalleryDiscription, new { htmlAttributes = new { @class = "" } })
-                    @Html.ValidationMessageFor(model => model.GalleryDiscription, "", new { @class = "" })
                 </li>
                 <li>
                     <p class="formButtons">

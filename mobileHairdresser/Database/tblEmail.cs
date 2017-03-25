@@ -11,16 +11,28 @@ namespace mobileHairdresser.Database
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class tblEmail
     {
         public int EmailID { get; set; }
+        [Required]
+        [Display(Name = "Name")]
         public string CustName { get; set; }
+        [Required]
+        [Display(Name ="Email Address")]
+        [DataType(DataType.EmailAddress)]
         public string custEmail { get; set; }
+        [Required]
+        [Display(Name ="Phone Number")]
+        [DataType(DataType.PhoneNumber)]
         public string custPhone { get; set; }
+        [Required]
         public string Subject { get; set; }
         public string Message { get; set; }
-        public string Read { get; set; }
+        [Display(Name ="Date Sent")]
+        [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd}")]
         public System.DateTime DateSent { get; set; }
+        public string Read { get; set; }
     }
 }
