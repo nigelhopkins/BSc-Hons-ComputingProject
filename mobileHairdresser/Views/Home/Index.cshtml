@@ -27,10 +27,11 @@
                 <p>Any unauthroised access or attemped access will be loged and may be reported to local law enforcment agencies!</p>
                 <p style="color:red;">@loginErrorMessage</p>
             </div>
-            
-            @Html.TextBoxFor(a => a.Username, new { @id = "username", @name = "Username", @placeholder = "Username." });
-            @Html.PasswordFor(a => a.Password, new { @id = "password", @name = "password", @placeholder = "Password." });
+            <div class="loginInputs">
+            @Html.TextBoxFor(a => a.Username, new { @id = "username", @name = "Username", @placeholder = "Username." })
+            @Html.PasswordFor(a => a.Password, new { @id = "password", @name = "password", @placeholder = "Password." })
             <span><input type="checkbox" name="PasswordReveal" id="PasswordReveal" name="PasswordReveal" /><label>Tick to reveal password.</label></span>
+            </div>
             <p class="logonButtons"><button type="button" onclick="location.href='@Url.Action("recoverPassword","login")'">Forgotten Password</button><button type="submit">Login</button></p>
             
         }

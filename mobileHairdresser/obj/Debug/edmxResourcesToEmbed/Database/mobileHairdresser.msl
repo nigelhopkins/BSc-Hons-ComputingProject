@@ -128,8 +128,8 @@
     <EntitySetMapping Name="tblTimeSlots">
       <EntityTypeMapping TypeName="mobileHairdresserModel.tblTimeSlot">
         <MappingFragment StoreEntitySet="tblTimeSlot">
-          <ScalarProperty Name="timeSlotID" ColumnName="timeSlotID" />
           <ScalarProperty Name="timeSlot" ColumnName="timeSlot" />
+          <ScalarProperty Name="timeSlotID" ColumnName="timeSlotID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

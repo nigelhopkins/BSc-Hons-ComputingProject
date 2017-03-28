@@ -432,6 +432,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="App_Browsers\qt.browser" />
     <EntityDeploy Include="Database\mobileHairdresser.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>mobileHairdresser.Designer.cs</LastGenOutput>
@@ -439,7 +440,6 @@
     <Content Include="Database\mobileHairdresser.edmx.diagram">
       <DependentUpon>mobileHairdresser.edmx</DependentUpon>
     </Content>
-    <Content Include="App_Browsers\qt.browser" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\dropzone\basic.css" />
     <Content Include="Scripts\dropzone\basic.min.css" />
@@ -450,6 +450,7 @@
     <Content Include="Scripts\dropzone\dropzone.min.css" />
     <Content Include="Scripts\dropzone\dropzone.min.js" />
     <None Include="Scripts\jquery-1.12.4-vsdoc.js" />
+    <Content Include="Scripts\GoogleMaps.js" />
     <Content Include="Scripts\jquery-1.12.4.js" />
     <Content Include="Scripts\jquery-1.12.4.min.js" />
     <Content Include="Scripts\jquery-1.12.4.min.map" />
@@ -922,6 +923,8 @@
     <Content Include="Views\Appointment\appointmentConfirmation.cshtml" />
     <Content Include="Views\Appointment\printAppointmentConfirmation.cshtml" />
     <Content Include="Views\Shared\printLayout.cshtml" />
+    <Content Include="Views\Appointment\changeAppointment.cshtml" />
+    <Content Include="Views\Appointment\getDirections.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

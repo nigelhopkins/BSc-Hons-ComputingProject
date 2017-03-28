@@ -11,15 +11,11 @@ namespace mobileHairdresser.Database
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class tblAppointment
     {
         public int appointmentID { get; set; }
-        [Required]
-        [Display(Name ="Appointment Date")]
-        [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd}")]
-        public DateTime appointmentDate { get; set; }
+        public System.DateTime appointmentDate { get; set; }
         public int employeeID { get; set; }
         public int clientID { get; set; }
         public int haircutID { get; set; }

@@ -4,20 +4,21 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="28f25d283f074e23a7e5202c56e56407" Name="Diagram1">
+      <Diagram DiagramId="4a79704f01d94cd998f6788daf7fd29a" Name="Diagram1">
         <EntityTypeShape EntityType="mobileHairdresserModel.sysdiagram" Width="1.5" PointX="0.75" PointY="8.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="mobileHairdresserModel.tblAppointment" Width="1.5" PointX="8" PointY="5" IsExpanded="true" />
-        <EntityTypeShape EntityType="mobileHairdresserModel.tblClient" Width="1.5" PointX="5.75" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="mobileHairdresserModel.tblAppointment" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="mobileHairdresserModel.tblClient" Width="1.5" PointX="0.75" PointY="1.125" IsExpanded="true" />
         <EntityTypeShape EntityType="mobileHairdresserModel.tblEmail" Width="1.5" PointX="2.75" PointY="8.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="mobileHairdresserModel.tblEmployee" Width="1.5" PointX="3" PointY="5" IsExpanded="true" />
-        <EntityTypeShape EntityType="mobileHairdresserModel.tblGallery" Width="1.5" PointX="0.75" PointY="1.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="mobileHairdresserModel.tblHaircut" Width="1.5" PointX="8" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="mobileHairdresserModel.tblHaircutType" Width="1.5" PointX="5.75" PointY="1.375" IsExpanded="true" />
-        <EntityTypeShape EntityType="mobileHairdresserModel.tblLogin" Width="1.5" PointX="0.75" PointY="5.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="mobileHairdresserModel.tblPhoto" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="mobileHairdresserModel.tblEmployee" Width="1.5" PointX="8" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="mobileHairdresserModel.tblGallery" Width="1.5" PointX="2.75" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="mobileHairdresserModel.tblHaircut" Width="1.5" PointX="10" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="mobileHairdresserModel.tblHaircutType" Width="1.5" PointX="7.75" PointY="5.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="mobileHairdresserModel.tblLogin" Width="1.5" PointX="5.75" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="mobileHairdresserModel.tblPhoto" Width="1.5" PointX="5" PointY="5" IsExpanded="true" />
         <EntityTypeShape EntityType="mobileHairdresserModel.tblSchedule" Width="1.5" PointX="4.75" PointY="8.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="mobileHairdresserModel.tblTimeSlot" Width="1.5" PointX="6.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="mobileHairdresserModel.tblTimeSlot" Width="1.5" PointX="0.75" PointY="5.625" IsExpanded="true" />
         <AssociationConnector Association="mobileHairdresserModel.FK_tblAppointment_tblClient" ManuallyRouted="false" />
+        <AssociationConnector Association="mobileHairdresserModel.FK_tblAppointment_tblTimeSlot" ManuallyRouted="false" />
         <AssociationConnector Association="mobileHairdresserModel.FK_tblEmployee_tblLogin" ManuallyRouted="false" />
         <AssociationConnector Association="mobileHairdresserModel.FK_tblPhotos_tblGallery" ManuallyRouted="false" />
         <AssociationConnector Association="mobileHairdresserModel.FK_tblHaircut_tblHaircutType" ManuallyRouted="false" />

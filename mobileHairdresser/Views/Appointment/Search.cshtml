@@ -1,13 +1,94 @@
-﻿
+﻿@model mobileHairdresser.Database.tblAppointment
 @{
     ViewBag.Title = "Search";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <div class="ContentContianer">
-    <h1>Search Appointments</h1>
     <div class="ContentWrapper">
-
+        <h2>Search Appointments</h2>
+        @using (Html.BeginForm("Search", "Appointment", FormMethod.Post, new { }))
+        {
+            @Html.AntiForgeryToken()
+            <ul>
+                <li>@Html.ValidationSummary()
+                    @ViewData["appointmentError"]</li>
+                <li class="appointmentSearch">
+                    <label>Appointment Referance Number : </label>
+                    @Html.TextBoxFor(model => model.appointmentID)
+                    <button type="submit">Search</button>
+                    
+                </li>
+                @if (Model != null)
+                {
+                    <li class="searchResults">
+                    
+                        <div class="actionButtons">
+                            @if (Session["user"] != null)
+                            {
+                                <button type="button" onclick="location.href='@Url.Action("getDirections", "Appointment", new { appointmentID = Model.appointmentID })'">Get Directions</button>
+                            }
+                            <button type="button" onclick="location.href='@Url.Action("changeAppointment","Appointment", new { appointmentID = Model.appointmentID })'">Change Appointment</button>
+                            <button type="button" onclick="location.href='@Url.Action("cancelAppointment","Appointment", new { appointmentID = Model.appointmentID })'">Cancel Appointment</button>
+                        </div>  
+                        <ul class="master">
+                            <li><h1>Mobile Hairdresser : Appointment Card</h1></li>
+                            <li><h3>@Html.LabelFor(model => model.tblClient.clientName) @Html.DisplayFor(model => model.tblClient.clientName)</h3></li>
+                            <li><h3><label>Referance Number :</label>@Html.DisplayFor(model => model.appointmentID)</h3></li>
+                            <li>
+                                <h3>Contact Details</h3>
+                                <ul>
+                                    <li>
+                                        @Html.LabelFor(model => model.tblClient.clientMobile)<p>@Html.DisplayFor(model => model.tblClient.clientMobile)</p>
+                                    </li>
+                                    <li>
+                                        @Html.LabelFor(model => model.tblClient.clientEmail)<p>@Html.DisplayFor(model => model.tblClient.clientEmail)</p>
+                                    </li>
+                                    <li>
+                                        <label>Address</label><p>
+                                            @Html.DisplayFor(model => model.tblClient.clientHouseNumber)
+                                            @{
+                                                var temp = Model.tblClient.clientPostalCode.Split(',');
+                                                foreach (var line in temp)
+                                                {
+                                                    @line <br />
+                                                }
+                                            }
+                                        </p>
+                                    </li>
+                                </ul>
+                            </li>
+                            <li>
+                                <h3>Appointment Details</h3>
+                                <ul>
+                                    <li>
+                                        @Html.LabelFor(model => model.appointmentDate)
+                                        <p>
+                                            @Html.DisplayFor(model => model.appointmentDate.DayOfWeek)
+                                            @Html.DisplayFor(model => model.appointmentDate.Day)
+                                            @Model.appointmentDate.ToString("MMMM")
+                                            @Html.DisplayFor(model => model.appointmentDate.Year)
+                                        </p>
+                                    </li>
+                                    <li>
+                                        <label>Appointment Time</label>
+                                        <p>@ViewData["timeSlot"]</p>
+                                    </li>
+                                    <li>
+                                        <label>Hairdresser</label>
+                                        <p>@ViewData["employee"]</p>
+                                    </li>
+                                    <li>
+                                        <label>Hircut</label>
+                                        <p>@ViewData["haircut"]</p>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                  </li>
+                 }
+            </ul>
+        }
     </div>
 </div>
 

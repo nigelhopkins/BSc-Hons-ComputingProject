@@ -23,6 +23,7 @@
     <Property Name="appointmentCancled" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
     <Property Name="cancledReason" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="tblClient" Relationship="Self.FK_tblAppointment_tblClient" FromRole="tblAppointment" ToRole="tblClient" />
+    <NavigationProperty Name="tblTimeSlot" Relationship="Self.FK_tblAppointment_tblTimeSlot" FromRole="tblAppointment" ToRole="tblTimeSlot" />
   </EntityType>
   <EntityType Name="tblClient">
     <Key>
@@ -126,7 +127,8 @@
       <PropertyRef Name="timeSlotID" />
     </Key>
     <Property Name="timeSlotID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="timeSlot" Type="Time" Nullable="false" Precision="7" />
+    <Property Name="timeSlot" Type="DateTime" Nullable="false" />
+    <NavigationProperty Name="tblAppointments" Relationship="Self.FK_tblAppointment_tblTimeSlot" FromRole="tblTimeSlot" ToRole="tblAppointment" />
   </EntityType>
   <Association Name="FK_tblAppointment_tblClient">
     <End Role="tblClient" Type="Self.tblClient" Multiplicity="1" />
@@ -137,6 +139,18 @@
       </Principal>
       <Dependent Role="tblAppointment">
         <PropertyRef Name="clientID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblAppointment_tblTimeSlot">
+    <End Role="tblTimeSlot" Type="Self.tblTimeSlot" Multiplicity="1" />
+    <End Role="tblAppointment" Type="Self.tblAppointment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblTimeSlot">
+        <PropertyRef Name="timeSlotID" />
+      </Principal>
+      <Dependent Role="tblAppointment">
+        <PropertyRef Name="timeSlotID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -191,6 +205,10 @@
     <EntitySet Name="tblTimeSlots" EntityType="Self.tblTimeSlot" />
     <AssociationSet Name="FK_tblAppointment_tblClient" Association="Self.FK_tblAppointment_tblClient">
       <End Role="tblClient" EntitySet="tblClients" />
+      <End Role="tblAppointment" EntitySet="tblAppointments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblAppointment_tblTimeSlot" Association="Self.FK_tblAppointment_tblTimeSlot">
+      <End Role="tblTimeSlot" EntitySet="tblTimeSlots" />
       <End Role="tblAppointment" EntitySet="tblAppointments" />
     </AssociationSet>
     <AssociationSet Name="FK_tblEmployee_tblLogin" Association="Self.FK_tblEmployee_tblLogin">

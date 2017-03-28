@@ -5,77 +5,74 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <div class="ContentContianer">
-    <h1>Appointment Confirmation</h1>
     <div class="ContentWrapper">
-@if (@TempData["appointmentConfirmationEmail"] != null)
-{
-    <div class="accessWarning">
-        <p>
-            Hi @Html.DisplayFor(model => model.tblClient.clientName),
-            <br />@TempData["appointmentConfirmationEmail"].
-        </p>
-    </div>
-}
-        
-        <ul class="master">
-            <li><h1>Mobile Hairdresser : Appointment Card</h1></li>
-            <li><h3>@Html.LabelFor(model => model.tblClient.clientName) @Html.DisplayFor(model => model.tblClient.clientName)</h3></li>
-            <li>
-                <h3>Contact Details</h3>
-                <ul>
-                    <li>
-                        @Html.LabelFor(model => model.tblClient.clientMobile)
-                        <p>@Html.DisplayFor(model => model.tblClient.clientMobile)</p>
-                    </li>
-                    <li>
-                        @Html.LabelFor(model => model.tblClient.clientEmail)
-                    <p>@Html.DisplayFor(model => model.tblClient.clientEmail)</p>
-                </li>
-                <li>
-                    <label>Address</label><p>
-                        @Html.DisplayFor(model => model.tblClient.clientHouseNumber)
-                    @{
-                        var temp = Model.tblClient.clientPostalCode.Split(',');
-                        foreach (var line in temp)
-                        {
-                            @line <br />
-                        }
-                    }
-                </p>
-            </li>
-        </ul>
-    </li>
-    <li>
-        <h3>Appointment Details : Ref : @Html.DisplayFor(model => model.appointmentID)</h3>
-        <ul>
-            <li>
-                @Html.LabelFor(model => model.appointmentDate)
+        @if (@TempData["appointmentConfirmationEmail"] != null)
+        {
+            <div class="accessWarning">
                 <p>
-                    @Html.DisplayFor(model => model.appointmentDate.DayOfWeek)
-                @Html.DisplayFor(model => model.appointmentDate.Day)
-                @Model.appointmentDate.ToString("MMMM")
-                @Html.DisplayFor(model => model.appointmentDate.Year)
-            </p>
-        </li>
-        <li>
-            <label>Appointment Time</label>
-            <p>@ViewData["timeSlot"]</p>
-        </li>
-        <li>
-            <label>Hairdresser</label>
-            <p>@ViewData["employee"]</p>
-        </li>
-        <li>
-            <label>Hircut</label>
-            <p>@ViewData["haircut"]</p>
-        </li>
-    </ul>
-</li>
-</ul>
+                    Hi @Html.DisplayFor(model => model.tblClient.clientName),
+                    <br />@TempData["appointmentConfirmationEmail"].
+                </p>
+            </div>
+        }
         <div class="formButtons">
             <button type="button" onclick="location.href='@Url.Action("createAppointmentCard","appointment", new {appointmentID = @Model.appointmentID})'">Print</button>
             <button type="button" onclick="location.href='@Url.Action("confirmationEmail","appointment", new { appointmentID = @Model.appointmentID })'">Email</button>
             <button type="button" onclick="location.href='@Url.Action("appointmentIndex","appointment")'">Close</button>
         </div>
+        <ul class="master">
+            <li><h1>Mobile Hairdresser : Appointment Card</h1></li>
+            <li><h3>@Html.LabelFor(model => model.tblClient.clientName) @Html.DisplayFor(model => model.tblClient.clientName)</h3></li>
+            <li><h3><label>Referance Number :</label>@Html.DisplayFor(model => model.appointmentID)</h3></li>
+            <li>
+                <h3>Contact Details</h3>
+                <ul>
+                    <li>
+                        @Html.LabelFor(model => model.tblClient.clientMobile)<p>@Html.DisplayFor(model => model.tblClient.clientMobile)</p>
+                    </li>
+                    <li>
+                        @Html.LabelFor(model => model.tblClient.clientEmail)<p>@Html.DisplayFor(model => model.tblClient.clientEmail)</p>
+                    </li>
+                    <li>
+                        <label>Address</label><p>
+                        @Html.DisplayFor(model => model.tblClient.clientHouseNumber)
+                        @{
+                            var temp = Model.tblClient.clientPostalCode.Split(',');
+                            foreach (var line in temp)
+                            {
+                                @line <br />
+                            }
+                        }
+                        </p>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <h3>Appointment Details</h3>
+                <ul>
+                    <li>
+                        @Html.LabelFor(model => model.appointmentDate)
+                        <p>
+                            @Html.DisplayFor(model => model.appointmentDate.DayOfWeek)
+                            @Html.DisplayFor(model => model.appointmentDate.Day)
+                            @Model.appointmentDate.ToString("MMMM")
+                            @Html.DisplayFor(model => model.appointmentDate.Year)
+                        </p>
+                    </li>
+                    <li>
+                        <label>Appointment Time</label>
+                        <p>@ViewData["timeSlot"]</p>
+                    </li>
+                    <li>
+                        <label>Hairdresser</label>
+                        <p>@ViewData["employee"]</p>
+                    </li>
+                    <li>
+                        <label>Hircut</label>
+                        <p>@ViewData["haircut"]</p>
+                    </li>
+                </ul>
+            </li>
+        </ul>
     </div>
 </div>

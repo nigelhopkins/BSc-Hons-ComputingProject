@@ -118,7 +118,7 @@
       <PropertyRef Name="timeSlotID" />
     </Key>
     <Property Name="timeSlotID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="timeSlot" Type="time" Precision="7" Nullable="false" />
+    <Property Name="timeSlot" Type="datetime" Nullable="false" />
   </EntityType>
   <Association Name="FK_tblAppointment_tblClient">
     <End Role="tblClient" Type="Self.tblClient" Multiplicity="1" />
@@ -129,6 +129,18 @@
       </Principal>
       <Dependent Role="tblAppointment">
         <PropertyRef Name="clientID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_tblAppointment_tblTimeSlot">
+    <End Role="tblTimeSlot" Type="Self.tblTimeSlot" Multiplicity="1" />
+    <End Role="tblAppointment" Type="Self.tblAppointment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblTimeSlot">
+        <PropertyRef Name="timeSlotID" />
+      </Principal>
+      <Dependent Role="tblAppointment">
+        <PropertyRef Name="timeSlotID" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -183,6 +195,10 @@
     <EntitySet Name="tblTimeSlot" EntityType="Self.tblTimeSlot" Schema="dbo" store:Type="Tables" />
     <AssociationSet Name="FK_tblAppointment_tblClient" Association="Self.FK_tblAppointment_tblClient">
       <End Role="tblClient" EntitySet="tblClient" />
+      <End Role="tblAppointment" EntitySet="tblAppointment" />
+    </AssociationSet>
+    <AssociationSet Name="FK_tblAppointment_tblTimeSlot" Association="Self.FK_tblAppointment_tblTimeSlot">
+      <End Role="tblTimeSlot" EntitySet="tblTimeSlot" />
       <End Role="tblAppointment" EntitySet="tblAppointment" />
     </AssociationSet>
     <AssociationSet Name="FK_tblEmployee_tblLogin" Association="Self.FK_tblEmployee_tblLogin">

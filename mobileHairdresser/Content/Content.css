@@ -65,11 +65,22 @@
 #adminLoginContainer{
     margin-top:125px;
 }
-#adminLoginContainer input[type="text"], #adminLoginContainer input[type="password"]
+.loginInputs{
+    display:block;
+    width:80%;
+    height:auto;
+    padding:0px;
+    margin:0px auto;
+}
+.loginInputs input[type="text"], #adminLoginContainer input[type="password"]
 {
+    width:100%;
     display:block;
     line-height:50px;
-    margin:10px auto;
+}
+.loginInputs span{
+    display:block;
+    width:100%;
 }
 #adminLoginContainer {
     display:none;
@@ -77,21 +88,23 @@
 #adminLoginContainer h1{
     margin:0 0 25px 0;
 }
-#adminLoginContainer form button{
-    font-size:100%;
-    display:inline-block;
-    width:49%;
-}
-#adminLoginContainer form button:first-child{
-    float:left;
-}
-#adminLoginContainer form button:last-child{
-    float:right;
-}
+
 .logonButtons{
-    border:0px solid #808080;
+    display:block;
     width:80%;
     margin:0 auto;
+}
+.logonButtons button{
+    display:inline-block;
+    width:45%;
+    padding:0px;
+    margin:0px;
+}
+.logonButtons button:last-child{
+    float:right;
+}
+.loginButtons button:last-child:after{
+    clear:both;
 }
 
 /*
@@ -113,12 +126,6 @@
 .accessWarning p{
     font-size:1.25em;
     margin:10px 0;
-}
-#adminLoginContainer span {
-    display:block;
-    width:80%;
-    border:0px solid #000;
-    margin: 0 auto;
 }
 #adminLoginContainer input[type="checkbox"]{
     display:inline-block;
@@ -578,7 +585,17 @@
 .appointment button:last-child:after{
     clear:both;
 }
-
+.actionButtons{
+    display:block;
+    width:80%;
+    margin:0 auto;
+    text-align:center;
+}
+.actionButtons button{
+    display:inline-block;
+    margin:0px;
+    padding:0px;
+}
 /*CSS style for the progress bar on the createAppointment page with in the appointment controller */
 #progressbar {
 	margin-bottom: 30px;
@@ -645,9 +662,21 @@
 .master a{
     color:#000;
 }
-.master h1, .master h3{
-    font-size:1em;
-}    
+.master h1{
+    font-size:150%;
+    padding:0px;
+    width:100%
+}   
+.master h3{
+    font-size:100%;
+}
+.master h3 label{
+    display:inline-block;
+    width:auto !important;
+    vertical-align:middle;
+    margin:0px;
+    padding:0px;
+}
 .master li{
     list-style:none;
     line-height:25px;
@@ -655,12 +684,13 @@
 .master li ul{
     display:block;
     margin:25px;
+    padding:15px;
     margin-left:auto;
     margin-right:0;
     width:90%;
     border:1px solid #000;
 }
-.master li p{
+.master li ul li p{
     display:inline-block;
     width:auto;
     text-align:left;
@@ -669,19 +699,39 @@
     padding:0px;
     font-size:100%;
 }
-.master li span a{
+.master li ul li span a{
     padding :0px;
     margin :0px;
     text-align:left;
 }
-.master li label{
+.master li ul li label{
     display:inline-block;
     width:200px;
     text-align:left;
     font-weight:bold;
     vertical-align:top;
-    padding:5px;
     margin:0px;
+}
+.appointmentSearch{
+    display:block;
+    box-shadow:0px 0px 5px 3px #000;
+    padding:25px;
+}
+.appointmentSearch label{
+    display:inline-block;
+    margin:20px 0;
+    font-size:150%;
+    font-weight:200;
+}
+.appointmentSearch button{
+    padding:0px;
+    margin:0px 0px 0px auto;
+}
+.searchResults{
+    display:block;
+    margin:25px auto;
+    padding:15px;
+    box-shadow:0px 0px 5px 3px #000;
 }
 /* End of CSS style for all the pages with in the Appointment Controller */
 
@@ -777,7 +827,7 @@
     #adminLoginContainer{
         padding:0px;
         margin:0px;
-        height:90%;
+        height:95%;
     }
     .loginForm{
         font-size:80%;
@@ -785,16 +835,6 @@
     .logonButtons{
         display:block;
         margin:0 auto;
-    }
-    .logonButtons button{
-        display:inline-block;
-        width:49%;
-        padding:0px;
-        margin:0px;
-        font-size:100% !important;
-    }
-    .logonButtons button:first-child{
-        float:left;
     }
     .logonButtons button:last-child{
         float:right;
@@ -1054,3 +1094,47 @@
         
     }
 } /* End of CSS style for screen in with a width of 414px or mobile device in portriate orientation */
+.mapContainer{
+    display:block;
+    border:1px solid #000;
+    box-shadow: 0 0 10px 1px #000;
+    border-radius:5px;
+    padding:5px;
+    height:60%;
+    min-height:60%;
+    width:80%;
+    margin:25px auto;
+    overflow:hidden;
+}
+#map{
+    height:100%;
+}
+.directionsContainer{
+    display:block;
+    border:1px solid #000; 
+    box-shadow:0 0 10px 1px #000;
+    margin: 20px auto;
+    padding:10px 25px;
+    border-radius:5px;
+    width:80%;
+    overflow:hidden;
+}
+#map-directions table{
+    width:100%;
+}
+.adp-placemark tr:first-child{
+    line-height:50px;
+}
+.adp-placemark tr:first-child td{
+    width:auto;
+    padding:0 10px;
+    text-align:center;
+    font-size:150%;
+}
+.adp-summary{
+    display:block;
+    width:100%;
+    font-size:150%;
+    text-align:right;
+    line-height:50px;
+}

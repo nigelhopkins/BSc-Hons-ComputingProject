@@ -4,6 +4,13 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 
     <script src="~/Scripts/jquery-1.12.4.min.js"></script>
+
+    var getDayOfTheWeek = Model.appointmentDate.DayOfWeek;
+    var getDay = Model.appointmentDate.Day;
+    var getMonth = Model.appointmentDate.ToString("MMMM");
+    var getYear = Model.appointmentDate.Year;
+    string getDate = Convert.ToString(Model.appointmentDate.ToString("dd-MM-yy"));
+
 }
 <script>
         $(document).ready(function () {
@@ -25,7 +32,7 @@
                     $.getJSON("@Url.Action("getTimeSlots","Appointment")", { appointmentDate: formatDate }, function (data) {
                         $("#appointmentList").addList(data);
                         $('#appointmentList').show();
-                      
+
                     });
                     if (data != null) {
                         $.fn.addList = function (data) {
@@ -51,16 +58,17 @@
                 if(getValue == null)
                 {
                     $('#appointmentList').hide();
-                }               
+                }
             })
     })
 </script>
 <div class="ContentContianer">
     <div class="ContentWrapper">
-        @using (Html.BeginForm("bookAppointment", "Appointment", FormMethod.Post, new { @class="appointment" }))
+        @using (Html.BeginForm("saveChangeAppointment", "Appointment", FormMethod.Post, new { @class="appointment" }))
         {
             @Html.AntiForgeryToken()
             @Html.ValidationSummary()
+            @Html.HiddenFor(model => model.appointmentID)
             
             <ul id="progressbar">
                 <li class="active">Haircut Details</li>
@@ -70,15 +78,15 @@
             <fieldset>
                 <h1 class="fs-title">Haircut Detials</h1>
                 <h2 class="fs-subtitle"></h2>
-                @Html.DropDownListFor(model => model.employeeID, ViewBag.employeeName as SelectList, "-- Please Select Stylist --", new { @class = "" })
-                @Html.DropDownListFor(model => model.haircutID, ViewBag.haircutList as SelectList, "-- Please Haircut --", new { @class = "" })
+                @Html.DropDownListFor(model => model.employeeID, ViewBag.employeeName as SelectList, "--- Please Select Employee ---" , new { @class = "" })
+                @Html.DropDownListFor(model => model.haircutID, ViewBag.haircutList as SelectList, "" , new { @class = "--- Please Select Haircut ---" })
                 <button type="button" name="next" class="next action-button">Next</button>
             </fieldset>
             <fieldset>
                 <h1 class="fs-title">Appointment Detials</h1>
                 <h2 class="fs-subtitle"></h2>
                 <div class="input-group ui-datepicker appointmentDatepicker" data-provide="datepicker">
-                    @Html.TextBox("appointmentDate", null, new { @class = "datepicker", @placeholder = "Please Select Appointment Date." })
+                    @Html.TextBox("appointmentDate", getDayOfTheWeek + " " + getDay + " " + getMonth , new { @class = "datepicker", @placeholder = "Please Select Appointment Date." })
                     <div class="input-group-addon">
                         <span class="glyphicon glyphicon-calendar"></span>
                     </div>

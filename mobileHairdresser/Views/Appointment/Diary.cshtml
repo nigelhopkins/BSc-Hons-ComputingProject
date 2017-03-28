@@ -1,13 +1,31 @@
-﻿
+﻿@model mobileHairdresser.Database.tblTimeSlot
 @{
     ViewBag.Title = "Diary";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
 <div class="ContentContianer">
-    <h1>Diary</h1>
     <div class="ContentWrapper">
-
+        <div id="tableList">
+            @Html.DropDownList("appointmentDates", ViewBag.Dates as SelectList, "Select a date", new { id = "appointmentDates" })
+            <div class="tableListControl">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>@Html.DisplayNameFor(model => model.timeSlot)</th>
+                            <th> &nbsp;</th>
+                            <th>Client Name</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                          <tr><td>@Html.DisplayFor(model => model.timeSlot)</td></tr>
+                </table>
+            </div>
+            @if (Session["user"] != null)
+            {
+                <div class="formButtons">
+                    <button type="button" onclick="location.href='@Url.Action("Index","Prices")'">View Price Details</button>
+                </div>
+            }
+        </div>
     </div>
 </div>
-

@@ -5,40 +5,44 @@
 
     <script src="~/Scripts/jquery-1.12.4.min.js"></script>
 }       
-       <ul class="master">
-           <li><h1>Mobile Hairdresser : Appointment Card</h1></li>
-            <li><h3>@Html.LabelFor(model => model.tblClient.clientName) @Html.DisplayFor(model => model.tblClient.clientName)</h3></li>
+<ul class="master">
+    <li><h1>Mobile Hairdresser : Appointment Card</h1></li>
+    <li><h3>@Html.LabelFor(model => model.tblClient.clientName) @Html.DisplayFor(model => model.tblClient.clientName)</h3></li>
+    <li><h3><label>Referance Number :</label>@Html.DisplayFor(model => model.appointmentID)</h3></li>
+    <li>
+        <h3>Contact Details</h3>
+        <ul>
             <li>
-                <h3>Contact Details</h3>
-                <ul>
-                    <li>
-                        @Html.LabelFor(model => model.tblClient.clientMobile) 
-                        <p>@Html.DisplayFor(model => model.tblClient.clientMobile)</p>
-                </li>
-                <li>@Html.LabelFor(model => model.tblClient.clientEmail) 
-                    <p>@Html.DisplayFor(model => model.tblClient.clientEmail)</p>
+                @Html.LabelFor(model => model.tblClient.clientMobile)<p>@Html.DisplayFor(model => model.tblClient.clientMobile)</p>
             </li>
             <li>
-                <label>Address</label><p>@Html.DisplayFor(model => model.tblClient.clientHouseNumber) 
-                @{
+                @Html.LabelFor(model => model.tblClient.clientEmail)<p>@Html.DisplayFor(model => model.tblClient.clientEmail)</p>
+            </li>
+            <li>
+                <label>Address</label><p>
+                    @Html.DisplayFor(model => model.tblClient.clientHouseNumber)
+                    @{
                     var temp = Model.tblClient.clientPostalCode.Split(',');
                     foreach (var line in temp)
                     {
-                        @line <br />
+                    @line <br />
                     }
-                }</p>
+                    }
+                </p>
             </li>
         </ul>
     </li>
     <li>
-        <h3>Appointment Details : Ref: @Html.DisplayFor(model => model.appointmentID)</h3>
+        <h3>Appointment Details</h3>
         <ul>
             <li>
-                @Html.LabelFor(model => model.appointmentDate) 
-                <p>@Html.DisplayFor(model => model.appointmentDate.DayOfWeek)
-                @Html.DisplayFor(model => model.appointmentDate.Day)
-                @Model.appointmentDate.ToString("MMMM")
-                @Html.DisplayFor(model => model.appointmentDate.Year)</p>
+                @Html.LabelFor(model => model.appointmentDate)
+                <p>
+                    @Html.DisplayFor(model => model.appointmentDate.DayOfWeek)
+                    @Html.DisplayFor(model => model.appointmentDate.Day)
+                    @Model.appointmentDate.ToString("MMMM")
+                    @Html.DisplayFor(model => model.appointmentDate.Year)
+                </p>
             </li>
             <li>
                 <label>Appointment Time</label>
@@ -55,4 +59,3 @@
         </ul>
     </li>
 </ul>
-
