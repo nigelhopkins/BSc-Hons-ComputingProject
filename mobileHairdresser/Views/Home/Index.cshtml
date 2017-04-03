@@ -1,4 +1,4 @@
-﻿@model mobileHairdresser.Database.tblLogin
+﻿@model mobileHairdresser.Database.tblEmployee
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewBag.Title = "Index";
@@ -28,8 +28,8 @@
                 <p style="color:red;">@loginErrorMessage</p>
             </div>
             <div class="loginInputs">
-            @Html.TextBoxFor(a => a.Username, new { @id = "username", @name = "Username", @placeholder = "Username." })
-            @Html.PasswordFor(a => a.Password, new { @id = "password", @name = "password", @placeholder = "Password." })
+            @Html.TextBoxFor(a => a.Email, new { @id = "username", @name = "Username", @placeholder = "Please enter your email address." })
+            @Html.PasswordFor(a => a.tblLogin.Password, new { @id = "password", @name = "password", @placeholder = "Password." })
             <span><input type="checkbox" name="PasswordReveal" id="PasswordReveal" name="PasswordReveal" /><label>Tick to reveal password.</label></span>
             </div>
             <p class="logonButtons"><button type="button" onclick="location.href='@Url.Action("recoverPassword","login")'">Forgotten Password</button><button type="submit">Login</button></p>

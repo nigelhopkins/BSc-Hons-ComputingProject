@@ -20,8 +20,6 @@
     <Property Name="clientID" Type="Int32" Nullable="false" />
     <Property Name="haircutID" Type="Int32" Nullable="false" />
     <Property Name="timeSlotID" Type="Int32" Nullable="false" />
-    <Property Name="appointmentCancled" Type="String" MaxLength="3" FixedLength="false" Unicode="false" />
-    <Property Name="cancledReason" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="tblClient" Relationship="Self.FK_tblAppointment_tblClient" FromRole="tblAppointment" ToRole="tblClient" />
     <NavigationProperty Name="tblTimeSlot" Relationship="Self.FK_tblAppointment_tblTimeSlot" FromRole="tblAppointment" ToRole="tblTimeSlot" />
   </EntityType>
@@ -37,6 +35,8 @@
     <Property Name="clientHouseName" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
     <Property Name="clientPostalCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="tblAppointments" Relationship="Self.FK_tblAppointment_tblClient" FromRole="tblClient" ToRole="tblAppointment" />
+    <Property Name="Password" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="salt" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityType Name="tblEmail">
     <Key>
@@ -98,10 +98,10 @@
       <PropertyRef Name="loginID" />
     </Key>
     <Property Name="loginID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Username" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
-    <Property Name="Password" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="Password" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="IsDefault" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="tblEmployees" Relationship="Self.FK_tblEmployee_tblLogin" FromRole="tblLogin" ToRole="tblEmployee" />
+    <Property Name="Salt" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityType Name="tblPhoto">
     <Key>
@@ -114,13 +114,6 @@
     <Property Name="DateStamp" Type="DateTime" Nullable="false" Precision="0" />
     <Property Name="GalleryID" Type="Int32" Nullable="false" />
     <NavigationProperty Name="tblGallery" Relationship="Self.FK_tblPhotos_tblGallery" FromRole="tblPhotos" ToRole="tblGallery" />
-  </EntityType>
-  <EntityType Name="tblSchedule">
-    <Key>
-      <PropertyRef Name="scheduleID" />
-    </Key>
-    <Property Name="scheduleID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="timeSlot" Type="Time" Precision="7" />
   </EntityType>
   <EntityType Name="tblTimeSlot">
     <Key>
@@ -201,7 +194,6 @@
     <EntitySet Name="tblHaircutTypes" EntityType="Self.tblHaircutType" />
     <EntitySet Name="tblLogins" EntityType="Self.tblLogin" />
     <EntitySet Name="tblPhotos" EntityType="Self.tblPhoto" />
-    <EntitySet Name="tblSchedules" EntityType="Self.tblSchedule" />
     <EntitySet Name="tblTimeSlots" EntityType="Self.tblTimeSlot" />
     <AssociationSet Name="FK_tblAppointment_tblClient" Association="Self.FK_tblAppointment_tblClient">
       <End Role="tblClient" EntitySet="tblClients" />

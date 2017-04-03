@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using System.Net;
 using System.Web.Mvc;
 using mobileHairdresser.Database;
+using System.Linq;
 
 namespace mobileHairdresser.Controllers
 {
@@ -68,21 +69,12 @@ namespace mobileHairdresser.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> createNewAdminAccount([Bind(Include = "employeeID,FirstName,LastName,Email,PhoneNumber,LoginID")] tblEmployee tblEmployee, tblLogin tblLogin)
         {
-            bool userNameExist = false;
-
             if(Session["user"] != null && Session["loginID"] != null)
             {
-                foreach(var username in db.tblLogins)
-                {
-                    var name = username.Username;
 
-                    if(tblLogin.Username == name)
-                    {
-                        userNameExist = true;
-                    }
-                }
+                bool findEmployee = db.tblEmployees.Where(x => x.FirstName.Equals(tblEmployee.FirstName) && x.LastName.Equals(tblEmployee.LastName)).Any();
 
-                if(userNameExist == true)
+                if(findEmployee)
                 {
                     RedirectToAction("Index", "Home");
                 }
@@ -100,8 +92,7 @@ namespace mobileHairdresser.Controllers
                         await db.SaveChangesAsync();
                         return RedirectToAction("adminAccountList");
                     }
-
-                    ViewBag.LoginID = new SelectList(db.tblLogins, "loginID", "Username", tblEmployee.LoginID);
+                    
                     return View(tblEmployee);
                 }
             }
@@ -126,7 +117,6 @@ namespace mobileHairdresser.Controllers
                 {
                     return HttpNotFound();
                 }
-                ViewBag.LoginID = new SelectList(db.tblLogins, "loginID", "Username", tblEmployee.LoginID);
                 return View(tblEmployee);
             }
             else
@@ -151,7 +141,6 @@ namespace mobileHairdresser.Controllers
                     await db.SaveChangesAsync();
                     return RedirectToAction("adminAccountList");
                 }
-                ViewBag.LoginID = new SelectList(db.tblLogins, "loginID", "Username", tblEmployee.LoginID);
                 return View(tblEmployee);
             }
             else

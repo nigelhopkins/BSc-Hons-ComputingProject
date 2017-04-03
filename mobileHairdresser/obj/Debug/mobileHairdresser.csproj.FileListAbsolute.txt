@@ -80,3 +80,4 @@ C:\Users\Nigel\Dropbox\College Work\Year 3\CORC371 Honours Project\Final-Project
 C:\Users\Nigel\Dropbox\College Work\Year 3\CORC371 Honours Project\Final-Project\mobileHairdresser\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
 C:\Users\Nigel\Dropbox\College Work\Year 3\CORC371 Honours Project\Final-Project\mobileHairdresser\obj\Debug\mobileHairdresser.dll
 C:\Users\Nigel\Dropbox\College Work\Year 3\CORC371 Honours Project\Final-Project\mobileHairdresser\obj\Debug\mobileHairdresser.pdb
+C:\Users\Nigel\Dropbox\College Work\Year 3\CORC371 Honours Project\Final-Project\mobileHairdresser\obj\Debug\mobileHairdresser.csprojResolveAssemblyReference.cache

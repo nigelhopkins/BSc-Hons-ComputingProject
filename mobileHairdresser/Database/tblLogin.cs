@@ -28,6 +28,7 @@ namespace mobileHairdresser.Database
         [DataType(DataType.Password)]
         public string Password { get; set; }
         public string IsDefault { get; set; }
+        public string Salt { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tblEmployee> tblEmployees { get; set; }

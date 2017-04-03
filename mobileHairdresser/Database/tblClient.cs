@@ -40,7 +40,11 @@ namespace mobileHairdresser.Database
         [Display(Name ="Postal Code")]
         [DataType(DataType.PostalCode)]
         public string clientPostalCode { get; set; }
-    
+        [Required]
+        [DataType(DataType.Password)]
+        public string Password { get; set; }
+        [Required]
+        public string salt { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tblAppointment> tblAppointments { get; set; }
     }

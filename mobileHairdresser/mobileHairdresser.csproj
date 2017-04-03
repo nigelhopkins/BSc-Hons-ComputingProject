@@ -254,9 +254,6 @@
     <Compile Include="Database\tblPhoto.cs">
       <DependentUpon>mobileHairdresserEntities.tt</DependentUpon>
     </Compile>
-    <Compile Include="Database\tblSchedule.cs">
-      <DependentUpon>mobileHairdresserEntities.tt</DependentUpon>
-    </Compile>
     <Compile Include="Database\tblTimeSlot.cs">
       <DependentUpon>mobileHairdresserEntities.tt</DependentUpon>
     </Compile>

@@ -21,14 +21,14 @@
           <ScalarProperty Name="clientID" ColumnName="clientID" />
           <ScalarProperty Name="haircutID" ColumnName="haircutID" />
           <ScalarProperty Name="timeSlotID" ColumnName="timeSlotID" />
-          <ScalarProperty Name="appointmentCancled" ColumnName="appointmentCancled" />
-          <ScalarProperty Name="cancledReason" ColumnName="cancledReason" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="tblClients">
       <EntityTypeMapping TypeName="mobileHairdresserModel.tblClient">
         <MappingFragment StoreEntitySet="tblClient">
+          <ScalarProperty Name="salt" ColumnName="salt" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
           <ScalarProperty Name="clientID" ColumnName="clientID" />
           <ScalarProperty Name="clientName" ColumnName="clientName" />
           <ScalarProperty Name="clientMobile" ColumnName="clientMobile" />
@@ -98,8 +98,8 @@
     <EntitySetMapping Name="tblLogins">
       <EntityTypeMapping TypeName="mobileHairdresserModel.tblLogin">
         <MappingFragment StoreEntitySet="tblLogin">
+          <ScalarProperty Name="Salt" ColumnName="Salt" />
           <ScalarProperty Name="loginID" ColumnName="loginID" />
-          <ScalarProperty Name="Username" ColumnName="Username" />
           <ScalarProperty Name="Password" ColumnName="Password" />
           <ScalarProperty Name="IsDefault" ColumnName="IsDefault" />
         </MappingFragment>
@@ -114,14 +114,6 @@
           <ScalarProperty Name="Url" ColumnName="Url" />
           <ScalarProperty Name="DateStamp" ColumnName="DateStamp" />
           <ScalarProperty Name="GalleryID" ColumnName="GalleryID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="tblSchedules">
-      <EntityTypeMapping TypeName="mobileHairdresserModel.tblSchedule">
-        <MappingFragment StoreEntitySet="tblSchedule">
-          <ScalarProperty Name="scheduleID" ColumnName="scheduleID" />
-          <ScalarProperty Name="timeSlot" ColumnName="timeSlot" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

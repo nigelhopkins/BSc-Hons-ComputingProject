@@ -15,7 +15,8 @@
                     @TempData["appointmentError"]</li>
                 <li class="appointmentSearch">
                     <label>Appointment Referance Number : </label>
-                    @Html.TextBoxFor(model => model.appointmentID)
+                    @Html.TextBoxFor(model => model.tblClient.clientEmail, new { @id="clientEmail"})
+                    @Html.TextBoxFor(model => model.tblClient.Password, new { @id="clientPassword"})
                     <button type="submit">Search</button>
                     
                 </li>

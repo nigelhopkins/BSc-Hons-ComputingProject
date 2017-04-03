@@ -16,55 +16,55 @@ namespace mobileHairdresser.Controllers
     {
         int LoginID;
         // GET: login
-        public ActionResult createSession()
+        public ActionResult createSession(string username)
         {
-            var fullname = "";
             //Creates Session by pulling the users name form the database and creating a session with those details.
             var NameSearch = (from t in db.tblEmployees
                               join id in db.tblLogins on t.LoginID equals id.loginID
-                              where t.LoginID == LoginID
+                              where t.Email == username
                               select new { t.FirstName, t.LastName, t.LoginID }).First();
 
-            fullname = NameSearch.FirstName.ToString() + " " + NameSearch.LastName.ToString();
-
-
             //Create a session
-            Session["user"] = fullname;
+            Session["user"] = NameSearch.FirstName.ToString() + " " + NameSearch.LastName.ToString();
             Session["loginID"] = LoginID;
 
             return RedirectToAction("getAuthentication", "login");
         }
         [HttpPost]
-        public ActionResult getAuthenticated(tblLogin loginDetails, tblEmployee userInfo, string ReturnUrl)
+        public ActionResult getAuthenticated(tblEmployee userInfo, string ReturnUrl)
         {
 
-            string username = loginDetails.Username.ToLower();
-            string password = loginDetails.Password;
+            string username = userInfo.Email.ToLower();
+            string password = userInfo.tblLogin.Password;
             bool verifyHash = false;
             string uname = "";
             string pword = "";
             string isFirstLogin = "";
+            var salt = "";
+            var saltedPassword = "";
             bool authenticateUser = false;
 
             try
             {
                 var loginSearch = (from t in db.tblLogins
-                                   where t.Username == username
-                                   select new { t.Username, t.Password, t.loginID, t.IsDefault }).First();
-                uname = loginSearch.Username;
+                                   join e in db.tblEmployees on t.loginID equals e.LoginID
+                                   where e.Email == username
+                                   select new { e.Email, t.Password, t.loginID, t.IsDefault, t.Salt }).First();
+                uname = loginSearch.Email;
                 pword = loginSearch.Password;
+                salt = loginSearch.Salt;
                 LoginID = loginSearch.loginID;
                 isFirstLogin = loginSearch.IsDefault.ToString();
-
+                saltedPassword = password + salt; 
                 switch (isFirstLogin)
                 {
                     case "true":
 
-                        verifyHash = Crypto.VerifyHashedPassword(pword, password);
+                        verifyHash = Crypto.VerifyHashedPassword(pword, saltedPassword);
 
                         if (verifyHash != true)
                         {
-                            var checkPassword = db.tblLogins.Where(a => a.Username.Equals(username) && a.Password.Equals(password)).FirstOrDefault();
+                            var checkPassword = db.tblEmployees.Where(a => a.Email.Equals(username) && a.tblLogin.Password.Equals(password)).FirstOrDefault();
                             if (checkPassword != null)
                             {
                                 authenticateUser = true;
@@ -80,7 +80,7 @@ namespace mobileHairdresser.Controllers
                         break;
                     case "false":
 
-                        verifyHash = Crypto.VerifyHashedPassword(pword, password);
+                        verifyHash = Crypto.VerifyHashedPassword(pword, saltedPassword);
 
                         if (username == uname && verifyHash == true)
                         {
@@ -96,7 +96,7 @@ namespace mobileHairdresser.Controllers
 
                 if (authenticateUser == true)
                 {
-                    createSession();
+                    createSession(username);
                     if (isFirstLogin == "true")
                     {
                         return RedirectToAction("changePassword", "login");
@@ -136,6 +136,9 @@ namespace mobileHairdresser.Controllers
             string isFirstLogin = "";
             bool updatePassword = false;
             var hashedPassword = "";
+            var saltedPassword = "";
+            var generateSalt = "";
+            var salt = "";
             int username = Convert.ToInt32(Session["loginID"]);
 
             if (confirmPassword.Length <= 7)
@@ -146,9 +149,11 @@ namespace mobileHairdresser.Controllers
             {
                 var passwordSearch = (from t in db.tblLogins
                                       where t.loginID == username
-                                      select new { t.Password, t.IsDefault }).First();
+                                      select new { t.Password, t.IsDefault, t.Salt }).First();
                 isFirstLogin = passwordSearch.IsDefault;
+                salt = passwordSearch.Salt;
                 hashedPassword = passwordSearch.Password;
+                currentPassword = currentPassword + salt;
 
 
                 switch (isFirstLogin)
@@ -198,7 +203,10 @@ namespace mobileHairdresser.Controllers
                         {
                             tblLogin findUser = db.tblLogins.Find(changePassword.loginID);
 
-                            findUser.Password = Crypto.HashPassword(newPassword).ToString();
+                            generateSalt = Crypto.GenerateSalt();
+                            findUser.Salt = generateSalt;
+                            saltedPassword = newPassword + generateSalt;                            
+                            findUser.Password = Crypto.HashPassword(saltedPassword).ToString();
 
                             if (findUser.IsDefault == "true")
                             {
@@ -236,19 +244,19 @@ namespace mobileHairdresser.Controllers
         }
 
         [HttpPost]
-        public ActionResult recoverPassword(tblLogin username)
+        public ActionResult recoverPassword(tblEmployee tblEmployee)
         {
-            string searchUsername = Request["userName"];
-
             try
             {
                 string strPwdchar = "abcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+                var salt = Crypto.GenerateSalt();
+                var saltedPassword = "";
                 string strPwd = "";
 
-                var userSeacrh = (from t in db.tblEmployees
+                var userSearch = (from t in db.tblEmployees
                                   join id in db.tblLogins on t.LoginID equals id.loginID
-                                  where id.Username == searchUsername
-                                  select new { id.loginID, id.Username, id.Password, id.IsDefault, t.Email, t.FirstName, t.LastName }).First();
+                                  where t.Email == tblEmployee.Email
+                                  select new { id.loginID, id.Password, id.IsDefault, t.Email, t.FirstName, t.LastName }).First();
 
                 //Create a randomised password
                 Random rnd = new Random();
@@ -257,15 +265,17 @@ namespace mobileHairdresser.Controllers
                     int iRandom = rnd.Next(0, strPwdchar.Length - 1);
                     strPwd += strPwdchar.Substring(iRandom, 1);
                 }
-
+                //Add salt to newly created password
+                saltedPassword = strPwd + salt;
                 //Hashed newly created random password
-                var hashedNewPassword = Crypto.HashPassword(strPwd).ToString();
+                var hashedNewPassword = Crypto.HashPassword(saltedPassword).ToString();
 
                 //Save new password to database
                 try
                 {
-                    tblLogin findUser = db.tblLogins.Find(userSeacrh.loginID);
+                    tblLogin findUser = db.tblLogins.Find(userSearch.loginID);
 
+                    findUser.Salt = salt.ToString();
                     findUser.Password = hashedNewPassword.ToString();
                     //Sets the database to ask for user to change password when next logged in
                     findUser.IsDefault = "true";
@@ -280,9 +290,9 @@ namespace mobileHairdresser.Controllers
 
                 //ViewBag.error = "New password was created and saved to the database.";
 
-                string emailName = HttpUtility.UrlEncode(userSeacrh.FirstName + userSeacrh.LastName);
-                string userName = HttpUtility.UrlEncode(userSeacrh.Username);
-                string emailPassword = HttpUtility.UrlEncode(strPwd);
+                string emailName = userSearch.FirstName + " " + userSearch.LastName;
+                string userName = userSearch.Email;
+                string emailPassword = strPwd;
 
                 try
                 {
@@ -299,10 +309,10 @@ namespace mobileHairdresser.Controllers
                     string senderDisplayName = "Mobile Hairdresser : Password Recovery";
 
                     MailMessage passwordRecoveryMessage = new MailMessage();
-                    passwordRecoveryMessage.To.Add(userSeacrh.Email);
+                    passwordRecoveryMessage.To.Add(userSearch.Email);
                     passwordRecoveryMessage.From = new MailAddress(senderEmail, senderDisplayName);
                     passwordRecoveryMessage.Subject = @"" + senderDisplayName;
-                    passwordRecoveryMessage.Body = string.Format(body, emailName, emailName, emailPassword);
+                    passwordRecoveryMessage.Body = string.Format(body, emailName, userName, emailPassword);
                     passwordRecoveryMessage.IsBodyHtml = true;
 
                     using (SmtpClient smtp = new SmtpClient())
@@ -316,16 +326,16 @@ namespace mobileHairdresser.Controllers
                         smtp.SendCompleted += (s, e) => { smtp.Dispose(); };
                         smtp.Send(passwordRecoveryMessage);
                     }
-                    ViewBag.error = "Your new password has been sent to " + userSeacrh.Email;
+                    ViewBag.error = "Your new password has been sent to " + userSearch.Email;
                 }
-                catch(Exception error)
+                catch(Exception)
                 {
-                    ViewBag.error = "An error has occurred and you email has not been sent! : " + error ; 
+                    ViewBag.error = "An error has occurred and you email has not been sent!" ; 
                 }        
             }
-            catch(Exception error)
+            catch(Exception)
             {
-                    ViewBag.error = "New password was not created : " + error;
+                    ViewBag.error = "New password was not created!";
             }
 
             return View();

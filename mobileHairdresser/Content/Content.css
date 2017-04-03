@@ -42,6 +42,10 @@
 .loginForm{
     padding-top:1px;
 }
+.loginForm h2{
+    width:80%;
+    margin:25px auto;
+}
 .ContentWrapper{
     min-height:500px;
     overflow-y:auto;
@@ -112,10 +116,21 @@
 */
 .accessWarning{
     width:80%;
-    margin:50px auto;
+    margin:25px auto;
     height:auto;
     padding:25px;
     border:1px dashed #808080;
+}
+#recoveryPassword{
+    margin:0 auto;
+    width:80%;
+    line-height:50px;
+}
+.newPassword{
+    display:block;
+    width:80%;
+    margin:0 auto;
+    line-height:35px;
 }
 .accessWarning h1{
     display:block;

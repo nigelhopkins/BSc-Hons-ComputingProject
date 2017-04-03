@@ -20,8 +20,6 @@
     <Property Name="clientID" Type="int" Nullable="false" />
     <Property Name="haircutID" Type="int" Nullable="false" />
     <Property Name="timeSlotID" Type="int" Nullable="false" />
-    <Property Name="appointmentCancled" Type="varchar" MaxLength="3" />
-    <Property Name="cancledReason" Type="text" />
   </EntityType>
   <EntityType Name="tblClient">
     <Key>
@@ -34,6 +32,8 @@
     <Property Name="clientHouseNumber" Type="int" />
     <Property Name="clientHouseName" Type="varchar" MaxLength="250" />
     <Property Name="clientPostalCode" Type="varchar" MaxLength="50" />
+    <Property Name="Password" Type="varchar" MaxLength="250" Nullable="false" />
+    <Property Name="salt" Type="varchar" MaxLength="250" Nullable="false" />
   </EntityType>
   <EntityType Name="tblEmail">
     <Key>
@@ -52,7 +52,7 @@
     <Key>
       <PropertyRef Name="employeeID" />
     </Key>
-    <Property Name="employeeID" Type="int" Nullable="false" />
+    <Property Name="employeeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="FirstName" Type="varchar" MaxLength="250" />
     <Property Name="LastName" Type="varchar" MaxLength="250" />
     <Property Name="Email" Type="varchar" MaxLength="250" />
@@ -91,8 +91,8 @@
       <PropertyRef Name="loginID" />
     </Key>
     <Property Name="loginID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Username" Type="varchar" MaxLength="250" />
-    <Property Name="Password" Type="varchar" MaxLength="250" />
+    <Property Name="Salt" Type="varchar" MaxLength="250" Nullable="false" />
+    <Property Name="Password" Type="varchar" MaxLength="250" Nullable="false" />
     <Property Name="IsDefault" Type="varchar" MaxLength="250" />
   </EntityType>
   <EntityType Name="tblPhotos">
@@ -105,13 +105,6 @@
     <Property Name="Url" Type="varchar" MaxLength="250" Nullable="false" />
     <Property Name="DateStamp" Type="date" Nullable="false" />
     <Property Name="GalleryID" Type="int" Nullable="false" />
-  </EntityType>
-  <EntityType Name="tblSchedule">
-    <Key>
-      <PropertyRef Name="scheduleID" />
-    </Key>
-    <Property Name="scheduleID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="timeSlot" Type="time" Precision="7" />
   </EntityType>
   <EntityType Name="tblTimeSlot">
     <Key>
@@ -191,7 +184,6 @@
     <EntitySet Name="tblHaircutType" EntityType="Self.tblHaircutType" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblLogin" EntityType="Self.tblLogin" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblPhotos" EntityType="Self.tblPhotos" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="tblSchedule" EntityType="Self.tblSchedule" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblTimeSlot" EntityType="Self.tblTimeSlot" Schema="dbo" store:Type="Tables" />
     <AssociationSet Name="FK_tblAppointment_tblClient" Association="Self.FK_tblAppointment_tblClient">
       <End Role="tblClient" EntitySet="tblClient" />
