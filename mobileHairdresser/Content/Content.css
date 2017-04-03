@@ -520,7 +520,6 @@
     padding: 20px 30px;
     box-sizing: border-box;
     width: 100%;
-    overflow-x:hidden;
     height:405px;
     max-height:405px;
     /*stacking fieldsets above each other*/
@@ -529,7 +528,16 @@
 .appointment fieldset:not(:first-of-type) {
     display: none;
 }
-
+.appointmentConfirmationButtons{
+    display:block;
+    width:90%;
+    margin:35px auto;
+    text-align:right;
+}
+.appointmentConfirmationButtons button{
+    display:inline-block;
+    margin:0px auto;
+}
 .appointment {
     display:block;
     width:100%;
@@ -590,11 +598,23 @@
     width:80%;
     margin:0 auto;
     text-align:center;
-}
+}   
 .actionButtons button{
     display:inline-block;
     margin:0px;
     padding:0px;
+} 
+
+.appointmentDatepicker{
+    display:block;
+    text-align:center;
+}
+.appointmentDatepicker .ui-datepicker{
+    display:block;
+    font-size:100%;
+    width:100%;
+    margin:0 auto;
+    position:relative;
 }
 /*CSS style for the progress bar on the createAppointment page with in the appointment controller */
 #progressbar {
@@ -732,6 +752,158 @@
     margin:25px auto;
     padding:15px;
     box-shadow:0px 0px 5px 3px #000;
+}
+/* Dairy Page */
+#selectDate{
+    display:block;
+    width:100%;
+    text-align:center;
+    margin-top:50px;
+    position:relative;
+}
+#selectDate:hover{
+    cursor:pointer;
+}
+.datepickerInstruction{
+    font-size:40%;
+    display:block;
+    width:100%;
+    margin:0px;
+    padding:0px;
+    margin-bottom:25px;
+}
+#datePicker{
+    display:block;
+    position:relative;
+    background:#fff;
+    font-size:100%;
+}
+.datePickerContainer{
+    display:none;
+    position:absolute;
+    overflow:hidden;
+    background:#fff;
+    padding:1px;
+    z-index:99;
+    width:100%;
+    height:auto;
+    top:0px;
+    right:0px;
+    text-align:center;
+} 
+.datePickerContainer .ui-datepicker{
+    display:block;
+    width:100%;
+    height:100%;
+    position:relative;
+}
+.diaryTable{
+    display:block;
+    width:80%;
+    min-height:90%;
+    margin:2.5% auto;
+    position:relative;
+    border:none;
+}
+.diaryTableContainer{
+    display:block;
+    margin:0px;
+    width:100%;
+    padding:0px;
+    position:relative;
+    height:270px;
+    border:0px dashed #000;
+    overflow:hidden;
+}
+.diaryButtons{
+    display:block;
+    width:100%;
+    text-align:center;
+}
+.diaryButtons button:first-child{
+    float:left;
+}
+.diaryButtons button:last-child{
+    float:right;
+}
+.diaryButtons button{
+    display:inline-block;
+    margin:0px auto;
+}
+.diaryButtons button:after{
+    clear:both;
+}
+.diaryTableContainer table{
+    display:table;
+    width:100%;
+    margin:0 auto;
+}
+.diaryTableContainer table thead tr{
+    display:table-row;
+    line-height:50px;
+    border:none;
+    background:rgba(0,0,0, 0.3);
+}
+.diaryTableContainer table thead tr th{
+    display:table-cell;
+    width:50%;
+    padding:0 20px;
+}
+.diaryTableContainer table tbody tr{
+    display:table-row;
+    line-height:35px;
+    border-bottom:1px dashed #000;
+}
+.diaryTableContainer table tbody tr td{
+    display:table-cell;
+    width:50%;
+    padding: 0 20px;
+}
+
+
+/* End of Dairy Page */
+
+/* Cookie Policy */
+
+.CookieContainer{
+    display:block;
+    width:90%;
+    margin:0 auto;
+    padding:25px;
+    overflow:hidden;
+    text-align:justify;
+}
+.CookieContainer h2{
+    width:100%;
+    margin:25px auto;
+}
+.cookieTable{
+    display:block;
+    width:80%;
+    margin:25px auto;
+    box-shadow:0 0 5px 2px #000;
+}
+.cookieTable td, .cookieTable th{
+    padding:0 25px;
+}
+.cookieTable td:nth-child(2)
+{
+    border-left:1px solid #000;
+    border-right:1px solid #000;
+}
+.cookieTable th{
+    line-height:50px;
+    border-bottom:1px solid #000;
+}
+.cookieTable td{
+    padding:25px;
+}
+.CookiePolicyFooter{
+    display:block;
+    line-height:100px;
+    width:100%;
+    margin:0 auto;
+    text-align:center;
 }
 /* End of CSS style for all the pages with in the Appointment Controller */
 

@@ -24,9 +24,7 @@ namespace mobileHairdresser.Database
         public int timeSlotID { get; set; }
         [Display(Name = "Time Of Appointment")]
         [DataType(DataType.Time)]
-        [DisplayFormat(DataFormatString = "{0:HH:mm}", ApplyFormatInEditMode = true)]
-        public System.DateTime timeSlot { get; set; }
-    
+        public TimeSpan timeSlot { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tblAppointment> tblAppointments { get; set; }
     }

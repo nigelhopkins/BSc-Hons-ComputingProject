@@ -33,31 +33,34 @@
                         </div>  
                         <ul class="master">
                             <li><h1>Mobile Hairdresser : Appointment Card</h1></li>
-                            <li><h3>@Html.LabelFor(model => model.tblClient.clientName) @Html.DisplayFor(model => model.tblClient.clientName)</h3></li>
-                            <li><h3><label>Referance Number :</label>@Html.DisplayFor(model => model.appointmentID)</h3></li>
-                            <li>
-                                <h3>Contact Details</h3>
-                                <ul>
-                                    <li>
-                                        @Html.LabelFor(model => model.tblClient.clientMobile)<p>@Html.DisplayFor(model => model.tblClient.clientMobile)</p>
-                                    </li>
-                                    <li>
-                                        @Html.LabelFor(model => model.tblClient.clientEmail)<p>@Html.DisplayFor(model => model.tblClient.clientEmail)</p>
-                                    </li>
-                                    <li>
-                                        <label>Address</label><p>
-                                            @Html.DisplayFor(model => model.tblClient.clientHouseNumber)
-                                            @{
-                                                var temp = Model.tblClient.clientPostalCode.Split(',');
-                                                foreach (var line in temp)
-                                                {
-                                                    @line <br />
+                            @if (Session["user"] != null)
+                            {
+                                <li><h3>@Html.LabelFor(model => model.tblClient.clientName) @Html.DisplayFor(model => model.tblClient.clientName)</h3></li>
+                                <li><h3><label>Referance Number :</label>@Html.DisplayFor(model => model.appointmentID)</h3></li>
+                                <li>
+                                    <h3>Contact Details</h3>
+                                    <ul>
+                                        <li>
+                                            @Html.LabelFor(model => model.tblClient.clientMobile)<p>@Html.DisplayFor(model => model.tblClient.clientMobile)</p>
+                                        </li>
+                                        <li>
+                                            @Html.LabelFor(model => model.tblClient.clientEmail)<p>@Html.DisplayFor(model => model.tblClient.clientEmail)</p>
+                                        </li>
+                                        <li>
+                                            <label>Address</label><p>
+                                                @Html.DisplayFor(model => model.tblClient.clientHouseNumber)
+                                                @{
+                                                    var temp = Model.tblClient.clientPostalCode.Split(',');
+                                                    foreach (var line in temp)
+                                                    {
+                                                        @line <br />
+                                                    }
                                                 }
-                                            }
-                                        </p>
-                                    </li>
-                                </ul>
-                            </li>
+                                            </p>
+                                        </li>
+                                    </ul>
+                                </li>
+                            }
                             <li>
                                 <h3>Appointment Details</h3>
                                 <ul>

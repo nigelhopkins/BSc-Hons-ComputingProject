@@ -15,9 +15,8 @@
                 </p>
             </div>
         }
-        <div class="formButtons">
+        <div class="appointmentConfirmationButtons">
             <button type="button" onclick="location.href='@Url.Action("createAppointmentCard","appointment", new {appointmentID = @Model.appointmentID})'">Print</button>
-            <button type="button" onclick="location.href='@Url.Action("confirmationEmail","appointment", new { appointmentID = @Model.appointmentID })'">Email</button>
             <button type="button" onclick="location.href='@Url.Action("appointmentIndex","appointment")'">Close</button>
         </div>
         <ul class="master">

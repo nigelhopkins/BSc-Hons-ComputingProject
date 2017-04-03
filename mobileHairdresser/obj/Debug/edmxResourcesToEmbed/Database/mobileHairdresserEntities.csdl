@@ -127,7 +127,7 @@
       <PropertyRef Name="timeSlotID" />
     </Key>
     <Property Name="timeSlotID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="timeSlot" Type="DateTime" Nullable="false" />
+    <Property Name="timeSlot" Type="Time" Nullable="false" Precision="7" />
     <NavigationProperty Name="tblAppointments" Relationship="Self.FK_tblAppointment_tblTimeSlot" FromRole="tblTimeSlot" ToRole="tblAppointment" />
   </EntityType>
   <Association Name="FK_tblAppointment_tblClient">

@@ -1,4 +1,6 @@
-﻿using mobileHairdresser.Database;
+﻿using Microsoft.SqlServer.Server;
+using mobileHairdresser.Database;
+using mobileHairdresser.Model;
 using Rotativa;
 using System;
 using System.Collections.Generic;
@@ -67,7 +69,7 @@ namespace mobileHairdresser.Controllers
                     }
                     db.tblAppointments.Add(tblAppointment);
                     db.SaveChanges();
-                    return RedirectToAction("appointmentConfirmation", "Appointment", new { appointmentID = tblAppointment.appointmentID });
+                    return RedirectToAction("confirmationEmail", "Appointment", new { appointmentID = tblAppointment.appointmentID });
                 }
                 catch (Exception)
                 {
@@ -145,7 +147,7 @@ namespace mobileHairdresser.Controllers
             try
             {
                 string appointmentDate = tblAppointment.appointmentDate.DayOfWeek.ToString() + " " + tblAppointment.appointmentDate.Day + " " + tblAppointment.appointmentDate.ToString("MMMM") + " " + tblAppointment.appointmentDate.Year;
-                DateTime appointmentTime = tblTimeSlot.timeSlot;
+                TimeSpan appointmentTime = tblTimeSlot.timeSlot;
                 string haircutName = tblHaircut.HaircutName;
                 string employeeName = tblEmployee.FirstName + " " + tblEmployee.LastName;
                 string customerName = tblAppointment.tblClient.clientName;
@@ -188,11 +190,62 @@ namespace mobileHairdresser.Controllers
 
         }
 
-        public ActionResult Diary()
+        public ActionResult Diary(string appointmentDate)
         {
-            ViewBag.Dates = new SelectList(db.tblAppointments, "appointmentDate", "appointmentDate");
+            if (Session["user"] != null)
+                {
+                    DateTime date = Convert.ToDateTime(appointmentDate);
+                    if (appointmentDate != null)
+                    {
+                        int numOfDays = Convert.ToInt32((date - DateTime.Today).TotalDays);
 
-            return View();
+                        if (numOfDays > 42)
+                        {
+                            date = date.AddDays(-1);
+                        }
+                        else if (numOfDays < 0)
+                        {
+                            date = date.AddDays(+1);
+                        }
+                        else if (numOfDays <= 42 && numOfDays >= 0)
+                        {
+                            bool findDate = db.tblAppointments.Where(x => x.appointmentDate.Equals(date)).Any();
+
+                            ViewBag.appointmentDate = date.ToString("dddd dd MM yyyy");
+
+                            if (findDate != false)
+                            {
+                                return View(db.tblAppointments.Where(x => x.appointmentDate.Equals(date)).ToList());
+                            }
+                            else
+                            {
+                            TempData["AppointmentError"] = "No appointments have been booked for this day!";
+                                return View(db.tblAppointments.ToList());
+                            }
+                        }
+                        else
+                        {
+                            bool findDate = db.tblAppointments.Where(x => x.appointmentDate.Equals(date)).Any();
+
+                            ViewBag.appointmentDate = date.ToString("dddd dd MM yyyy");
+
+                            if (findDate != false)
+                            {
+                                return View(db.tblAppointments.Where(x => x.appointmentDate.Equals(date)).ToList());
+                            }
+                            else
+                            {
+                            TempData["AppointmentError"] = "No appointments have been book for this day!";
+                            return View(db.tblAppointments.ToList());
+                            }
+                    }
+                    }
+                    else
+                    {
+                        return View(db.tblAppointments.ToList());
+                    }
+                }
+                return RedirectToAction("Index", "Home");
         }
         public ActionResult Search(int? appointmentID)
         {
@@ -251,7 +304,7 @@ namespace mobileHairdresser.Controllers
                 }
 
                 db.SaveChanges();
-                return RedirectToAction("appointmentConfirmation", "Appointment", new { appointmentID = tblAppointment.appointmentID });
+                return RedirectToAction("confirmationEmail", "Appointment", new { appointmentID = tblAppointment.appointmentID });
             }
             catch (Exception)
             {

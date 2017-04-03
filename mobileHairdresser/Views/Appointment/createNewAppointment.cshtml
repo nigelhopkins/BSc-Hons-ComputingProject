@@ -20,6 +20,7 @@
                     var getYear = new Date();
                     var shortDate = new Date(Date.parse(data + getYear.getFullYear()));
                     var formatDate = $.datepicker.formatDate('dd-mm-yy', shortDate);
+                    $("#selectedAppointmentDate").val(formatDate);
                     $("#appointmentList").empty();
 
                     $.getJSON("@Url.Action("getTimeSlots","Appointment")", { appointmentDate: formatDate }, function (data) {
@@ -77,14 +78,18 @@
             <fieldset>
                 <h1 class="fs-title">Appointment Detials</h1>
                 <h2 class="fs-subtitle"></h2>
-                <div class="input-group ui-datepicker appointmentDatepicker" data-provide="datepicker">
-                    @Html.TextBox("appointmentDate", null, new { @class = "datepicker", @placeholder = "Please Select Appointment Date." })
-                    <div class="input-group-addon">
-                        <span class="glyphicon glyphicon-calendar"></span>
-                    </div>
+                <div class="appointmentDateSelector">
+                        <div class="input-group ui-datepicker appointmentDatepicker" data-provide="datepicker">
+                            <span>Please select your appointment date from the calender below.</span>
+                            <div id="appointmentDate" class="datepicker-inline">
+                                @Html.HiddenFor(model => model.appointmentDate, new { @id = "selectedAppointmentDate" })
+                            </div>
+                        </div>
+                        <span class="timeSlotMessage">
+                            <select id="appointmentList" onchange=""></select>
+                            @Html.HiddenFor(model => model.timeSlotID, new { @id = "appointmentTime" })
+                        </span>  
                 </div>
-                <select id="appointmentList" onchange=""></select>  
-                @Html.HiddenFor(model => model.timeSlotID, new { @id= "appointmentTime" })
                 <button type="button" name="previous" class="previous action-button">Previous</button>
                 <button type="button" name="next" class="next action-button">Next</button>
             </fieldset>

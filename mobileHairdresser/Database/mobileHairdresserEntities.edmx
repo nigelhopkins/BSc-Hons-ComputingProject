@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="mobileHairdresserModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+      <Schema Namespace="mobileHairdresserModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="sysdiagrams">
           <Key>
             <PropertyRef Name="diagram_id" />
@@ -123,7 +123,7 @@
             <PropertyRef Name="timeSlotID" />
           </Key>
           <Property Name="timeSlotID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="timeSlot" Type="datetime" Nullable="false" />
+          <Property Name="timeSlot" Type="time" Precision="7" Nullable="false" />
         </EntityType>
         <Association Name="FK_tblAppointment_tblClient">
           <End Role="tblClient" Type="Self.tblClient" Multiplicity="1" />
@@ -219,7 +219,8 @@
             <End Role="tblPhotos" EntitySet="tblPhotos" />
           </AssociationSet>
         </EntityContainer>
-      </Schema></edmx:StorageModels>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="mobileHairdresserModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -350,7 +351,7 @@
             <PropertyRef Name="timeSlotID" />
           </Key>
           <Property Name="timeSlotID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="timeSlot" Type="DateTime" Nullable="false" />
+          <Property Name="timeSlot" Type="Time" Nullable="false" Precision="7" />
           <NavigationProperty Name="tblAppointments" Relationship="Self.FK_tblAppointment_tblTimeSlot" FromRole="tblTimeSlot" ToRole="tblAppointment" />
         </EntityType>
         <Association Name="FK_tblAppointment_tblClient">
@@ -580,8 +581,8 @@
           <EntitySetMapping Name="tblTimeSlots">
             <EntityTypeMapping TypeName="mobileHairdresserModel.tblTimeSlot">
               <MappingFragment StoreEntitySet="tblTimeSlot">
-                <ScalarProperty Name="timeSlot" ColumnName="timeSlot" />
                 <ScalarProperty Name="timeSlotID" ColumnName="timeSlotID" />
+                <ScalarProperty Name="timeSlot" ColumnName="timeSlot" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

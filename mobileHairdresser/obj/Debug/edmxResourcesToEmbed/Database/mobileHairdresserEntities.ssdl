@@ -118,7 +118,7 @@
       <PropertyRef Name="timeSlotID" />
     </Key>
     <Property Name="timeSlotID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="timeSlot" Type="datetime" Nullable="false" />
+    <Property Name="timeSlot" Type="time" Precision="7" Nullable="false" />
   </EntityType>
   <Association Name="FK_tblAppointment_tblClient">
     <End Role="tblClient" Type="Self.tblClient" Multiplicity="1" />

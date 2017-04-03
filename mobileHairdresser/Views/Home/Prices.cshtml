@@ -8,7 +8,7 @@
 }
 
 <script>
-    $(function () {
+    $(document).onload(function () {
         $("#haircutTypeID").change(function () {
             $("#PriceList").html("")
             $.get("/Home/getHaircutTypeID", { TypeID: $("#haircutTypeID").val() }, function (data) {
@@ -18,11 +18,11 @@
                                            + "<td> &nbsp; </td>"
                                            + "<td> &pound " + row.LongPrice.toFixed(2) + "</td>"
                                            + "<td> &pound " + row.ShortPrice.toFixed(2) + "</td>"
-                                           + "</tr>")
-                })
-            })
-        })
-    })
+                                           + "</tr>");
+                });
+            });
+        });
+    });
 </script>
 
 <div class="ContentContianer">

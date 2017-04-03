@@ -1,31 +1,113 @@
-﻿@model mobileHairdresser.Database.tblTimeSlot
+﻿@model List<mobileHairdresser.Database.tblAppointment>
 @{
     ViewBag.Title = "Diary";
     Layout = "~/Views/Shared/_Layout.cshtml";
+
+    string noAppointments = null;
+
+    if(TempData["AppointmentError"] != null)
+    {
+        noAppointments = TempData["AppointmentError"].ToString();
+    }
+
+    DateTime appointmentDate = DateTime.Today, tomorrow, yesterday;
+
+    if(ViewBag.appointmentDate != null)
+    {
+        appointmentDate = Convert.ToDateTime(ViewBag.appointmentDate);
+    }
 }
 <div class="ContentContianer">
-    <div class="ContentWrapper">
-        <div id="tableList">
-            @Html.DropDownList("appointmentDates", ViewBag.Dates as SelectList, "Select a date", new { id = "appointmentDates" })
-            <div class="tableListControl">
-                <table class="table">
+    <div class="ContentWrapper">  
+<div class="diaryTable">
+    @using (Html.BeginForm("Diary", "Appointment", FormMethod.Post, new { @id="diaryForm" }))
+    {
+
+        tomorrow = appointmentDate.AddDays(+1);
+        yesterday = appointmentDate.AddDays(-1);
+        <h2 id="selectDate">@appointmentDate.ToString("dddd dd MMMM yyyy")
+            <span class="datepickerInstruction">click here to change the date.</span>
+            <div class="datePickerContainer">
+                <div class="input-group ui-datepicker appointmentDatepicker" data-provide="datepicker">
+                    <div id="datePicker" class="datepicker-inline">
+                    </div>
+                </div>
+            </div>
+        </h2>
+        <div class="diaryTableContainer">
+
+            @if (noAppointments == null)
+            {
+                <table class="table-responsive">
                     <thead>
                         <tr>
-                            <th>@Html.DisplayNameFor(model => model.timeSlot)</th>
-                            <th> &nbsp;</th>
+                            <th>Time Of Appointment</th>
                             <th>Client Name</th>
                         </tr>
                     </thead>
-                    <tbody></tbody>
-                          <tr><td>@Html.DisplayFor(model => model.timeSlot)</td></tr>
+                    <tbody>
+                        @foreach (var client in Model.Where(x => x.appointmentDate == appointmentDate).OrderBy(o => o.timeSlotID))
+                        {
+
+                            <tr>
+                                <td>@Html.DisplayFor(model => client.tblTimeSlot.timeSlot)</td>
+                                <td>@Html.DisplayFor(model => client.tblClient.clientName)</td>
+                            </tr>
+                        }
+                    </tbody>
                 </table>
-            </div>
-            @if (Session["user"] != null)
+            }
+            else
             {
-                <div class="formButtons">
-                    <button type="button" onclick="location.href='@Url.Action("Index","Prices")'">View Price Details</button>
+                <div class="accessWarning">
+                    <span>@noAppointments</span>
                 </div>
             }
+
+        </div>
+    }
+
+            <div class="diaryButtons">
+                @if (Convert.ToInt32((yesterday - DateTime.Today).TotalDays) >= 0)
+                {
+                    <button type="button" onclick="location.href='@Url.Action("Diary", "Appointment", new { appointmentDate = yesterday.ToString("dd-MM-yyyy") })'" class="next">Previous</button>
+                }
+                @if (appointmentDate != DateTime.Today)
+                {
+                    <button type="button" onclick="location.href='@Url.Action("Diary","Appointment", new { appointmentDate = DateTime.Today.ToString("dd-MM-yyyy") })'">Today</button>
+                }
+                @if (Convert.ToInt32((tomorrow - DateTime.Today).TotalDays) <= 42)
+                {
+                    <button type="button" onclick="location.href='@Url.Action("Diary","Appointment", new { appointmentDate = tomorrow.ToString("dd-MM-yyyy") })'" class="previous">Next</button>
+                }
+               
+            </div>
         </div>
     </div>
 </div>
+<script src="~/Scripts/jquery-1.12.4.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#selectDate").click(function () {
+            $(".datePickerContainer").fadeToggle();
+        });
+
+         $("#datePicker").datepicker({
+                dateFormat: 'DD dd MM',
+                endDate: ' ',
+                minDate: '0',
+                maxDate: '6w',
+                beforeShowDay: $.datepicker.noWeekends,
+                defaultDate: new Date(+1),
+                autoclose: false,
+                todayHighlight: true,
+                onSelect: function (data) {
+                    var getYear = new Date();
+                    var shortDate = new Date(Date.parse(data + getYear.getFullYear()));
+                    var formatDate = $.datepicker.formatDate('dd-mm-yy', shortDate);
+
+                    $(location).attr('href','?appointmentDate=' + formatDate + '');
+                }
+                    });
+    })
+</script>      
