@@ -17,8 +17,7 @@ namespace mobileHairdresser.Controllers
             if (getUnreadEmails.Count != 0)
             {
                 ViewBag.emailCount = "glyphicon glyphicon-envelope";
-            }
-            
+            }            
         }
     }
 }

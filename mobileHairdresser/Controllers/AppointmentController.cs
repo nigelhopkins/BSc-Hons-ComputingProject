@@ -31,6 +31,7 @@ namespace mobileHairdresser.Controllers
 
             return View();
         }
+        [HttpGet]
         public JsonResult getTimeSlots(string appointmentDate, tblTimeSlot tblTimeSlot)
         {
             DateTime setDate = Convert.ToDateTime(appointmentDate);
@@ -40,8 +41,6 @@ namespace mobileHairdresser.Controllers
             var getTimeSlotIDs = db.tblTimeSlots.Where(q => !tempTimeSlot.Contains(q.timeSlotID));
 
             return Json(new SelectList(getTimeSlotIDs, "timeSlotID", "timeSlot"), JsonRequestBehavior.AllowGet);
-
-
         }
         [HttpPost]
         public ActionResult bookAppointment(tblAppointment tblAppointment, tblClient tblClient)
@@ -49,31 +48,48 @@ namespace mobileHairdresser.Controllers
 
             if (ModelState.IsValid)
             {
-                try
+                if((tblAppointment.appointmentDate - DateTime.Today).TotalDays <= 0)
                 {
-                    int appointmentTime = int.Parse(Request.Form["timeSlotID"]);
-                    tblClient newClient = new tblClient();
-                    {
-                        newClient.clientName = tblAppointment.tblClient.clientName;
-                        newClient.clientMobile = tblAppointment.tblClient.clientMobile;
-                        newClient.clientEmail = tblAppointment.tblClient.clientEmail;
-                        newClient.clientHouseNumber = tblAppointment.tblClient.clientHouseNumber;
-                        newClient.clientPostalCode = tblAppointment.tblClient.clientPostalCode;
-                    }
+                    ViewData["appointmentError"] = "We are unable to create appointment for the same day.";
 
-                    tblAppointment newAppointment = new tblAppointment();
+                    if(Request.UrlReferrer.ToString() != null)
                     {
-                        newAppointment.employeeID = tblAppointment.employeeID;
-                        newAppointment.haircutID = tblAppointment.haircutID;
-                        newAppointment.timeSlotID = tblAppointment.timeSlotID;
+                        return Redirect(Request.UrlReferrer.ToString());
                     }
-                    db.tblAppointments.Add(tblAppointment);
-                    db.SaveChanges();
-                    return RedirectToAction("confirmationEmail", "Appointment", new { appointmentID = tblAppointment.appointmentID });
+                    else
+                    {
+                        return RedirectToAction("appointmentIndex", "Appointment");
+                    }
                 }
-                catch (Exception)
+                else
                 {
-                    TempData["systemMessage"] = "<p>Unable to make apppointment please try again later.</p>";
+                    try
+                    {
+                        int appointmentTime = int.Parse(Request.Form["timeSlotID"]);
+                        tblClient newClient = new tblClient();
+                        {
+                            newClient.clientName = tblAppointment.tblClient.clientName;
+                            newClient.clientMobile = tblAppointment.tblClient.clientMobile;
+                            newClient.clientEmail = tblAppointment.tblClient.clientEmail;
+                            newClient.clientHouseNumber = tblAppointment.tblClient.clientHouseNumber;
+                            newClient.clientPostalCode = tblAppointment.tblClient.clientPostalCode;
+                        }
+
+                        tblAppointment newAppointment = new tblAppointment();
+                        {
+                            newAppointment.appointmentDate = tblAppointment.appointmentDate;
+                            newAppointment.employeeID = tblAppointment.employeeID;
+                            newAppointment.haircutID = tblAppointment.haircutID;
+                            newAppointment.timeSlotID = tblAppointment.timeSlotID;
+                        }
+                        db.tblAppointments.Add(tblAppointment);
+                        db.SaveChanges();
+                        return RedirectToAction("confirmationEmail", "Appointment", new { appointmentID = tblAppointment.appointmentID });
+                    }
+                    catch (Exception)
+                    {
+                        TempData["appointmentError"] = "<p>Unable to make apppointment please try again later.</p>";
+                    }
                 }
             }
 
@@ -219,7 +235,7 @@ namespace mobileHairdresser.Controllers
                             }
                             else
                             {
-                            TempData["AppointmentError"] = "No appointments have been booked for this day!";
+                            TempData["appointmentError"] = "No appointments have been booked for this day!";
                                 return View(db.tblAppointments.ToList());
                             }
                         }
@@ -235,7 +251,7 @@ namespace mobileHairdresser.Controllers
                             }
                             else
                             {
-                            TempData["AppointmentError"] = "No appointments have been book for this day!";
+                            TempData["appointmentError"] = "No appointments have been book for this day!";
                             return View(db.tblAppointments.ToList());
                             }
                     }
@@ -255,6 +271,14 @@ namespace mobileHairdresser.Controllers
                 if (findAppointment != false)
                 {
                     tblAppointment tblAppointment = db.tblAppointments.Find(appointmentID);
+
+                    if((tblAppointment.appointmentDate - DateTime.Today).TotalDays < 0)
+                    {
+                        TempData["appointmentError"] = "No appointment found please try again";
+
+                        return View();
+                    }
+
                     tblEmployee tblEmployee = db.tblEmployees.Find(tblAppointment.employeeID);
                     tblHaircut tblHaircut = db.tblHaircuts.Find(tblAppointment.haircutID);
                     tblTimeSlot tblTimeSlot = db.tblTimeSlots.Find(tblAppointment.timeSlotID);
@@ -266,7 +290,7 @@ namespace mobileHairdresser.Controllers
                 }
                 else
                 {
-                    ViewData["appointmentError"] = "No appointment found please try again";
+                    TempData["appointmentError"] = "No appointment found please try again";
                 }
 
             }
@@ -287,28 +311,37 @@ namespace mobileHairdresser.Controllers
             try
             {
                 var findClientID = db.tblAppointments.Where(clientID => clientID.appointmentID == appointmentID).First();
-                tblClient newClient = db.tblClients.Find(findClientID.clientID);
+                if ((tblAppointment.appointmentDate - DateTime.Today).TotalDays <= 0)
                 {
-                    newClient.clientName = tblAppointment.tblClient.clientName;
-                    newClient.clientMobile = tblAppointment.tblClient.clientMobile;
-                    newClient.clientEmail = tblAppointment.tblClient.clientEmail;
-                    newClient.clientHouseNumber = tblAppointment.tblClient.clientHouseNumber;
-                    newClient.clientPostalCode = tblAppointment.tblClient.clientPostalCode;
+                    TempData["appointmentError"] = "Sorry we are unable to change the appointment on the same day." 
+                                                    + "Please contact Mobile Hairdresser's directly to make changes ";
+                    return Redirect(Request.UrlReferrer.ToString());
                 }
-
-                tblAppointment newAppointment = db.tblAppointments.Find(tblAppointment.appointmentID);
+                else
                 {
-                    newAppointment.employeeID = tblAppointment.employeeID;
-                    newAppointment.haircutID = tblAppointment.haircutID;
-                    newAppointment.timeSlotID = tblAppointment.timeSlotID;
-                }
+                    tblClient newClient = db.tblClients.Find(findClientID.clientID);
+                    {
+                        newClient.clientName = tblAppointment.tblClient.clientName;
+                        newClient.clientMobile = tblAppointment.tblClient.clientMobile;
+                        newClient.clientEmail = tblAppointment.tblClient.clientEmail;
+                        newClient.clientHouseNumber = tblAppointment.tblClient.clientHouseNumber;
+                        newClient.clientPostalCode = tblAppointment.tblClient.clientPostalCode;
+                    }
 
-                db.SaveChanges();
-                return RedirectToAction("confirmationEmail", "Appointment", new { appointmentID = tblAppointment.appointmentID });
+                    tblAppointment newAppointment = db.tblAppointments.Find(tblAppointment.appointmentID);
+                    {
+                        newAppointment.employeeID = tblAppointment.employeeID;
+                        newAppointment.haircutID = tblAppointment.haircutID;
+                        newAppointment.timeSlotID = tblAppointment.timeSlotID;
+                    }
+
+                    db.SaveChanges();
+                    return RedirectToAction("confirmationEmail", "Appointment", new { appointmentID = tblAppointment.appointmentID });
+                }
             }
             catch (Exception)
             {
-                TempData["systemMessage"] = "<p>Unable to make apppointment please try again later.</p>";
+                TempData["appointmentError"] = "<p>Unable to make apppointment please try again later.</p>";
             }
             return RedirectToAction("Search", "Appointment");
         }
@@ -326,9 +359,18 @@ namespace mobileHairdresser.Controllers
         public async Task<ActionResult> cancelAppointmentConfirmation(int? appointmentID)
         {
             tblAppointment tblAppointment = await db.tblAppointments.FindAsync(appointmentID);
-            db.tblAppointments.Remove(tblAppointment);
-            await db.SaveChangesAsync();
-            return RedirectToAction("Search", "Appointment");
+            if((tblAppointment.appointmentDate - DateTime.Today).TotalDays <= 0)
+            {
+                ViewData["appointmentError"] = "We are unable to cancel any appointment on the same day."
+                                                +"Please contact the Mobile Hairdresser's directly to cancel the appointment";
+                return RedirectToAction(Request.UrlReferrer.ToString());
+            }
+            else
+            {
+                db.tblAppointments.Remove(tblAppointment);
+                await db.SaveChangesAsync();
+                return RedirectToAction("Search", "Appointment");
+            }
         }
         public ActionResult getDirections(int? appointmentID)
         {

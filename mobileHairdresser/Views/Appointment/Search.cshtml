@@ -12,7 +12,7 @@
             @Html.AntiForgeryToken()
             <ul>
                 <li>@Html.ValidationSummary()
-                    @ViewData["appointmentError"]</li>
+                    @TempData["appointmentError"]</li>
                 <li class="appointmentSearch">
                     <label>Appointment Referance Number : </label>
                     @Html.TextBoxFor(model => model.appointmentID)

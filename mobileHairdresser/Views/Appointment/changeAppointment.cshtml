@@ -69,7 +69,8 @@
             @Html.AntiForgeryToken()
             @Html.ValidationSummary()
             @Html.HiddenFor(model => model.appointmentID)
-            
+            @TempData["appointmentError"]
+
             <ul id="progressbar">
                 <li class="active">Haircut Details</li>
                 <li>Appointment Details</li>

@@ -459,12 +459,14 @@ ul li input[type="time"], ul li input[type="email"],ul li input[type="tel"]
 {
     display:block;
     position:absolute;
-    top:40%;
-    width:100%;
+    top:0%;
+    right:0px;
+    width:77%;
     background:rgba(243, 243, 243, 0.6);
     border:1px dashed   #000;
     text-align:center;
     padding:25px;
+    z-index:9999;
 }
 #systemMessages button[type="submit"]{
     position:absolute;

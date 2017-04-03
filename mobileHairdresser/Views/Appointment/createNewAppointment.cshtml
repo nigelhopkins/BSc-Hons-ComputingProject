@@ -62,6 +62,7 @@
         {
             @Html.AntiForgeryToken()
             @Html.ValidationSummary()
+            @TempData["appointmentError"]
             
             <ul id="progressbar">
                 <li class="active">Haircut Details</li>

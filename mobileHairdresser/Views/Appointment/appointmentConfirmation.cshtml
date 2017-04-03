@@ -11,7 +11,8 @@
             <div class="accessWarning">
                 <p>
                     Hi @Html.DisplayFor(model => model.tblClient.clientName),
-                    <br />@TempData["appointmentConfirmationEmail"].
+                    <br />@TempData["appointmentConfirmationEmail"] @TempData["appointmentError"].
+                          
                 </p>
             </div>
         }
