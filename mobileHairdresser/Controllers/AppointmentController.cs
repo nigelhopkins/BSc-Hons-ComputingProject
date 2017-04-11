@@ -1,17 +1,14 @@
-﻿using Microsoft.SqlServer.Server;
-using mobileHairdresser.Database;
-using mobileHairdresser.Model;
+﻿using mobileHairdresser.Database;
 using Rotativa;
+using Rotativa.Options;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
-using System.Data.Entity;
 using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Mail;
 using System.Threading.Tasks;
-using System.Web;
 using System.Web.Helpers;
 using System.Web.Mvc;
 using System.Web.Security;
@@ -37,12 +34,18 @@ namespace mobileHairdresser.Controllers
         public JsonResult getTimeSlots(string appointmentDate, tblTimeSlot tblTimeSlot)
         {
             DateTime setDate = Convert.ToDateTime(appointmentDate);
+            if((setDate - DateTime.Today).TotalDays > 0)
+            {
+                List<int> tempTimeSlot = db.tblAppointments.Where(x => x.appointmentDate == setDate).Select(q => q.timeSlotID).ToList();
 
-            List<int> tempTimeSlot = db.tblAppointments.Where(x => x.appointmentDate == setDate).Select(q => q.timeSlotID).ToList();
+                var getTimeSlotIDs = db.tblTimeSlots.Where(q => !tempTimeSlot.Contains(q.timeSlotID));
 
-            var getTimeSlotIDs = db.tblTimeSlots.Where(q => !tempTimeSlot.Contains(q.timeSlotID));
-
-            return Json(new SelectList(getTimeSlotIDs, "timeSlotID", "timeSlot"), JsonRequestBehavior.AllowGet);
+                return Json(new SelectList(getTimeSlotIDs, "timeSlotID", "timeSlot"), JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                return Json(false, JsonRequestBehavior.AllowGet);
+            }
         }
         [HttpPost]
         public ActionResult bookAppointment(tblAppointment tblAppointment, tblClient tblClient)
@@ -67,22 +70,9 @@ namespace mobileHairdresser.Controllers
                 {
                     try
                     {
-                        string strPwdchar = "abcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
                         var salt = Crypto.GenerateSalt();
-                        var saltedPassword = "";
-                        string strPwd = "";
-
-                        
-                        //Create a randomised password
-                        Random rnd = new Random();
-                        for (int i = 0; i <= 8; i++)
-                        {
-                            int iRandom = rnd.Next(0, strPwdchar.Length - 1);
-                            strPwd += strPwdchar.Substring(iRandom, 1);
-                        }
-                        //Add salt to newly created password
-                        saltedPassword = strPwd + salt;                        
-
+                        var generatedPassword = Membership.GeneratePassword(12, 1);
+                        TempData["userInfo"] = generatedPassword.ToString();
                         int appointmentTime = int.Parse(Request.Form["timeSlotID"]);
                         tblClient newClient = new tblClient();
                         {
@@ -92,19 +82,27 @@ namespace mobileHairdresser.Controllers
                             newClient.clientHouseNumber = tblAppointment.tblClient.clientHouseNumber;
                             newClient.clientPostalCode = tblAppointment.tblClient.clientPostalCode;
                             newClient.salt = salt;
-                            newClient.Password = Crypto.HashPassword(saltedPassword).ToString();
+                            newClient.Password = Crypto.HashPassword(generatedPassword + salt).ToString();
                         }
+                        db.tblClients.Add(newClient);
+                        db.SaveChanges();
 
                         tblAppointment newAppointment = new tblAppointment();
                         {
                             newAppointment.appointmentDate = tblAppointment.appointmentDate;
+                            newAppointment.clientID = newClient.clientID;
                             newAppointment.employeeID = tblAppointment.employeeID;
                             newAppointment.haircutID = tblAppointment.haircutID;
                             newAppointment.timeSlotID = tblAppointment.timeSlotID;
                         }
-                        db.tblAppointments.Add(tblAppointment);
-                        db.SaveChanges();
-                        return RedirectToAction("confirmationEmail", "Appointment", new { appointmentID = tblAppointment.appointmentID });
+                        using (db)
+                        {
+                            
+                            db.tblAppointments.Add(newAppointment);
+                            db.SaveChanges();
+                        }
+                        int findAppointmentID = newAppointment.appointmentID;
+                        return RedirectToAction("confirmationEmail", "Appointment", new { appointmentID = findAppointmentID });
                     }
                     catch (Exception)
                     {
@@ -128,6 +126,10 @@ namespace mobileHairdresser.Controllers
             ViewData["employee"] = tblEmployee.FirstName + " " + tblEmployee.LastName;
             ViewData["haircut"] = tblHaircut.HaircutName;
             ViewData["timeSlot"] = tblTimeSlot.timeSlot;
+            if(TempData["userInfo"] != null)
+            {
+                TempData.Keep("userInfo");
+            }
 
             if (tblAppointment == null)
             {
@@ -135,41 +137,36 @@ namespace mobileHairdresser.Controllers
             }
             return View(tblAppointment);
         }
-        public async Task<ActionResult> printAppointmentConfirmation(int? appointmentID)
+        public ActionResult DownloadAppointmentCard(int? appointmentID)
         {
-            if (appointmentID == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            tblAppointment tblAppointment = await db.tblAppointments.FindAsync(appointmentID);
-            tblEmployee tblEmployee = await db.tblEmployees.FindAsync(tblAppointment.employeeID);
-            tblHaircut tblHaircut = await db.tblHaircuts.FindAsync(tblAppointment.haircutID);
-            tblTimeSlot tblTimeSlot = await db.tblTimeSlots.FindAsync(tblAppointment.timeSlotID);
+            tblAppointment tblAppointment = db.tblAppointments.Find(appointmentID);
+            tblEmployee tblEmployee = db.tblEmployees.Find(tblAppointment.employeeID);
+            tblHaircut tblHaircut = db.tblHaircuts.Find(tblAppointment.haircutID);
+            tblTimeSlot tblTimeSlot = db.tblTimeSlots.Find(tblAppointment.timeSlotID);
             ViewData["employee"] = tblEmployee.FirstName + " " + tblEmployee.LastName;
             ViewData["haircut"] = tblHaircut.HaircutName;
             ViewData["timeSlot"] = tblTimeSlot.timeSlot;
-
-            if (tblAppointment == null)
+            if(TempData["userInfo"] != null)
             {
-                return HttpNotFound();
+                TempData.Keep("userInfo");
             }
-            return View(tblAppointment);
-        }
-        public ActionResult createAppointmentCard(int? appointmentID)
-        {
-            return new UrlAsPdf(Url.Action("printAppointmentConfirmation", "Appointment") + "/?appointmentID=" + appointmentID)
-            {
-                FileName = "Mobile Hairdresser Appointment Card.pdf",
-                PageOrientation = Rotativa.Options.Orientation.Landscape,
-                PageSize = Rotativa.Options.Size.A5,
-                PageMargins = new Rotativa.Options.Margins(5, 5, 5, 5)
 
+            return new Rotativa.ViewAsPdf("appointmentConfirmation", tblAppointment)
+            {
+                FileName = "Mobile Hairdresser : Appointment Card.pdf",
+                PageSize = Size.A4,
+                PageOrientation = Orientation.Portrait,
+                PageMargins = {Left = 0, Right = 0},
+                CustomSwitches = "--print-media-type --zoom 1.3"
             };
         }
         public ActionResult confirmationEmail(int appointmentID)
         {
             string body;
-
+            if(TempData["userInfo"] != null)
+            {
+                TempData.Keep("userInfo");
+            }
             tblAppointment tblAppointment = db.tblAppointments.Find(appointmentID);
             tblHaircut tblHaircut = db.tblHaircuts.Find(tblAppointment.haircutID);
             tblEmployee tblEmployee = db.tblEmployees.Find(tblAppointment.employeeID);
@@ -189,6 +186,7 @@ namespace mobileHairdresser.Controllers
                 string customerName = tblAppointment.tblClient.clientName;
                 string customerPhoneNumber = tblAppointment.tblClient.clientMobile;
                 string customerEmail = tblAppointment.tblClient.clientEmail;
+                string clientPassword = TempData["userInfo"].ToString();
                 int customerHouseNumber = Convert.ToInt32(tblAppointment.tblClient.clientHouseNumber);
                 string customerAddress = tblAppointment.tblClient.clientPostalCode;
                 string emailFrom = ConfigurationManager.AppSettings["EmailFormAddress"];
@@ -198,7 +196,7 @@ namespace mobileHairdresser.Controllers
                 confirmationMessage.From = new MailAddress(emailFrom, "Mobile Hairdresser");
                 confirmationMessage.ReplyToList.Add(new MailAddress(customerEmail));
                 confirmationMessage.Subject = @"Mobile Hairdresser : Appointment Confirmation";
-                confirmationMessage.Body = string.Format(body, customerName, customerPhoneNumber, customerEmail
+                confirmationMessage.Body = string.Format(body, customerName, customerPhoneNumber, customerEmail, clientPassword
                                                         , customerHouseNumber, customerAddress, appointmentID, appointmentDate
                                                         , appointmentTime, employeeName, haircutName);
                 confirmationMessage.IsBodyHtml = true;
@@ -283,45 +281,39 @@ namespace mobileHairdresser.Controllers
             }
             return RedirectToAction("Index", "Home");
         }
-        public ActionResult Search(tblAppointment tblAppointment)
+        [HttpGet]
+        public ActionResult Search(int? appointmentID, string clientPassword)
         {
-            var findClient = db.tblClients.Find(tblAppointment.tblClient.clientEmail);
-            string userEnteredPassword = tblAppointment.tblClient.Password;
-            string salt = findClient.salt.ToString();
-            string storedPassword = findClient.Password.ToString();
-
-
-
-            if (Crypto.VerifyHashedPassword(storedPassword, userEnteredPassword + salt))
+            if(appointmentID == null)
             {
-                bool findAppointment = db.tblAppointments.Where(a => a.appointmentID == tblAppointment.appointmentID).Any();
-                if (findAppointment != false)
+                return View();
+            }
+            tblAppointment tblAppointment = db.tblAppointments.Find(appointmentID);
+            try
+            {
+                string salt = tblAppointment.tblClient.salt;
+
+                if ((Crypto.VerifyHashedPassword(tblAppointment.tblClient.Password, clientPassword + salt))||(Session["user"] != null))
                 {
-                    var getAppointment = db.tblAppointments.Find(tblAppointment.appointmentID);
-
-                    if ((tblAppointment.appointmentDate - DateTime.Today).TotalDays < 0)
-                    {
-                        TempData["appointmentError"] = "No appointment found please try again";
-
-                        return View();
-                    }
-
+                    TempData["userInfo"] = tblAppointment.appointmentID;
                     tblEmployee tblEmployee = db.tblEmployees.Find(tblAppointment.employeeID);
                     tblHaircut tblHaircut = db.tblHaircuts.Find(tblAppointment.haircutID);
-                    tblTimeSlot tblTimeSlot = db.tblTimeSlots.Find(tblAppointment.timeSlotID);
+                    ViewData["timeSlot"] = tblAppointment.tblTimeSlot.timeSlot;
                     ViewData["employee"] = tblEmployee.FirstName + " " + tblEmployee.LastName;
                     ViewData["haircut"] = tblHaircut.HaircutName;
-                    ViewData["timeSlot"] = tblTimeSlot.timeSlot;
-
+                    if ((tblAppointment == null) || (tblEmployee == null) || (tblHaircut == null))
+                    {
+                        return HttpNotFound();
+                    }
                     return View(tblAppointment);
                 }
-                else
-                {
-                    TempData["appointmentError"] = "No appointment found please try again";
-                }
-
             }
-            return View();
+            catch(Exception)
+            {
+                ViewBag.searchError = "No appointment could be found please try again later!";
+            }
+            
+            return View();            
         }
         public ActionResult changeAppointment(int? appointmentID)
         {
@@ -375,18 +367,24 @@ namespace mobileHairdresser.Controllers
         [HttpGet]
         public async Task<ActionResult> cancelAppointment(int? appointmentID)
         {
-            tblAppointment tblAppointment = await db.tblAppointments.FindAsync(appointmentID);
-            db.tblClients.Remove(tblAppointment.tblClient);
-            db.tblAppointments.Remove(tblAppointment);
-            await db.SaveChangesAsync();
-
+            try
+            {
+                tblAppointment tblAppointment = await db.tblAppointments.FindAsync(appointmentID);
+                db.tblClients.Remove(tblAppointment.tblClient);
+                db.tblAppointments.Remove(tblAppointment);
+                await db.SaveChangesAsync();
+            }
+            catch(Exception)
+            {
+                ViewBag.searchError = "Your appointment could not be found please try again, or contact the Mobile Hairdresser";
+            }
             return RedirectToAction("Search", "Appointment");
         }
         [HttpPost]
         public async Task<ActionResult> cancelAppointmentConfirmation(int? appointmentID)
         {
             tblAppointment tblAppointment = await db.tblAppointments.FindAsync(appointmentID);
-            if ((tblAppointment.appointmentDate - DateTime.Today).TotalDays <= 0)
+            if (((tblAppointment.appointmentDate - DateTime.Today).TotalDays <= 0)||(Session["user"] == null))
             {
                 ViewData["appointmentError"] = "We are unable to cancel any appointment on the same day."
                                                 + "Please contact the Mobile Hairdresser's directly to cancel the appointment";

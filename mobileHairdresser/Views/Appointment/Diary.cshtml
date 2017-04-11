@@ -45,12 +45,14 @@
                             <th>Client Name</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="diaryBody">
                         @foreach (var client in Model.Where(x => x.appointmentDate == appointmentDate).OrderBy(o => o.timeSlotID))
                         {
 
                             <tr>
-                                <td>@Html.DisplayFor(model => client.tblTimeSlot.timeSlot)</td>
+                                <td>
+                                    @Html.HiddenFor(model => client.appointmentID, new { @id = "appointmentID"})
+                                    @Html.DisplayFor(model => client.tblTimeSlot.timeSlot)</td>
                                 <td>@Html.DisplayFor(model => client.tblClient.clientName)</td>
                             </tr>
                         }
@@ -110,4 +112,11 @@
                 }
                     });
     })
+    $(function () {
+        $("#diaryBody tr").click(function () {
+            var findAppointmentID = $(this).children().find('input[type="hidden"]').val();
+            
+            window.location.href = '/Appointment/Search' + '?appointmentID=' + findAppointmentID;
+        })
+    });
 </script>      

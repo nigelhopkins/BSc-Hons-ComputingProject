@@ -4,11 +4,11 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="1ab767421cf2429eba12a796eb9162e1" Name="Diagram1">
-        <EntityTypeShape EntityType="mobileHairdresserModel.sysdiagram" Width="1.5" PointX="10.25" PointY="1.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="mobileHairdresserModel.tblAppointment" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
-        <EntityTypeShape EntityType="mobileHairdresserModel.tblClient" Width="1.5" PointX="0.75" PointY="1.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="mobileHairdresserModel.tblEmail" Width="1.5" PointX="12" PointY="4.875" IsExpanded="true" />
+      <Diagram DiagramId="2ae211de2cd440768723a4a5c0483ad6" Name="Diagram1">
+        <EntityTypeShape EntityType="mobileHairdresserModel.sysdiagram" Width="1.5" PointX="0.75" PointY="8.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="mobileHairdresserModel.tblAppointment" Width="1.5" PointX="3" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="mobileHairdresserModel.tblClient" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="mobileHairdresserModel.tblEmail" Width="1.5" PointX="2.75" PointY="8.75" IsExpanded="true" />
         <EntityTypeShape EntityType="mobileHairdresserModel.tblEmployee" Width="1.5" PointX="8" PointY="1" IsExpanded="true" />
         <EntityTypeShape EntityType="mobileHairdresserModel.tblGallery" Width="1.5" PointX="2.75" PointY="5.125" IsExpanded="true" />
         <EntityTypeShape EntityType="mobileHairdresserModel.tblHaircut" Width="1.5" PointX="10" PointY="5" IsExpanded="true" />

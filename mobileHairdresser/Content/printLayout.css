@@ -1,55 +1,52 @@
-﻿*{
-    padding:0px;
-    margin:0px;
-    font-family:Consolas;
-    font-size:100%;
+﻿@media print{
+    body{
+    background:none;
     color:#000;
-}
-
-/* Body layout */
-
-html, body{
-    width:100%;
-    height:100%;
-}
-.master{
-    display:block;
-    background:#fff;
-    border:1px dashed #000;
-    margin:0 auto;
-    padding:50px;
-    width:80%;
-    height:100%;
-    min-height:100%;
-}
-    
-.master li{
-    list-style:none;
-    line-height:25px;
-}
-.master li ul{
-    margin:25px 0;
-    border:1px solid #000;
-}
-.master li p{
-    display:inline-block;
-    width:auto;
-    text-align:left;
-    margin:0;
-    vertical-align:top;
-    padding:0px;
-}
-.master li span a{
-    padding :0px;
-    margin :0px;
-    text-align:left;
-}
-.master li label{
-    display:inline-block;
-    width:200px;
-    text-align:left;
-    font-weight:bold;
-    vertical-align:top;
-    padding:5px;
-    margin:0px;
+    font-size:100%;
+    }
+    h1, h2, h3{
+        letter-spacing:normal;
+        font-weight:bolder;
+    }
+    .master h1{
+        font-size:200%;
+        text-align:center;
+    }
+    #sidebar-wrapper, .accessWarning, .appointmentConfirmationButtons, footer{
+        display:none;
+    }
+    .ContentWrapper, .master{
+        width:100%;
+        height:auto;
+        overflow:unset;
+        min-height:unset;
+        overflow-y:unset;
+    }
+    .loginDetails{
+        text-align:center;
+    }
+   
+    .master h3{
+        margin:0px;
+        line-height:35px;
+    }
+    .master li ul{
+        margin:0px auto;
+    }
+    .loginDetails label{
+        vertical-align:top;
+    }
+    .ContentContianer{
+        padding:0px;
+    }
+    #pageContent-wrapper{
+        display:block;
+        position:relative;
+        left:0px;
+        width:90%;
+        margin:25px auto;
+    }
+     a[href]:after {
+        content: none !important;
+      }
 }

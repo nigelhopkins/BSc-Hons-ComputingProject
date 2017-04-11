@@ -209,53 +209,53 @@
     <Compile Include="Controllers\loginController.cs" />
     <Compile Include="Controllers\PortfolioController.cs" />
     <Compile Include="Controllers\PricesController.cs" />
-    <Compile Include="Database\mobileHairdresserEntities.Context.cs">
+    <Compile Include="Database\mobileHairdresser.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>mobileHairdresserEntities.Context.tt</DependentUpon>
+      <DependentUpon>mobileHairdresser.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Database\mobileHairdresserEntities.cs">
+    <Compile Include="Database\mobileHairdresser.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>mobileHairdresserEntities.tt</DependentUpon>
+      <DependentUpon>mobileHairdresser.tt</DependentUpon>
     </Compile>
-    <Compile Include="Database\mobileHairdresserEntities.Designer.cs">
+    <Compile Include="Database\mobileHairdresser.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>mobileHairdresserEntities.edmx</DependentUpon>
+      <DependentUpon>mobileHairdresser.edmx</DependentUpon>
     </Compile>
     <Compile Include="Database\sysdiagram.cs">
-      <DependentUpon>mobileHairdresserEntities.tt</DependentUpon>
+      <DependentUpon>mobileHairdresser.tt</DependentUpon>
     </Compile>
     <Compile Include="Database\tblAppointment.cs">
-      <DependentUpon>mobileHairdresserEntities.tt</DependentUpon>
+      <DependentUpon>mobileHairdresser.tt</DependentUpon>
     </Compile>
     <Compile Include="Database\tblClient.cs">
-      <DependentUpon>mobileHairdresserEntities.tt</DependentUpon>
+      <DependentUpon>mobileHairdresser.tt</DependentUpon>
     </Compile>
     <Compile Include="Database\tblEmail.cs">
-      <DependentUpon>mobileHairdresserEntities.tt</DependentUpon>
+      <DependentUpon>mobileHairdresser.tt</DependentUpon>
     </Compile>
     <Compile Include="Database\tblEmployee.cs">
-      <DependentUpon>mobileHairdresserEntities.tt</DependentUpon>
+      <DependentUpon>mobileHairdresser.tt</DependentUpon>
     </Compile>
     <Compile Include="Database\tblGallery.cs">
-      <DependentUpon>mobileHairdresserEntities.tt</DependentUpon>
+      <DependentUpon>mobileHairdresser.tt</DependentUpon>
     </Compile>
     <Compile Include="Database\tblHaircut.cs">
-      <DependentUpon>mobileHairdresserEntities.tt</DependentUpon>
+      <DependentUpon>mobileHairdresser.tt</DependentUpon>
     </Compile>
     <Compile Include="Database\tblHaircutType.cs">
-      <DependentUpon>mobileHairdresserEntities.tt</DependentUpon>
+      <DependentUpon>mobileHairdresser.tt</DependentUpon>
     </Compile>
     <Compile Include="Database\tblLogin.cs">
-      <DependentUpon>mobileHairdresserEntities.tt</DependentUpon>
+      <DependentUpon>mobileHairdresser.tt</DependentUpon>
     </Compile>
     <Compile Include="Database\tblPhoto.cs">
-      <DependentUpon>mobileHairdresserEntities.tt</DependentUpon>
+      <DependentUpon>mobileHairdresser.tt</DependentUpon>
     </Compile>
     <Compile Include="Database\tblTimeSlot.cs">
-      <DependentUpon>mobileHairdresserEntities.tt</DependentUpon>
+      <DependentUpon>mobileHairdresser.tt</DependentUpon>
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -328,15 +328,15 @@
     <Content Include="Content\themes\base\tabs.css" />
     <Content Include="Content\themes\base\theme.css" />
     <Content Include="Content\themes\base\tooltip.css" />
-    <Content Include="Database\mobileHairdresserEntities.Context.tt">
+    <Content Include="Database\mobileHairdresser.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>mobileHairdresserEntities.edmx</DependentUpon>
-      <LastGenOutput>mobileHairdresserEntities.Context.cs</LastGenOutput>
+      <DependentUpon>mobileHairdresser.edmx</DependentUpon>
+      <LastGenOutput>mobileHairdresser.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Database\mobileHairdresserEntities.tt">
+    <Content Include="Database\mobileHairdresser.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>mobileHairdresserEntities.edmx</DependentUpon>
-      <LastGenOutput>mobileHairdresserEntities.cs</LastGenOutput>
+      <DependentUpon>mobileHairdresser.edmx</DependentUpon>
+      <LastGenOutput>mobileHairdresser.cs</LastGenOutput>
     </Content>
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -430,14 +430,14 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
-    <Content Include="App_Browsers\qt.browser" />
-    <EntityDeploy Include="Database\mobileHairdresserEntities.edmx">
+    <EntityDeploy Include="Database\mobileHairdresser.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>mobileHairdresserEntities.Designer.cs</LastGenOutput>
+      <LastGenOutput>mobileHairdresser.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="Database\mobileHairdresserEntities.edmx.diagram">
-      <DependentUpon>mobileHairdresserEntities.edmx</DependentUpon>
+    <Content Include="Database\mobileHairdresser.edmx.diagram">
+      <DependentUpon>mobileHairdresser.edmx</DependentUpon>
     </Content>
+    <Content Include="App_Browsers\qt.browser" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\dropzone\basic.css" />
     <Content Include="Scripts\dropzone\basic.min.css" />
@@ -925,6 +925,7 @@
     <Content Include="Views\Appointment\changeAppointment.cshtml" />
     <Content Include="Views\Appointment\getDirections.cshtml" />
     <Content Include="Views\Appointment\Diary.cshtml" />
+    <Content Include="Views\Appointment\appointmentFetch.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

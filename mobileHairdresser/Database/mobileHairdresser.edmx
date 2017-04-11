@@ -37,8 +37,8 @@
           <Property Name="clientHouseNumber" Type="int" />
           <Property Name="clientHouseName" Type="varchar" MaxLength="250" />
           <Property Name="clientPostalCode" Type="varchar" MaxLength="50" />
-          <Property Name="Password" Type="varchar" MaxLength="250" Nullable="false" />
-          <Property Name="salt" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="250" />
+          <Property Name="salt" Type="varchar" MaxLength="250" />
         </EntityType>
         <EntityType Name="tblEmail">
           <Key>
@@ -249,9 +249,9 @@
           <Property Name="clientHouseNumber" Type="Int32" />
           <Property Name="clientHouseName" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
           <Property Name="clientPostalCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="salt" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="tblAppointments" Relationship="Self.FK_tblAppointment_tblClient" FromRole="tblClient" ToRole="tblAppointment" />
-          <Property Name="Password" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
-          <Property Name="salt" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="tblEmail">
           <Key>
@@ -270,7 +270,7 @@
           <Key>
             <PropertyRef Name="employeeID" />
           </Key>
-          <Property Name="employeeID" Type="Int32" Nullable="false" />
+          <Property Name="employeeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="FirstName" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
           <Property Name="LastName" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
           <Property Name="Email" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
@@ -313,10 +313,10 @@
             <PropertyRef Name="loginID" />
           </Key>
           <Property Name="loginID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Salt" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Password" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="IsDefault" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="tblEmployees" Relationship="Self.FK_tblEmployee_tblLogin" FromRole="tblLogin" ToRole="tblEmployee" />
-          <Property Name="Salt" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="tblPhoto">
           <Key>
@@ -457,14 +457,12 @@
                 <ScalarProperty Name="clientID" ColumnName="clientID" />
                 <ScalarProperty Name="haircutID" ColumnName="haircutID" />
                 <ScalarProperty Name="timeSlotID" ColumnName="timeSlotID" />
-                </MappingFragment>
+              </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="tblClients">
             <EntityTypeMapping TypeName="mobileHairdresserModel.tblClient">
               <MappingFragment StoreEntitySet="tblClient">
-                <ScalarProperty Name="salt" ColumnName="salt" />
-                <ScalarProperty Name="Password" ColumnName="Password" />
                 <ScalarProperty Name="clientID" ColumnName="clientID" />
                 <ScalarProperty Name="clientName" ColumnName="clientName" />
                 <ScalarProperty Name="clientMobile" ColumnName="clientMobile" />
@@ -472,6 +470,8 @@
                 <ScalarProperty Name="clientHouseNumber" ColumnName="clientHouseNumber" />
                 <ScalarProperty Name="clientHouseName" ColumnName="clientHouseName" />
                 <ScalarProperty Name="clientPostalCode" ColumnName="clientPostalCode" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="salt" ColumnName="salt" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -534,8 +534,8 @@
           <EntitySetMapping Name="tblLogins">
             <EntityTypeMapping TypeName="mobileHairdresserModel.tblLogin">
               <MappingFragment StoreEntitySet="tblLogin">
-                <ScalarProperty Name="Salt" ColumnName="Salt" />
                 <ScalarProperty Name="loginID" ColumnName="loginID" />
+                <ScalarProperty Name="Salt" ColumnName="Salt" />
                 <ScalarProperty Name="Password" ColumnName="Password" />
                 <ScalarProperty Name="IsDefault" ColumnName="IsDefault" />
               </MappingFragment>

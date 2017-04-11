@@ -24,8 +24,6 @@ namespace mobileHairdresser.Database
         public int clientID { get; set; }
         public int haircutID { get; set; }
         public int timeSlotID { get; set; }
-        public string appointmentCancled { get; set; }
-        public string cancledReason { get; set; }
     
         public virtual tblClient tblClient { get; set; }
         public virtual tblTimeSlot tblTimeSlot { get; set; }

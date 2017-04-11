@@ -17,18 +17,20 @@
             </div>
         }
         <div class="appointmentConfirmationButtons">
-            <button type="button" onclick="location.href='@Url.Action("createAppointmentCard","appointment", new {appointmentID = @Model.appointmentID})'">Print</button>
-            <button type="button" onclick="location.href='@Url.Action("appointmentIndex","appointment")'">Close</button>
+            <button type="button" onclick="location.href='@Url.Action("DownloadAppointmentCard","appointment", new {appointmentID = @Model.appointmentID})'">Print</button>
+            <button type="button" onclick="location.href='@Url.Action("Search","appointment")'">Close</button>
         </div>
         <ul class="master">
             <li><h1>Mobile Hairdresser : Appointment Card</h1></li>
             <li><h3>@Html.LabelFor(model => model.tblClient.clientName) @Html.DisplayFor(model => model.tblClient.clientName)</h3></li>
-            <li><h3><label>Referance Number :</label>@Html.DisplayFor(model => model.appointmentID)</h3></li>
+            <li class="loginDetails"><h3>Login Details</h3></li>
+            <li class="loginDetails"><h3>Appointment Ref : @Html.DisplayFor(model => model.appointmentID)</h3></li>
+            <li class="loginDetails"><h3><label>Appointment Passcode :</label>@TempData["userInfo"]</h3></li>
             <li>
                 <h3>Contact Details</h3>
                 <ul>
                     <li>
-                        @Html.LabelFor(model => model.tblClient.clientMobile)<p>@Html.DisplayFor(model => model.tblClient.clientMobile)</p>
+                       @Html.LabelFor(model => model.tblClient.clientMobile)<p>@Html.DisplayFor(model => model.tblClient.clientMobile)</p>
                     </li>
                     <li>
                         @Html.LabelFor(model => model.tblClient.clientEmail)<p>@Html.DisplayFor(model => model.tblClient.clientEmail)</p>

@@ -553,12 +553,29 @@
     display:inline-block;
     margin:0px auto;
 }
+.calenderContainer{
+    display:block;
+    width:80%;
+    margin: 0 auto;
+}
 .appointment {
     display:block;
     width:100%;
     margin:0px auto;
     padding:0px;
     text-align:left;
+}
+.noAppointment{
+    display:block;
+    width:100%;
+    margin:10px auto;
+    line-height:35px;
+    color:#ff0000 !important;
+    text-align:center !important;
+    border: 1px solid #000;
+}
+.noAppointment:after{
+    text-align:center;
 }
 .appointment input, .appointment select{
     width:100%;
@@ -829,6 +846,7 @@
     height:270px;
     border:0px dashed #000;
     overflow:hidden;
+    overflow-y:auto;
 }
 .diaryButtons{
     display:block;
@@ -868,6 +886,10 @@
     display:table-row;
     line-height:35px;
     border-bottom:1px dashed #000;
+}
+.diaryTableContainer table tbody tr:hover{
+    cursor:pointer;
+    background:rgba(255,255,255, 0.6);
 }
 .diaryTableContainer table tbody tr td{
     display:table-cell;

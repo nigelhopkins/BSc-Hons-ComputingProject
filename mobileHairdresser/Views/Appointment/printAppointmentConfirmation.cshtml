@@ -3,12 +3,14 @@
     ViewBag.Title = "Print Appointment Card";
     Layout = "~/Views/Shared/printLayout.cshtml";
 
-    <script src="~/Scripts/jquery-1.12.4.min.js"></script>
+    <script src="~/Scripts/jquery-1.12.4.min.js"></script>      
 }       
 <ul class="master">
     <li><h1>Mobile Hairdresser : Appointment Card</h1></li>
     <li><h3>@Html.LabelFor(model => model.tblClient.clientName) @Html.DisplayFor(model => model.tblClient.clientName)</h3></li>
-    <li><h3><label>Referance Number :</label>@Html.DisplayFor(model => model.appointmentID)</h3></li>
+    <li><h3>Login Details</h3></li>
+    <li><h3>@Html.LabelFor(model => model.tblClient.clientEmail) @Html.DisplayFor(model => model.tblClient.clientEmail)</h3></li>
+    <li><h3><label>Password :</label>@Convert.ToString(Session["userInfo"])</h3></li>
     <li>
         <h3>Contact Details</h3>
         <ul>
