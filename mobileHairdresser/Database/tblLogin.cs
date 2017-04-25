@@ -23,8 +23,6 @@ namespace mobileHairdresser.Database
     
         public int loginID { get; set; }
         [Required]
-        public string Username { get; set; }
-        [Required]
         [DataType(DataType.Password)]
         public string Password { get; set; }
         public string IsDefault { get; set; }

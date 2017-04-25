@@ -34,8 +34,9 @@
                         </div>
                     </div>
                         <span class="timeSlotMessage">
-                            @Html.HiddenFor(model => model.timeSlotID, new { @id = "appointmentTime" })
+                            
                         </span>  
+                    @Html.Hidden("appointmentTime")
                 </div>
                 <button type="button" name="previous" class="previous action-button">Previous</button>
                 <button type="button" name="next" class="next action-button">Next</button>
@@ -55,67 +56,63 @@
 </div>
 <script src="~/Scripts/jquery-1.12.4.min.js"></script>
 <script>
-        $(document).ready(function () {
-            $("#appointmentDate").datepicker({
-                dateFormat: 'DD dd MM',
-                endDate: ' ',
-                minDate: '0',
-                maxDate: '6w',
-                beforeShowDay: $.datepicker.noWeekends,
-                defaultDate: new Date(+1),
-                autoclose: false,
-                todayHighlight: true,
-                onSelect: function (data) {
-                    var getYear = new Date();
-                    var shortDate = new Date(Date.parse(data + getYear.getFullYear()));
-                    var formatDate = $.datepicker.formatDate('dd-mm-yy', shortDate);
-                    $("#selectedAppointmentDate").val(formatDate);
-                    $("#appointmentList").empty();
-                    $.getJSON("@Url.Action("getTimeSlots","Appointment")", { appointmentDate: formatDate }, function (data) {
-                        $('.timeSlotMessage').empty();
+    $(document).ready(function () {
+        $("#appointmentDate").datepicker({
+            dateFormat: 'DD dd MM',
+            endDate: ' ',
+            minDate: '0',
+            maxDate: '6w',
+            beforeShowDay: $.datepicker.noWeekends,
+            defaultDate: new Date(+1),
+            autoclose: false,
+            todayHighlight: true,
+            onSelect: function (data) {
+                var getYear = new Date();
+                var shortDate = new Date(Date.parse(data + getYear.getFullYear()));
+                var formatDate = $.datepicker.formatDate('dd-mm-yy', shortDate);
+                $("#selectedAppointmentDate").val(formatDate);
+                $("#appointmentList").empty();
+                $.getJSON("@Url.Action("getTimeSlots","Appointment")", { appointmentDate: formatDate }, function (data) {
+                    $('.timeSlotMessage').empty();
 
-                        if(data.length == 0)
-                        {
-                            $('.timeSlotMessage').append("<p class='noAppointment'>No appointment times are avalible please select another date</p>")
-                        }
-                        else if(data == false)
-                        {
-                            $('.timeSlotMessage').append("<p class='noAppointment'>To get an appointment for the same day please call the Mobile Hairdresser directly</p>")
-                        }
-                        else
-                        {
-                            $('.timeSlotMessage').append($('<select id="appointmentList" onchange=""></select>'))
-                            $("#appointmentList").addList(data);
-                            $('#appointmentList').show();
-                        }
-                    });
-                    if ((data != null) || (data != false)) {
-                        $.fn.addList = function (data) {
-                            return this.each(function () {
-                                var list = this;
-                                var option = new Option("--- Avalible Appointment Times ---");
+                    if (data.length == 0) {
+                        $('.timeSlotMessage').append("<p class='noAppointment'>No appointment times are avalible please select another date</p>")
+                    }
+                    else if (data == false) {
+                        $('.timeSlotMessage').append("<p class='noAppointment'>To get an appointment for the same day please call the Mobile Hairdresser directly</p>")
+                    }
+                    else {
+                        $('.timeSlotMessage').append($('<select id="appointmentList" onchange="getTimeSlotID()"></select>'))
+                        $("#appointmentList").addList(data);
+                        $('#appointmentList').show();
+                    }
+                });
+                if ((data != null) || (data != false)) {
+                    $.fn.addList = function (data) {
+                        return this.each(function () {
+                            var list = this;
+                            var option = new Option("--- Avalible Appointment Times ---");
+                            list.add(option);
+                            $.each(data, function (index, itemData) {
+                                option = new Option(itemData.Text, itemData.Value);
                                 list.add(option);
-                                $.each(data, function (index, itemData) {
-                                    option = new Option(itemData.Text, itemData.Value);
-                                    list.add(option);
-                                });
-                            })
-                        }
-                    };
-                }
-            });
-            $('#appointmentList').change(function () {
-                var timeID = $('#appointmentList').val();
-                $('#appointmentTime').val(timeID);
-            });
-            $('#appointmentList').ready(function () {
-                var getValue = $('#appointmentList').val();
-                if(getValue == null)
-                {
-                    $('#appointmentList').hide();
-                }
-            })
-    })
+                            });
+                        })
+                    }
+                };
+            }
+        });
+        $('#appointmentList').ready(function () {
+            var getValue = $('#appointmentList').val();
+            if (getValue == null) {
+                $('#appointmentList').hide();
+            }
+        })
+    });
+    function getTimeSlotID() {
+            var timeID = $('#appointmentList').val();
+            $('#appointmentTime').val(timeID);
+    };
     var placeSearch, autocomplete;
     var componentForm = {
         street_number: 'short_name',

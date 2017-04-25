@@ -6,8 +6,8 @@
 }
 
 <div class="ContentContianer">
-    <h1>Edit : @Html.DisplayFor(model => model.GalleryName)</h1>
     <div class="ContentWrapper">
+        <h1>Edit : @Html.DisplayFor(model => model.GalleryName)</h1>
         @using (Html.BeginForm("EditGallery", "Portfolio", FormMethod.Post))
         {
             @Html.AntiForgeryToken()

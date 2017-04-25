@@ -73,7 +73,7 @@ namespace mobileHairdresser.Controllers
                         var salt = Crypto.GenerateSalt();
                         var generatedPassword = Membership.GeneratePassword(12, 1);
                         TempData["userInfo"] = generatedPassword.ToString();
-                        int appointmentTime = int.Parse(Request.Form["timeSlotID"]);
+                        int appointmentTime = int.Parse(Request["appointmentTime"]);
                         tblClient newClient = new tblClient();
                         {
                             newClient.clientName = tblAppointment.tblClient.clientName;
@@ -93,7 +93,7 @@ namespace mobileHairdresser.Controllers
                             newAppointment.clientID = newClient.clientID;
                             newAppointment.employeeID = tblAppointment.employeeID;
                             newAppointment.haircutID = tblAppointment.haircutID;
-                            newAppointment.timeSlotID = tblAppointment.timeSlotID;
+                            newAppointment.timeSlotID = appointmentTime;
                         }
                         using (db)
                         {

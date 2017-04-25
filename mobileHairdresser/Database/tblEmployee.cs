@@ -30,7 +30,7 @@ namespace mobileHairdresser.Database
         [Display(Name ="Phone Number")]
         [DataType(DataType.PhoneNumber)]
         public string PhoneNumber { get; set; }
-        public Nullable<int> LoginID { get; set; }
+        public int LoginID { get; set; }
     
         public virtual tblLogin tblLogin { get; set; }
     }

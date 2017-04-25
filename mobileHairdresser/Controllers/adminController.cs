@@ -66,8 +66,7 @@ namespace mobileHairdresser.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> createNewAdminAccount([Bind(Include = "employeeID,FirstName,LastName,Email,PhoneNumber,LoginID")] tblEmployee tblEmployee, tblLogin tblLogin)
+        public ActionResult createNewAdminAccount(tblEmployee tblEmployee, tblLogin tblLogin)
         {
             if(Session["user"] != null && Session["loginID"] != null)
             {
@@ -82,14 +81,27 @@ namespace mobileHairdresser.Controllers
                 {
                     if (ModelState.IsValid)
                     {
-                        tblLogin.IsDefault = "true";
-                        db.tblLogins.Add(tblLogin);
+                        tblLogin newLogin = new tblLogin();
+                        {
+                            newLogin.Password = tblEmployee.tblLogin.Password;
+                        }
+                        db.tblLogins.Add(newLogin);
+                        db.SaveChanges();
 
-                        tblEmployee.LoginID = tblLogin.loginID;
-
-                        db.tblEmployees.Add(tblEmployee);
-
-                        await db.SaveChangesAsync();
+                        tblEmployee newEmployee = new tblEmployee();
+                        {
+                            newEmployee.LoginID = newLogin.loginID;
+                            newEmployee.FirstName = tblEmployee.FirstName;
+                            newEmployee.LastName = tblEmployee.LastName;
+                            newEmployee.PhoneNumber = tblEmployee.PhoneNumber;
+                            newEmployee.Email = tblEmployee.Email;
+                            
+                        }
+                        using (db)
+                        {
+                            db.tblEmployees.Add(newEmployee);
+                            db.SaveChanges();
+                        }
                         return RedirectToAction("adminAccountList");
                     }
                     
