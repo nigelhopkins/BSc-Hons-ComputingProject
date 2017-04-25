@@ -5,8 +5,8 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <div class="ContentContianer">
-    <h1>Account Details</h1>
     <div class="ContentWrapper">
+        <h1>Account Details</h1>
         <ul>
             <li>
                 @Html.LabelFor(model => model.FirstName)
@@ -23,10 +23,6 @@
             <li>
                 @Html.LabelFor(model => model.PhoneNumber)
                 <span class="viewAccountDetails">@Html.DisplayFor(model => model.PhoneNumber, new { disabled = "ture", @class = "DissabledTextBox" })</span>
-            </li>
-            <li>
-                @Html.LabelFor(model => model.tblLogin.Username)
-                <span class="viewAccountDetails">@Html.DisplayFor(model => model.tblLogin.Username, new { disabled = "ture", @class = "DissabledTextBox" })</span>
             </li>
             <li>
             <li>

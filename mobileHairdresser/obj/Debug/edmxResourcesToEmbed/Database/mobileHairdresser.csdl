@@ -32,7 +32,6 @@
     <Property Name="clientMobile" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="clientEmail" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="clientHouseNumber" Type="Int32" />
-    <Property Name="clientHouseName" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
     <Property Name="clientPostalCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="Password" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
     <Property Name="salt" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
@@ -98,7 +97,7 @@
       <PropertyRef Name="loginID" />
     </Key>
     <Property Name="loginID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Salt" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Salt" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
     <Property Name="Password" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="IsDefault" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="tblEmployees" Relationship="Self.FK_tblEmployee_tblLogin" FromRole="tblLogin" ToRole="tblEmployee" />

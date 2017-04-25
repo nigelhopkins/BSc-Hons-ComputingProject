@@ -35,7 +35,6 @@
           <Property Name="clientMobile" Type="varchar" MaxLength="250" Nullable="false" />
           <Property Name="clientEmail" Type="varchar" MaxLength="250" Nullable="false" />
           <Property Name="clientHouseNumber" Type="int" />
-          <Property Name="clientHouseName" Type="varchar" MaxLength="250" />
           <Property Name="clientPostalCode" Type="varchar" MaxLength="50" />
           <Property Name="Password" Type="varchar" MaxLength="250" />
           <Property Name="salt" Type="varchar" MaxLength="250" />
@@ -96,7 +95,7 @@
             <PropertyRef Name="loginID" />
           </Key>
           <Property Name="loginID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Salt" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="Salt" Type="varchar" MaxLength="250" />
           <Property Name="Password" Type="varchar" MaxLength="250" Nullable="false" />
           <Property Name="IsDefault" Type="varchar" MaxLength="250" />
         </EntityType>
@@ -247,7 +246,6 @@
           <Property Name="clientMobile" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="clientEmail" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="clientHouseNumber" Type="Int32" />
-          <Property Name="clientHouseName" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
           <Property Name="clientPostalCode" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Password" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
           <Property Name="salt" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
@@ -313,7 +311,7 @@
             <PropertyRef Name="loginID" />
           </Key>
           <Property Name="loginID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Salt" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Salt" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
           <Property Name="Password" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="IsDefault" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="tblEmployees" Relationship="Self.FK_tblEmployee_tblLogin" FromRole="tblLogin" ToRole="tblEmployee" />
@@ -468,7 +466,6 @@
                 <ScalarProperty Name="clientMobile" ColumnName="clientMobile" />
                 <ScalarProperty Name="clientEmail" ColumnName="clientEmail" />
                 <ScalarProperty Name="clientHouseNumber" ColumnName="clientHouseNumber" />
-                <ScalarProperty Name="clientHouseName" ColumnName="clientHouseName" />
                 <ScalarProperty Name="clientPostalCode" ColumnName="clientPostalCode" />
                 <ScalarProperty Name="Password" ColumnName="Password" />
                 <ScalarProperty Name="salt" ColumnName="salt" />

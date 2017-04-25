@@ -84,6 +84,7 @@ namespace mobileHairdresser.Controllers
                         tblLogin newLogin = new tblLogin();
                         {
                             newLogin.Password = tblEmployee.tblLogin.Password;
+                            newLogin.IsDefault = "true";
                         }
                         db.tblLogins.Add(newLogin);
                         db.SaveChanges();

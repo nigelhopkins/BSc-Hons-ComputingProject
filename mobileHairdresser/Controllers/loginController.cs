@@ -59,10 +59,7 @@ namespace mobileHairdresser.Controllers
                 switch (isFirstLogin)
                 {
                     case "true":
-
-                        verifyHash = Crypto.VerifyHashedPassword(pword, saltedPassword);
-
-                        if (verifyHash != true)
+                        if (salt == null)
                         {
                             var checkPassword = db.tblEmployees.Where(a => a.Email.Equals(username) && a.tblLogin.Password.Equals(password)).FirstOrDefault();
                             if (checkPassword != null)
@@ -72,6 +69,7 @@ namespace mobileHairdresser.Controllers
                         }
                         else
                         {
+                            verifyHash = Crypto.VerifyHashedPassword(pword, saltedPassword);
                             if (username == uname && verifyHash == true)
                             {
                                 authenticateUser = true;
@@ -159,10 +157,7 @@ namespace mobileHairdresser.Controllers
                 switch (isFirstLogin)
                 {
                     case "true":
-
-                        verifyHash = Crypto.VerifyHashedPassword(hashedPassword, currentPassword);
-
-                        if (verifyHash != true)
+                        if (salt == null)
                         {
                             var checkPassword = db.tblLogins.Where(a => a.Password.Equals(currentPassword)).FirstOrDefault();
                             if (checkPassword != null)

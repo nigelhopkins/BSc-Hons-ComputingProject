@@ -32,7 +32,6 @@
           <ScalarProperty Name="clientMobile" ColumnName="clientMobile" />
           <ScalarProperty Name="clientEmail" ColumnName="clientEmail" />
           <ScalarProperty Name="clientHouseNumber" ColumnName="clientHouseNumber" />
-          <ScalarProperty Name="clientHouseName" ColumnName="clientHouseName" />
           <ScalarProperty Name="clientPostalCode" ColumnName="clientPostalCode" />
           <ScalarProperty Name="Password" ColumnName="Password" />
           <ScalarProperty Name="salt" ColumnName="salt" />

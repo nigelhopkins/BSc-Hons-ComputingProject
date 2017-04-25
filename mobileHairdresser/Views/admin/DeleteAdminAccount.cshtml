@@ -5,8 +5,8 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <div class="ContentContianer">
-    <h1>Delete Account</h1>
     <div class="ContentWrapper">
+        <h1>Delete Account</h1>
         <ul>
            <li>
                @Html.LabelFor(model => model.FirstName)
@@ -24,10 +24,6 @@
                 @Html.LabelFor(model => model.PhoneNumber)
                 <span class="DeleteAccount">@Html.DisplayFor(model => model.PhoneNumber) </span>
            </li>
-           <li>
-                @Html.LabelFor(model => model.tblLogin.Username)
-                <span class="DeleteAccount">@Html.DisplayFor(model => model.tblLogin.Username) </span>
-           <li>
                 @using (Html.BeginForm())
                 {
                     @Html.AntiForgeryToken()

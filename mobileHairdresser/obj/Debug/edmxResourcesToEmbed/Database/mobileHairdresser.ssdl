@@ -30,7 +30,6 @@
     <Property Name="clientMobile" Type="varchar" MaxLength="250" Nullable="false" />
     <Property Name="clientEmail" Type="varchar" MaxLength="250" Nullable="false" />
     <Property Name="clientHouseNumber" Type="int" />
-    <Property Name="clientHouseName" Type="varchar" MaxLength="250" />
     <Property Name="clientPostalCode" Type="varchar" MaxLength="50" />
     <Property Name="Password" Type="varchar" MaxLength="250" />
     <Property Name="salt" Type="varchar" MaxLength="250" />
@@ -91,7 +90,7 @@
       <PropertyRef Name="loginID" />
     </Key>
     <Property Name="loginID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Salt" Type="varchar" MaxLength="250" Nullable="false" />
+    <Property Name="Salt" Type="varchar" MaxLength="250" />
     <Property Name="Password" Type="varchar" MaxLength="250" Nullable="false" />
     <Property Name="IsDefault" Type="varchar" MaxLength="250" />
   </EntityType>
